@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
    },
    appBar: {
       background: '#45B39D',
+      position: 'fixed',
 
    },
    Button: {

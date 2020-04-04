@@ -1,7 +1,57 @@
-.BodyContainer {
-   margin-top: 100px;
-   min-height: 200px;
-   & .GridContainer {
-      
+.bodyContainer {
+   max-width: 100%;
+   margin: 0 auto;
+   &-cards {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      &-item {
+         width: 400px;
+         display: flex;
+         margin-top: 60px;
+         padding: 3rem;
+      }
+   }
+}
+
+
+@media (max-width: 1490px) {
+   .bodyContainer {
+      &-cards {
+         
+         &-item {
+            width: 300px;
+         }
+      }
+   }
+}
+
+
+
+@media (max-width: 1200px) {
+   .bodyContainer {
+      &-cards {
+         
+         &-item {
+            padding: 1rem;
+         }
+      }
+   }
+}
+
+@media (max-width: 800px) {
+   .bodyContainer {
+
+      &-cards {
+         &-item {
+            width: 400px;
+            padding: 1rem;
+         }
+      }
    }
 }
