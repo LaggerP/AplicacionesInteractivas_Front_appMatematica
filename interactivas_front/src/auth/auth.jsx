@@ -9,7 +9,7 @@ const fakeAuth = {
       setTimeout(cb, 100); // fake async
    },
 
-   signout(cb) {
+   signOut(cb) {
       this.isAuthenticated = false;
       localStorage.removeItem('session')
       setTimeout(cb, 100);
