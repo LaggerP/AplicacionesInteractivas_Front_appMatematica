@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Card from './Card/Card'
 import './LandingBody.scss'
-import kidImage from '../../assets/Images/kidVictory.jpg'
-import kidTablet from '../../assets/Images/kidTablet.jpg'
-import kidLaptop from '../../assets/Images/kidLaptop.jpg'
+import kidImage from '../../../assets/Images/kidVictory.jpg'
+import kidTablet from '../../../assets/Images/kidTablet.jpg'
+import kidLaptop from '../../../assets/Images/kidLaptop.jpg'
 
 export default class LandingBody extends Component {
 
