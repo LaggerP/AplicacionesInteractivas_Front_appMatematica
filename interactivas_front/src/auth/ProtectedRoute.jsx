@@ -13,8 +13,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     * inicies sesión
     * 
     */
-
-
    return (
 
       <Route
