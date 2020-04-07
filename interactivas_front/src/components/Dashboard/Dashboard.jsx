@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 
 export default class Dashboard extends Component {
 
-   signout = (e) => {
+   signOut = (e) => {
       e.preventDefault();
       auth.signOut(() => this.props.history.push('/'))
 
@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
    render() {
       return (
          <div>
-            <Button onClick={this.signout} variant="contained" color="primary">Cerrar sesión</Button>
+            <Button onClick={this.signOut} variant="contained" color="primary">Cerrar sesión</Button>
          </div>
       )
    }
