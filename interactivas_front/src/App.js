@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import Landing from './components/Landing/Landing';
-import Login from './components/Login/Login';
+import Login from './components/Auth/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard'
-import ProtectedRoute from './auth/ProtectedRoute'
+import ProtectedRoute from './ProtectedRoutes/ProtectedRoute'
 
 
 function App() {

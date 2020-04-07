@@ -8,12 +8,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     * Lógica:
     * 
     * Este componente se va a encargar de detectar si el usuario está o no conectado
-    * Consulta mediante la funcion auth.isConnected() y según en valor que le retorne,
+    * Consulta mediante la funcion ProtectedRoutes.isConnected() y según en valor que le retorne,
     * redirecciona al componente dashboard o te lleva al componente login para que
     * inicies sesión
     * 
     */
-
 
    return (
 
@@ -36,6 +35,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
          }
       />
    )
-}
+};
 
 export default ProtectedRoute
