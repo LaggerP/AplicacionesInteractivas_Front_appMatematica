@@ -56,7 +56,7 @@ export default function ButtonAppBar() {
                </Button>
                <Button
                   component={Link}
-                  to="/login"
+                  to="/auth/login"
                   className={classes.LoginButton}
                   variant="contained">
                   <span role="img" aria-label="key">🔑Ingresar</span>

@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/auth/login" component={Login} />
         <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         <Route path="*" component={()=>"404 not Found"}/>
       </Switch>

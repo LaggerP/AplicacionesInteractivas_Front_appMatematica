@@ -12,7 +12,7 @@ export default class Header extends Component {
             <div className="header-body">
                <div className="header-body--title">
                   <h1>¡Es momento de aprender!</h1>
-                  <Button variant="contained" color="secondary" component={Link} to="/login">¡Quiero jugar!</Button>
+                  <Button variant="contained" color="secondary" component={Link} to="/auth/login">¡Quiero jugar!</Button>
                </div>
 
             </div>
