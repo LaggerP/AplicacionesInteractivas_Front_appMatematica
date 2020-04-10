@@ -3,6 +3,15 @@ import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import auth from '../../../ProtectedRoutes/auth'
 import './Login.scss'
+import { css } from "@emotion/core";
+import PacmanLoader from "react-spinners/PacmanLoader";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 14%;
+`;
 
 export default class Login extends Component {
     constructor(props) {
@@ -10,8 +19,7 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
-
-
+            loading: false,
         };
     }
 
@@ -24,8 +32,12 @@ export default class Login extends Component {
         e.preventDefault();
         const userData = { email: this.state.email, password: this.state.password }
         console.log(userData)
-        if (userData.email !== '' || userData.password !== '')
-            auth.authenticate(() => this.props.history.push('/dashboard'))
+        if (userData.email !== '' || userData.password !== '') {
+            this.setState({loading: true})
+            setTimeout(
+                () => auth.authenticate(() => this.props.history.push('/dashboard'))
+                , 5000);
+        }
     };
 
     render() {
@@ -68,16 +80,20 @@ export default class Login extends Component {
                             </div>
                             {this.message}
                             <div className="loginContainer-box--form--button">
-                                <Button type="submit" onClick={this.login} variant="contained">Ingresar</Button>
+                                {!this.state.loading ?
+                                    <Button type="submit" onClick={this.login} variant="contained">Ingresar </Button>
+                                    :
+                                    <PacmanLoader
+                                        css={override}
+                                        size={30}
+                                        color={"#45B39D"}
+                                        loading={this.state.loading}
+                                    />
+                                }
                             </div>
-
                         </form>
-
-
                     </div>
-
                 </div>
-
                 {
                     /*
                        Cuando se tiene Material-UI se puede navegar entre componentes de la siguiente forma:
