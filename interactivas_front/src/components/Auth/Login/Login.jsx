@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import auth from '../../../ProtectedRoutes/auth'
 import './Login.scss'
-import { css } from "@emotion/core";
+import {css} from "@emotion/core";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
 const override = css`
-  display: block;
   margin: 0 auto;
   text-align: center;
   width: 14%;
+  margin-top: 140px;
 `;
 
 export default class Login extends Component {
@@ -30,7 +30,7 @@ export default class Login extends Component {
 
     login = (e) => {
         e.preventDefault();
-        const userData = { email: this.state.email, password: this.state.password }
+        const userData = {email: this.state.email, password: this.state.password}
         console.log(userData)
         if (userData.email !== '' || userData.password !== '') {
             this.setState({loading: true})
@@ -47,52 +47,53 @@ export default class Login extends Component {
                     <div className="loginContainer-box--header">
                         <h1>Ingrese sus datos</h1>
                     </div>
-                    <div className="loginContainer-box--form">
-                        <form action="">
-                            <div className="loginContainer-box--form--email">
-                                <div>
-                                    <label>E-mail:</label>
+                    {!this.state.loading ?
+                        <div className="loginContainer-box--form">
+                            <form action="">
+                                <div className="loginContainer-box--form--email">
+                                    <div>
+                                        <label>E-mail:</label>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="email"
+                                            id="emailInput"
+                                            placeholder="tu@email.com"
+                                            name="email"
+                                            onChange={this.handleChange('email')}
+                                            autoFocus
+                                            required/>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input
-                                        type="email"
-                                        id="emailInput"
-                                        placeholder="tu@email.com"
-                                        name="email"
-                                        onChange={this.handleChange('email')}
-                                        autoFocus
-                                        required/>
+                                <div className="loginContainer-box--form--password">
+                                    <div>
+                                        <label>Contraseña:</label>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="password"
+                                            id="passwordInput"
+                                            placeholder="Contraseña"
+                                            name="password"
+                                            onChange={this.handleChange('password')}
+                                            required/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="loginContainer-box--form--password">
-                                <div>
-                                    <label>Contraseña:</label>
-                                </div>
-                                <div>
-                                    <input
-                                        type="password"
-                                        id="passwordInput"
-                                        placeholder="Contraseña"
-                                        name="password"
-                                        onChange={this.handleChange('password')}
-                                        required/>
-                                </div>
-                            </div>
-                            {this.message}
-                            <div className="loginContainer-box--form--button">
-                                {!this.state.loading ?
+                                <div className="loginContainer-box--form--button">
                                     <Button type="submit" onClick={this.login} variant="contained">Ingresar </Button>
-                                    :
-                                    <PacmanLoader
-                                        css={override}
-                                        size={30}
-                                        color={"#45B39D"}
-                                        loading={this.state.loading}
-                                    />
-                                }
-                            </div>
-                        </form>
-                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        :
+                        <PacmanLoader
+                            css={override}
+                            size={30}
+                            color={"#45B39D"}
+                            loading={this.state.loading}
+                        />
+
+                    }
+
                 </div>
                 {
                     /*
