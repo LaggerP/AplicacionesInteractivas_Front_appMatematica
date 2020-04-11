@@ -14,6 +14,7 @@ export default class Login extends Component {
       return (
          <div>
             <h1>Hola soy un login</h1>
+             <h1>Hola</h1>
             {
                /*
                   Cuando se tiene Material-UI se puede navegar entre componentes de la siguiente forma:
