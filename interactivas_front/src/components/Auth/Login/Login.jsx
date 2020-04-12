@@ -35,7 +35,7 @@ export default class Login extends Component {
         if (userData.email !== '' || userData.password !== '') {
             this.setState({loading: true})
             setTimeout(
-                () => auth.authenticate(() => this.props.history.push('/dashboard'))
+                () => auth.authenticate(() => this.props.history.push('/games'))
                 , 5000);
         }
     };
@@ -48,42 +48,44 @@ export default class Login extends Component {
                         <h1>Ingrese sus datos</h1>
                     </div>
                     {!this.state.loading ?
-                        <div className="loginContainer-box--form">
-                            <form action="">
-                                <div className="loginContainer-box--form--email">
-                                    <div>
-                                        <label>E-mail:</label>
+                        <form onSubmit={this.login}>
+                            <div className="loginContainer-box--form">
+                                <form action="">
+                                    <div className="loginContainer-box--form--email">
+                                        <div>
+                                            <label>E-mail:</label>
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="email"
+                                                id="emailInput"
+                                                placeholder="tu@email.com"
+                                                name="email"
+                                                onChange={this.handleChange('email')}
+                                                autoFocus
+                                                required/>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <input
-                                            type="email"
-                                            id="emailInput"
-                                            placeholder="tu@email.com"
-                                            name="email"
-                                            onChange={this.handleChange('email')}
-                                            autoFocus
-                                            required/>
+                                    <div className="loginContainer-box--form--password">
+                                        <div>
+                                            <label>Contraseña:</label>
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="password"
+                                                id="passwordInput"
+                                                placeholder="Contraseña"
+                                                name="password"
+                                                onChange={this.handleChange('password')}
+                                                required/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="loginContainer-box--form--password">
-                                    <div>
-                                        <label>Contraseña:</label>
+                                    <div className="loginContainer-box--form--button">
+                                        <Button type="submit" variant="contained">Ingresar </Button>
                                     </div>
-                                    <div>
-                                        <input
-                                            type="password"
-                                            id="passwordInput"
-                                            placeholder="Contraseña"
-                                            name="password"
-                                            onChange={this.handleChange('password')}
-                                            required/>
-                                    </div>
-                                </div>
-                                <div className="loginContainer-box--form--button">
-                                    <Button type="submit" onClick={this.login} variant="contained">Ingresar </Button>
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        </form>
                         :
                         <PacmanLoader
                             css={override}
@@ -91,7 +93,6 @@ export default class Login extends Component {
                             color={"#45B39D"}
                             loading={this.state.loading}
                         />
-
                     }
 
                 </div>
