@@ -110,8 +110,6 @@ export default class Login extends Component {
                 </Link>
 
                 <div>
-
-                </div>
             </div>
         )
     }
