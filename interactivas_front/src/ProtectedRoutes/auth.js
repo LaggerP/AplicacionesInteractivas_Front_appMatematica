@@ -10,6 +10,7 @@ const fakeAuth = {
    signOut(cb) {
       this.isAuthenticated = false;
       localStorage.removeItem('session');
+      localStorage.removeItem('sessionName');
       setTimeout(cb, 100);
    },
 
