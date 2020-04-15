@@ -20,11 +20,13 @@ class Header extends Component {
         e.preventDefault();
         const userData = {nickName: this.state.nickName}
         console.log(userData)
+        console.log(localStorage.getItem('sessionName'));
         if (userData.nickName !== '') {
             this.setState({loading: true})
+            localStorage.setItem('sessionName',userData.nickName); // Se guarda en localStorage el nombre.
             setTimeout(
-                () => auth.authenticate(() => this.props.history.push('/games'))
-                , 5000);
+                () => auth.authenticate(() => this.props.history.push({pathname:'/games', state:{nick:userData.nickName}}))
+                , 2000);
         }
     };
 

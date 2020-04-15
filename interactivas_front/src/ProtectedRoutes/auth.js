@@ -6,16 +6,18 @@ const fakeAuth = {
       localStorage.setItem('session', true);
       setTimeout(cb, 100); // fake async
    },
-
    signOut(cb) {
       this.isAuthenticated = false;
       localStorage.removeItem('session');
+      localStorage.removeItem('sessionName');
       setTimeout(cb, 100);
    },
-
-   isConnected(){
+   isConnected() {
       return localStorage.getItem('session') ? true : false;
   },
+   getUser() {
+      return localStorage.getItem('sessionName');
+   }
 };
 
 export default fakeAuth
