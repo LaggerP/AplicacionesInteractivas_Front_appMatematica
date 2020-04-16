@@ -3,18 +3,18 @@
   list-style: none;
   & li {
     height: 30px;
-    color: white;
+    color: white !important;
     margin-right: 34px;
     margin-top: 10px;
     & a {
-      color: white;
+      color: white !important;
       text-decoration: none;
       transition: .3s;
       &:hover {
         font-size: 17px;
       }
       &:visited {
-        color: white;
+        color: white !important;
       }
     }
   }
