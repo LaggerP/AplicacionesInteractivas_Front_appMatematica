@@ -32,7 +32,7 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="header">
+            <div className="header" id="home">
                 <div className="header-body">
                     <form onSubmit={this.login}>
                         <div className="header-body--input">

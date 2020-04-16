@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './MenuJuegos.scss';
 import CardJuego from './CustomComponent/CardJuego/CardJuego'
-import Button from '@material-ui/core/Button'
 import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
 import fractions from '../../assets/Images/fractions.png';
 import money from '../../assets/Images/monedas.png';
@@ -22,7 +21,6 @@ export default class MenuJuegos extends Component {
                <h1 className='Bienvenido1'>¡Hola {this.getUser()}!</h1>
                <h3 className='Bienvenido2'>Elegi cualquiera de nuestros juegos y comenzá a divertirte</h3>
                <ul className="bodyContainer-cards">
-                  <Button>
                      <li className="bodyContainer-cards-itemJuego">
                         <CardJuego
                         title="Monedas"
@@ -32,8 +30,6 @@ export default class MenuJuegos extends Component {
                         img={money}>
                         </CardJuego>
                      </li>
-                  </Button>
-                  <Button>
                      <li className="bodyContainer-cards-itemJuego">
                         <CardJuego
                         title="Fracciones"
@@ -43,8 +39,6 @@ export default class MenuJuegos extends Component {
                         img={fractions}>
                         </CardJuego>
                      </li>
-                  </Button>
-                  <Button>
                      <li className="bodyContainer-cards-itemJuego">
                         <CardJuego
                         title="Sumas"
@@ -54,7 +48,6 @@ export default class MenuJuegos extends Component {
                         img={sums}>
                         </CardJuego>
                      </li>
-                  </Button>
                </ul>
             </div>
          </div>

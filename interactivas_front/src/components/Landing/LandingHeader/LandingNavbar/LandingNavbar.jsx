@@ -48,11 +48,13 @@ export default function ButtonAppBar() {
                <Typography variant="h6" className={classes.title}>
                   AppName
                </Typography>
+
                <Button className={classes.Button} color="inherit">
                   <span role="img" aria-label="home">🏠Home</span>
+
                </Button>
                <Button className={classes.Button} color="inherit">
-                  <span role="img" aria-label="game">🎮Juegos</span>
+                  <span role="img" aria-label="game">🎮Juegoss</span>
                </Button>
                <Button
                   component={Link}
