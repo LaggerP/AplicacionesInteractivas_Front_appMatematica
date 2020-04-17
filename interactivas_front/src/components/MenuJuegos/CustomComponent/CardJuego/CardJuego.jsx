@@ -6,7 +6,6 @@ const CardJuego = (props) => {
       <div className="card">
          <div className="card-image">
             <img src={props.img} alt="" />
-
          </div>
          <div className="card-content">
             <h1 className="card-content--title">{props.title}</h1>
