@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import MenuJuegosNavbar from '../MenuJuegos/MenuJuegosNavbar/MenuJuegosNavbar';
-import InteractiveList from '../Ranking/CustomComponent/InteractiveList';
+import MenuJuegosNavbar from '../MenuJuegosNavbar/MenuJuegosNavbar';
+import InteractiveList from './CustomComponent/InteractiveList';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import PollOutlinedIcon from '@material-ui/icons/PollOutlined';
