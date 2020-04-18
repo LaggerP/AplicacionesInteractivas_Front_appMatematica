@@ -1,0 +1,72 @@
+{
+  "gameName": "Monedas",
+  "descriptionGame": "Completa los siguientes ejercicios haciendo uso de las monedas",
+  "levels": [
+    {
+      "level": 1,
+      "descriptionProblem": "Acá iría la descripción del problema level 1",
+      "maxPoint": 225,
+      "allProblems": [{
+        "first": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $200",
+          "questionPoint": 75,
+          "successAnswer": 200
+        }],
+        "second": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $300",
+          "questionPoint": 75,
+          "successAnswer": 300
+        }],
+        "third": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $400",
+          "questionPoint": 75,
+          "successAnswer": 400
+        }]
+      }]
+    },
+    {
+      "level": 2,
+      "descriptionProblem": "Acá iría la descripción del problema level 2",
+      "maxPoint": 370,
+      "allProblems": [{
+        "first": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $210",
+          "questionPoint": 125,
+          "successAnswer": 210
+        }],
+        "second": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $320",
+          "questionPoint": 125,
+          "successAnswer": 320
+        }],
+        "third": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $485",
+          "questionPoint": 125,
+          "successAnswer": 485
+        }]
+      }]
+    },
+    {
+      "level": 3,
+      "descriptionProblem": "Acá iría la descripción del problema level 3",
+      "maxPoint": 525,
+      "allProblems": [{
+        "first": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $1000",
+          "questionPoint": 175,
+          "successAnswer": 1000
+        }],
+        "second": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $1240",
+          "questionPoint": 175,
+          "successAnswer": 1240
+        }],
+        "third": [{
+          "problem": "Coloque en la billetera la cantidad necesarias para llegar a $2210",
+          "questionPoint": 175,
+          "successAnswer": 2210
+        }]
+      }]
+    }
+  ]
+}
