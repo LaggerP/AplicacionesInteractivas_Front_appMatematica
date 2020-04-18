@@ -77,3 +77,40 @@
       }
    }
 }
+
+
+@media (max-width: 450px) {
+   .header {
+      &-body {
+         &--inputs {
+
+            &-divInput {
+               &-input {
+                  width: 300px;
+                  &::placeholder {
+                  }
+               }
+            }
+   
+   
+            & .formSubmitButton {
+            width: 320px;
+
+               &:hover, &:active, &:focus {
+               }
+            }
+   
+            .divViewSpan {
+               .formViewSpan {
+                  &:hover {
+   
+                  }
+               }
+            }
+   
+   
+         }
+      }
+   }
+   
+ }

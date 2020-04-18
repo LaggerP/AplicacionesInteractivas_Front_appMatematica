@@ -92,12 +92,12 @@ class Header extends Component {
                                            onChange={this.handleChange('nickName')}
                                            required
                                     />
-                                    <div className="divViewSpan">
+                                    <div className="divViewSpan animated zoomIn">
                                         <span className="formViewSpan" onClick={this.changeForm}>No tengo cuenta</span>
 
                                     </div>
                                 </div>
-                                <button type="submit" className="formSubmitButton">
+                                <button type="submit" className="formSubmitButton animated zoomIn">
 
                                     {!this.state.loading ? <span>🎮JUGAR</span>
                                         :
@@ -135,12 +135,12 @@ class Header extends Component {
                                            onChange={this.handleChange('nickName')}
                                            required
                                     />
-                                    <div className="divViewSpan">
+                                    <div className="divViewSpan animated zoomIn">
                                         <span className="formViewSpan" onClick={this.changeForm}>Ya tengo una cuenta</span>
 
                                     </div>
                                 </div>
-                                <button type="submit" className="formSubmitButton">
+                                <button type="submit" className="formSubmitButton animated zoomIn">
                                     {!this.state.loading ? <span>✍️REGISTRARSE</span>
                                         :
                                         <ClipLoader
