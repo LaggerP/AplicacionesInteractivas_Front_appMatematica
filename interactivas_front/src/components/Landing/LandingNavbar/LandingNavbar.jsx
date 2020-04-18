@@ -35,7 +35,7 @@ export default function LandingNavbar() {
             <Toolbar>
 
                <Typography variant="h6" className={classes.title}>
-                  AppName
+                  Virtu
                </Typography>
                <ul className="MenuUl">
                   <li><a href="#home"><span role="img" aria-label="home">🏠</span>Home</a></li>

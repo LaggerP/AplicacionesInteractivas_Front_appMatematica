@@ -17,12 +17,12 @@ export default class MenuJuegos extends Component {
    render() {
       return (
          <div>
-            <MenuJuegosNavbar></MenuJuegosNavbar>
-            <div className="bodyContainer">
+            <MenuJuegosNavbar/>
+            <div className="bodyContainerMenuJuegos">
                <h1 className='Bienvenido1'>¡Hola {this.getUser()}!</h1>
                <h3 className='Bienvenido2'>Elegi cualquiera de nuestros juegos y comenzá a divertirte</h3>
                <ul className="bodyContainer-cards">
-                  <li className="bodyContainer-cards-itemJuego">
+                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
                      <Button>
                         <CardJuego
                         title="Monedas"
@@ -34,7 +34,7 @@ export default class MenuJuegos extends Component {
                      </Button>
                   </li>
                
-                  <li className="bodyContainer-cards-itemJuego">
+                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
                      <Button>
                         <CardJuego
                         title="Fracciones"
@@ -47,7 +47,7 @@ export default class MenuJuegos extends Component {
                   </li>
                
                
-                  <li className="bodyContainer-cards-itemJuego">
+                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
                      <Button>
                         <CardJuego
                         title="Sumas"

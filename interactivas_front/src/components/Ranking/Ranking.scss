@@ -1,63 +1,62 @@
-h1{
-    text-align: center;
-    color: grey;
-    font-size: 35px;
-    margin-top: 3%;
-    position: relative;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
+.bodyContainer {
+  display: flex;
+  justify-content: center;
+  &--title {}
+  &--results {}
 }
+
+h1{
+  color: #000000;
+  font-size: 35px;
+  text-align: center ;
+}
+
 p{
+  color: #000000;
+  font-size: 20px;
   text-align: center;
-    color: grey;
-    font-size: 20px;
-    margin-top: 4%;
-    position: relative;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
+
 }
 
 .MuiListItemSecondaryAction-root {
-    left: 60vw !important;
+    left: 60vw;
 }
 .bagdeIcon{
-  left: 55px !important;
+  left: 55px;
 }
 
 @media (max-width: 1440px) {
     .MuiListItemSecondaryAction-root {
-        left: 65vw !important;
+        left: 65vw;
     }
     .bagdeIcon{
-      left: 55px !important;
+      left: 55px;
     }
   }
-  
+
   @media (max-width: 1024px) {
     .MuiListItemSecondaryAction-root {
-        left: 70vw !important;
+        left: 70vw;
     }
     .MuiList-root {
-      left: -20px !important;
+      left: -20px;
   }
   .bagdeIcon{
-    left: 55px !important;
+    left: 55px;
   }
 
   }
-  
+
   @media (max-width: 768px) {
     .MuiListItemSecondaryAction-root {
-        left: 74vw !important;
+        left: 74vw;
     }
     .MuiList-root {
-      padding-left: 10px !important;
+      padding-left: 10px;
   }
   .bagdeIcon{
-    left: 55px !important;
-  }    
+    left: 55px;
+  }
 }
 
 @media (max-width: 425px) {
@@ -65,10 +64,9 @@ p{
       left: 75vw;
   }
   .MuiList-root {
-    padding-left: 53px !important;
+    padding-left: 53px;
   }
   .bagdeIcon{
-    left: 55px !important;
+    left: 55px;
   }
 }
-  
