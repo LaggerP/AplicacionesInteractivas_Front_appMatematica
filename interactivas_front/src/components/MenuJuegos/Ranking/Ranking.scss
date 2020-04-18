@@ -1,0 +1,72 @@
+.bodyContainer {
+  display: flex;
+  justify-content: center;
+  &--title {}
+  &--results {}
+}
+
+h1{
+  color: #000000;
+  font-size: 35px;
+  text-align: center ;
+}
+
+p{
+  color: #000000;
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.MuiListItemSecondaryAction-root {
+    left: 60vw;
+}
+.bagdeIcon{
+  left: 55px;
+}
+
+@media (max-width: 1440px) {
+    .MuiListItemSecondaryAction-root {
+        left: 65vw;
+    }
+    .bagdeIcon{
+      left: 55px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .MuiListItemSecondaryAction-root {
+        left: 70vw;
+    }
+    .MuiList-root {
+      left: -20px;
+  }
+  .bagdeIcon{
+    left: 55px;
+  }
+
+  }
+
+  @media (max-width: 768px) {
+    .MuiListItemSecondaryAction-root {
+        left: 74vw;
+    }
+    .MuiList-root {
+      padding-left: 10px;
+  }
+  .bagdeIcon{
+    left: 55px;
+  }
+}
+
+@media (max-width: 425px) {
+  .MuiListItemSecondaryAction-root {
+      left: 75vw;
+  }
+  .MuiList-root {
+    padding-left: 53px;
+  }
+  .bagdeIcon{
+    left: 55px;
+  }
+}

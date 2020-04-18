@@ -1,14 +1,12 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
+import './MenuJuegosNavbar.scss'
 import { withStyles } from '@material-ui/core/styles';
-import {withRouter} from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import auth from '../../../ProtectedRoutes/auth'
 import Typography from '@material-ui/core/Typography';
-import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
-import SportsEsportsOutlinedIcon from '@material-ui/icons/SportsEsportsOutlined';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import IconButton from '@material-ui/core/IconButton';
+import Button from "@material-ui/core/Button";
 
 const useStyles = (theme) => ({
    root: {
@@ -16,16 +14,7 @@ const useStyles = (theme) => ({
    },
    appBar: {
       background: '#45B39D',
-      position: 'relative',
    },
-   Button: {
-      marginRight: theme.spacing(3),
-      fontSize: "20px",
-      '&:hover': {
-         color: 'white'
-      },
-   },
-   
    title: {
       flexGrow: 1,
    },
@@ -38,26 +27,50 @@ class MenuJuegosNavbar extends Component {
       auth.signOut(() => this.props.history.push('/'))
    }
 
-   render(){
+   render() {
       return (
          <div className={this.props.classes.root}>
             <AppBar position="static" className={this.props.classes.appBar}>
                <Toolbar>
                   <Typography variant="h6" className={this.props.classes.title}>
-                     AppName
+                     Virtu
                   </Typography>
-                  <IconButton title="Ranking" aria-label="home" className={this.props.classes.Button} color="inherit">
-                     <span className="spanNavBar" role="img" > Ranking </span>
-                     <BarChartRoundedIcon/>
-                  </IconButton>
-                  <IconButton title="Juegos" aria-label="game" className={this.props.classes.Button} color="inherit">
-                     <span className="spanNavBar" role="img"> Juegos </span>
-                     <SportsEsportsOutlinedIcon/>
-                  </IconButton>
-                  <IconButton title="Cerrar sesión" className={this.props.classes.Button} role="img" aria-label="game" onClick={this.signOut} color="inherit">
-                     <span className="spanNavBar" role="img"> Cerrar sesión </span>
-                     <LockOutlinedIcon/>
-                  </IconButton>
+                  <ul className="MenuGames">
+                     <li>
+                        <Link to="/ranking" className="link">
+                           <span
+                              className="menuIcon"
+                              role="img"
+                              aria-label="ranking">📊
+                           </span>
+                           <span
+                              className="menuText">
+                              Ranking
+                           </span>
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
+                            to="/games"
+                            className="link">
+                           <span
+                               className="menuIcon"
+                               role="img"
+                               aria-label="game">🕹️</span>
+                           <span
+                               className="menuText">Juegos</span>
+                        </Link>
+                     </li>
+
+                     <Button onClick={this.signOut}
+                             color="secondary"
+                             variant="contained"
+                             className="buttonExit">
+                        <span className="buttonExit--span" role="img" aria-label="logout">🚪Salir</span>
+                     </Button>
+
+                  </ul>
+
                </Toolbar>
             </AppBar>
          </div>

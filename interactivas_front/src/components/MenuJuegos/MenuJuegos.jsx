@@ -17,13 +17,13 @@ export default class MenuJuegos extends Component {
    render() {
       return (
          <div>
-            <MenuJuegosNavbar></MenuJuegosNavbar>
-            <div className="bodyContainer">
+            <MenuJuegosNavbar/>
+            <div className="bodyContainerMenuJuegos">
                <h1 className='Bienvenido1'>¡Hola {this.getUser()}!</h1>
                <h3 className='Bienvenido2'>Elegi cualquiera de nuestros juegos y comenzá a divertirte</h3>
                <ul className="bodyContainer-cards">
-                  <Button>
-                     <li className="bodyContainer-cards-itemJuego">
+                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
+                     <Button>
                         <CardJuego
                         title="Monedas"
                         detail="Vamos al super juntos! En este juego vamos aprender
@@ -31,10 +31,11 @@ export default class MenuJuegos extends Component {
                               Comenzemos a jugar"
                         img={money}>
                         </CardJuego>
-                     </li>
-                  </Button>
-                  <Button>
-                     <li className="bodyContainer-cards-itemJuego">
+                     </Button>
+                  </li>
+               
+                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
+                     <Button>
                         <CardJuego
                         title="Fracciones"
                         detail="En este juego aprenderemos a usar fracciones de una
@@ -42,10 +43,12 @@ export default class MenuJuegos extends Component {
                                  Ahora si, comenzemos a jugar!"
                         img={fractions}>
                         </CardJuego>
-                     </li>
-                  </Button>
-                  <Button>
-                     <li className="bodyContainer-cards-itemJuego">
+                     </Button>
+                  </li>
+               
+               
+                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
+                     <Button>
                         <CardJuego
                         title="Sumas"
                         detail="El juego de sumas se trata en agilizar la mente.
@@ -53,8 +56,8 @@ export default class MenuJuegos extends Component {
                                  y el menor de un numero. Empezemos a jugar!"
                         img={sums}>
                         </CardJuego>
-                     </li>
-                  </Button>
+                     </Button>
+                  </li>
                </ul>
             </div>
          </div>

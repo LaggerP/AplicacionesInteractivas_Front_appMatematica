@@ -1,4 +1,4 @@
-.bodyContainer {
+.bodyContainerMenuJuegos {
   max-width: 100%;
   margin: 0 auto;
   &-cards {
@@ -40,6 +40,11 @@
   align-items: center;
   justify-content: center;
 }
+.MuiButton-root {
+  border-radius: 0.7rem !important;
+  padding: 0px !important;
+}
+
 
 @media (max-width: 1280px) {
   .bodyContainer {
