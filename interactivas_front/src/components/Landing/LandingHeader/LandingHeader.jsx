@@ -32,12 +32,13 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="header" id="home">
+            <div className="header">
                 <div className="header-body">
                     <form onSubmit={this.login}>
                         <div className="header-body--input">
                             <input type="text"
                                    className="header-body--input-nickName"
+                                   autoComplete="off"
                                    maxLength="10"
                                    placeholder="Ingresá tu nickname para jugar"
                                    name="nickName"
