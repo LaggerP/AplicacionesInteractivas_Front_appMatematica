@@ -21,6 +21,9 @@
          align-items: center;
          justify-content: center;
          flex-direction: column;
+         &-title {
+            color: white;
+         }
          &-divInput {
             &-input {
                text-align: center;

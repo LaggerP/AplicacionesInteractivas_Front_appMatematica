@@ -71,7 +71,7 @@ class Header extends Component {
                     {this.state.isRegister ?
                         <form onSubmit={this.login} autoComplete="off">
                             <div className="header-body--inputs ">
-                                <h1>Empiece a jugar</h1>
+                                <h1 className="header-body--inputs-title">Empiece a jugar</h1>
                                 <div className="header-body--inputs-divInput ">
                                     <input type="text"
                                            className="header-body--inputs-divInput-input animated zoomIn"
@@ -114,7 +114,7 @@ class Header extends Component {
                         :
                         <form onSubmit={this.register} autoComplete="off">
                             <div className="header-body--inputs">
-                                <h1>Registrarse</h1>
+                                <h1 className="header-body--inputs-title">Registrarse</h1>
                                 <div className="header-body--inputs-divInput">
                                     <input type="text"
                                            className="header-body--inputs-divInput-input animated zoomIn"
