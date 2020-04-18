@@ -98,8 +98,8 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
-
-                                    {!this.state.loading ? <span>🎮JUGAR</span>
+                        
+                                    {!this.state.loading ? <span role="img" aria-label="game">🎮JUGAR</span>
                                         :
                                         <ClipLoader
                                             css={override}
@@ -141,7 +141,7 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
-                                    {!this.state.loading ? <span>✍️REGISTRARSE</span>
+                                    {!this.state.loading ? <span role="img" aria-label="hand">✍️REGISTRARSE</span>
                                         :
                                         <ClipLoader
                                         css={override}
