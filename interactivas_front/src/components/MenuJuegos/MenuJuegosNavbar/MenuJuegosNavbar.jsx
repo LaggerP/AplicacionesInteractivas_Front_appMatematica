@@ -37,6 +37,17 @@ class MenuJuegosNavbar extends Component {
       e.preventDefault();
       auth.signOut(() => this.props.history.push('/'))
    }
+   showRanking = (e) => {
+      e.preventDefault();
+      this.props.history.push('/ranking');
+   }
+   showGames = (e) => {
+      e.preventDefault();
+      if (auth.isConnected){
+         this.props.history.push('/games');
+      }
+   }
+
 
    render(){
       return (
@@ -46,11 +57,11 @@ class MenuJuegosNavbar extends Component {
                   <Typography variant="h6" className={this.props.classes.title}>
                      AppName
                   </Typography>
-                  <IconButton title="Ranking" aria-label="home" className={this.props.classes.Button} color="inherit">
+                  <IconButton onClick={this.showRanking} title="Ranking" aria-label="home" className={this.props.classes.Button} color="inherit">
                      <span className="spanNavBar" role="img" > Ranking </span>
                      <BarChartRoundedIcon/>
                   </IconButton>
-                  <IconButton title="Juegos" aria-label="game" className={this.props.classes.Button} color="inherit">
+                  <IconButton onClick={this.showGames} title="Juegos" aria-label="game" className={this.props.classes.Button} color="inherit">
                      <span className="spanNavBar" role="img"> Juegos </span>
                      <SportsEsportsOutlinedIcon/>
                   </IconButton>

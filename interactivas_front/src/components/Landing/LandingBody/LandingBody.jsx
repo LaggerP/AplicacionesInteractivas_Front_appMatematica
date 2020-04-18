@@ -9,7 +9,7 @@ export default class LandingBody extends Component {
 
    render() {
       return (
-         <div className="bodyContainer" id="games">
+         <div className="bodyContainer">
             <ul className="bodyContainer-cards">
                <li className="bodyContainer-cards-item">
                   <Card
