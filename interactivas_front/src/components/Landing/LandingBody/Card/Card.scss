@@ -36,3 +36,9 @@
       }
    }
 }
+
+@media (max-width: 768px){
+   .bodyContainer-cards-item {
+      width: 320px !important;
+   }
+}

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import MenuJuegosNavbar from '../MenuJuegosNavbar/MenuJuegosNavbar';
-import InteractiveList from './CustomComponent/InteractiveList';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import PollOutlinedIcon from '@material-ui/icons/PollOutlined';
@@ -8,6 +7,7 @@ import InsertChartOutlinedRoundedIcon from '@material-ui/icons/InsertChartOutlin
 import InsertChartOutlinedOutlinedIcon from '@material-ui/icons/InsertChartOutlinedOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import './Ranking.scss';
+import RankingTable from "./CustomComponent/RankingTable";
 
 class Ranking extends Component {
     constructor() {
@@ -55,10 +55,9 @@ class Ranking extends Component {
                                 icon={<AssessmentOutlinedIcon/>}
                             />
                         </BottomNavigation>
-                        <InteractiveList/>
+                        <RankingTable/>
+
                     </div>
-
-
                 </div>
 
             </div>
