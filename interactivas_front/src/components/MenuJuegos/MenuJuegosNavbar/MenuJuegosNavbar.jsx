@@ -1,49 +1,76 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {Component} from 'react';
+import './MenuJuegosNavbar.scss'
+import {withStyles} from '@material-ui/core/styles';
+import {withRouter, Link} from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import auth from '../../../ProtectedRoutes/auth'
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
+import SportsEsportsOutlinedIcon from '@material-ui/icons/SportsEsportsOutlined';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const useStyles = makeStyles((theme) => ({
-   root: {
-      flexGrow: 1,
-   },
-   appBar: {
-      background: '#45B39D',
-      position: 'fixed',
-   },
-   Button: {
-      marginRight: theme.spacing(3),
-      '&:hover': {
-         backgroundColor: '#4a47a3',
-         color: 'white'
-      },
-   },
-   title: {
-      flexGrow: 1,
-   },
-}));
+const useStyles = (theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    appBar: {
+        background: '#45B39D',
+    },
+    title: {
+        flexGrow: 1,
+    },
+});
 
-export default function MenuJuegosNavbar() {
-   const classes = useStyles();
+class MenuJuegosNavbar extends Component {
 
-   return (
-      <div className={classes.root}>
-         <AppBar position="static" className={classes.appBar}>
-            <Toolbar>
+    signOut = (e) => {
+        e.preventDefault();
+        auth.signOut(() => this.props.history.push('/'))
+    }
 
-               <Typography variant="h6" className={classes.title}>
-                  AppName
-               </Typography>
-               <Button className={classes.Button} color="inherit">
-                  <span role="img" aria-label="home">Ranking 📊</span>
-               </Button>
-               <Button className={classes.Button} color="inherit">
-                  <span role="img" aria-label="game">Juegos🎮</span>
-               </Button>
-            </Toolbar>
-         </AppBar>
-      </div>
-   );
+    render() {
+        return (
+            <div className={this.props.classes.root}>
+                <AppBar position="static" className={this.props.classes.appBar}>
+                    <Toolbar>
+                        <Typography variant="h6" className={this.props.classes.title}>
+                            Virtu
+                        </Typography>
+                        <ul className="MenuGames">
+                            <li>
+                                <Button
+                                    component={Link}
+                                    to="/ranking"
+                                    className="MenuNavbarButton"
+                                    startIcon={<BarChartRoundedIcon/>}>
+                                    Ranking
+                                </Button>
+                            </li>
+                            <li>
+                                <Button
+                                    component={Link}
+                                    to="/games"
+                                    className="MenuNavbarButton"
+                                    startIcon={<SportsEsportsOutlinedIcon/>}>
+                                    Juegos
+                                </Button>
+                            </li>
+                            <li>
+                                <Button
+                                    onClick={this.signOut}
+                                    startIcon={<ExitToAppIcon/>}
+                                    className="MenuNavbarButton">
+                                   <span>Salir</span>
+                                </Button>
+                            </li>
+                        </ul>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
+
+export default withStyles(useStyles)(withRouter(MenuJuegosNavbar));

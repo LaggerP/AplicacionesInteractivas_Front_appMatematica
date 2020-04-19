@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import Header from './LandingHeader/LandingHeader'
-import Body from './LandingBody/LandingBody'
+import LandingHeader from './LandingHeader/LandingHeader'
+import LandingBody from './LandingBody/LandingBody'
 import auth from "../../ProtectedRoutes/auth";
-import Navbar from "./LandingNavbar/LandingNavbar";
+import LandingNavbar from "./LandingNavbar/LandingNavbar";
 
 export class Landing extends Component {
 
-    // redirect to dashboard if the user is logged
-    componentDidMount() { if (auth.isConnected()) this.props.history.push('/games'); }
+   // redirect to dashboard if the user is logged
+   componentDidMount() { if (auth.isConnected()) this.props.history.push('/games'); }
 
-    render() {
+   render() {
       return (
          <div>
-             <Navbar></Navbar>
-             <Header></Header>
-            <Body></Body>
+            <LandingNavbar />
+            <LandingHeader />
+            <LandingBody />
          </div>
       )
    }

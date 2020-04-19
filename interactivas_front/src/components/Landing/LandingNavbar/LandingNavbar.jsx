@@ -1,9 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import './LandingNavbar.scss'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import HomeIcon from '@material-ui/icons/Home';
+import GamesIcon from '@material-ui/icons/Games';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -20,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
          color: 'white'
       },
    },
+
    title: {
       flexGrow: 1,
    },
@@ -34,14 +38,26 @@ export default function LandingNavbar() {
             <Toolbar>
 
                <Typography variant="h6" className={classes.title}>
-                  AppName
+                  Virtu
                </Typography>
-               <Button className={classes.Button} color="inherit">
-                  <span role="img" aria-label="home">🏠Home</span>
-               </Button>
-               <Button className={classes.Button} color="inherit">
-                  <span role="img" aria-label="game">🎮Juegos</span>
-               </Button>
+               <ul className="MenuUl">
+                  <li>
+                     <Button
+                         href="#home"
+                         className="LandingNavbarButton"
+                         startIcon={<HomeIcon/>}>
+                        <span>Home</span>
+                     </Button>
+                  </li>
+                  <li>
+                     <Button
+                         href="#games"
+                         className="LandingNavbarButton"
+                         startIcon={<GamesIcon/>}>
+                        <span>Juegos</span>
+                     </Button>
+                  </li>
+               </ul>
             </Toolbar>
          </AppBar>
       </div>

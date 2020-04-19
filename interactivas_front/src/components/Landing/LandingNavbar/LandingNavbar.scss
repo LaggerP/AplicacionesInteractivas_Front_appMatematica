@@ -1,0 +1,42 @@
+.MenuUl {
+  display: flex;
+  list-style: none;
+  & li {
+    height: 30px;
+    color: white !important;
+    margin-right: 34px;
+    font-size: 18px;
+    & .LandingNavbarButton {
+      color: white;
+      font-size: 20px;
+      border-radius: 3px !important;
+      width: 120px;
+      &:hover, &:active, &:focus {
+        background-color: transparent;
+      }
+      & span {
+        transition: .2s;
+        &:hover{
+          text-shadow: 5px 2px 5px rgba(4, 10, 8, 0.58);
+        }
+      }
+
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .MenuUl {
+    & li {
+      margin-right: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      & .LandingNavbarButton {
+        margin-top: 4px;
+        width: 60px;
+        font-size: 15px;
+        color: white;
+      }
+    }
+  }
+}
