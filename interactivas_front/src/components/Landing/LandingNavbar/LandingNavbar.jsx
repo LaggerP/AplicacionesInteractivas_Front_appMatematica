@@ -4,6 +4,9 @@ import './LandingNavbar.scss'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from "@material-ui/core/Button";
+import HomeIcon from '@material-ui/icons/Home';
+import GamesIcon from '@material-ui/icons/Games';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -38,8 +41,22 @@ export default function LandingNavbar() {
                   Virtu
                </Typography>
                <ul className="MenuUl">
-                  <li><a href="#home"><span role="img" aria-label="home">🏠</span>Home</a></li>
-                  <li><a href="#games"><span role="img" aria-label="game">🎮</span>Juegos</a></li>
+                  <li>
+                     <Button
+                         href="#home"
+                         className="LandingNavbarButton"
+                         startIcon={<HomeIcon/>}>
+                        <span>Home</span>
+                     </Button>
+                  </li>
+                  <li>
+                     <Button
+                         href="#games"
+                         className="LandingNavbarButton"
+                         startIcon={<GamesIcon/>}>
+                        <span>Juegos</span>
+                     </Button>
+                  </li>
                </ul>
             </Toolbar>
          </AppBar>

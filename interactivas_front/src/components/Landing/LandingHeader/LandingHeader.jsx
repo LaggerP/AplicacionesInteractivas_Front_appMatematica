@@ -33,15 +33,13 @@ class Header extends Component {
     }
 
     handleChange = name => event => this.setState({[name]: event.target.value})
-    state;
 
     login = (e) => {
         e.preventDefault();
         this.setState({isLoading: true})
         const userData = {nickName: this.state.nickName, password: this.state.password}
         console.log(userData)
-        console.log(localStorage.getItem('sessionName'));
-        if (userData.nickName !== '') {
+        if (userData.nickName !== '' && userData.password !== '') {
             this.setState({loading: true})
             localStorage.setItem('sessionName', userData.nickName); // Se guarda en localStorage el nombre.
             setTimeout(
@@ -57,7 +55,6 @@ class Header extends Component {
         e.preventDefault();
         this.setState({loading: true})
         const userData = {nickName: this.state.nickName, password: this.state.password}
-        console.log(userData)
     }
 
     changeForm = () => {
@@ -88,8 +85,8 @@ class Header extends Component {
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
                                            placeholder="Tu contraseña"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="password"
+                                           onChange={this.handleChange('password')}
                                            required
                                     />
                                     <div className="divViewSpan animated zoomIn">
@@ -99,7 +96,7 @@ class Header extends Component {
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
                         
-                                    {!this.state.loading ? <span role="img" aria-label="game">🎮JUGAR</span>
+                                    {!this.state.loading ? <span>JUGAR</span>
                                         :
                                         <ClipLoader
                                             css={override}
@@ -141,7 +138,7 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
-                                    {!this.state.loading ? <span role="img" aria-label="hand">✍️REGISTRARSE</span>
+                                    {!this.state.loading ? <span>REGISTRARSE</span>
                                         :
                                         <ClipLoader
                                         css={override}
