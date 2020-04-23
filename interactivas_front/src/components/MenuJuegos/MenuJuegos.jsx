@@ -3,6 +3,7 @@ import './MenuJuegos.scss';
 import CardJuego from './CustomComponent/CardJuego/CardJuego'
 import Button from '@material-ui/core/Button'
 import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
+import { Link } from 'react-router-dom'
 import fractions from '../../assets/Images/fractions.png';
 import money from '../../assets/Images/monedas.png';
 import sums from '../../assets/Images/sumas.png';
@@ -23,7 +24,7 @@ export default class MenuJuegos extends Component {
                <h3 className='Bienvenido2'>Elegi cualquiera de nuestros juegos y comenzá a divertirte</h3>
                <ul className="bodyContainer-cards">
                   <li className="bodyContainerMenuJuegos-cards-itemJuego">
-                     <Button>
+                     <Button component={Link} to="/games/monedas">
                         <CardJuego
                         title="Monedas"
                         detail="Vamos al super juntos! En este juego vamos aprender

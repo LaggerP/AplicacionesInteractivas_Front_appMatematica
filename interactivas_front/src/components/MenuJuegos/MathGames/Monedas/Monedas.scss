@@ -1,0 +1,45 @@
+// Monedas styles
+
+// Column styles
+.ColumnContainer {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  &-coins {
+    padding: 8px;
+    justify-content: center;
+    text-align: center;
+
+
+  }
+}
+
+// Coin styles
+
+.CoinContainer {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 49px;
+    height: 42px;
+    padding: 20px;
+    overflow: hidden;
+    border: 50% solid;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    font: normal 1px/2.5 Arial Black, Gadget, sans-serif;
+    color: rgba(0,0,0,1);
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: rgba(255,226,12,0.93);
+    -webkit-box-shadow: 14px 0 0 0 rgba(255,212,0,0.93) ;
+    box-shadow: 11px 0 0 0 rgba(171, 140, 0, 0.93);
+    text-shadow: 2px 1px 1px rgba(0,0,0,0.2) ;
+    -webkit-transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg)   ;
+    transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg)   ;
+
+  &-value {
+    font-size: 17px;
+  }
+}
