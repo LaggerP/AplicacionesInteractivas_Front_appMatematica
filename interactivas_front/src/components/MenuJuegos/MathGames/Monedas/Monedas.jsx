@@ -3,6 +3,7 @@ import data from '../../../../assets/jsonGames/monedas.json'
 import './Monedas.scss'
 import Column from './Column'
 import {DragDropContext} from "react-beautiful-dnd";
+import MenuJuegosNavbar from "../../MenuJuegosNavbar/MenuJuegosNavbar";
 
 const structureData = {
     coins: {
@@ -18,30 +19,34 @@ const structureData = {
     columns: {
         'monedero': {
             id: 'monedero',
-            title: 'Monedero',
+            title: 'Tu monedero',
             coinsIds: ['coin-2', 'coin-5', 'coin-10', 'coin-50', 'coin-100', 'coin-200', 'coin-500', 'coin-1000']
         },
         'cajaRegistradora': {
             id: 'caja',
-            title: 'caja',
-            coinsIds: ['coin-2', 'coin-5', 'coin-10', 'coin-50', 'coin-100', 'coin-200', 'coin-500', 'coin-1000']
+            title: 'La caja',
+            coinsIds: []
         }
     },
-    columnOrder: ['monedero']
+    columnOrder: ['monedero', 'cajaRegistradora']
 }
 
 class Monedas extends Component {
     constructor() {
         super();
         this.state = {
-            dataCoin: structureData,
-            dataGameMonedas: [],
+            dataCoin: [],
+            dataGameMonedas: data,
             gamePoints: 0,
+            isLoading: true,
         }
     }
 
     componentDidMount() {
-        this.setState({dataGameMonedas: data}) // data set from json
+        this.setState({
+            dataCoin: structureData, // data set from json
+            isLoading: false
+        })
     }
 
     updateGamePoints() {
@@ -50,55 +55,100 @@ class Monedas extends Component {
 
     onDragEnd = result => {
         const {destination, source, draggableId} = result;
+        if (!destination) return;
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) return;
 
-        if(!destination)
+        const start = this.state.dataCoin.columns[source.droppableId];
+        const finish = this.state.dataCoin.columns[destination.droppableId];
+        // case if the DnD happens in the same column
+        if (start === finish) {
+            const newCoinIds = Array.from(start.coinsIds);
+            newCoinIds.splice(source.index, 1);
+            newCoinIds.splice(destination.index, 0, draggableId);
+
+            const newColumn = {
+                ...start,
+                coinsIds: newCoinIds,
+            };
+
+            const newState = {
+                ...this.state.dataCoin,
+                columns: {
+                    ...this.state.dataCoin.columns,
+                    [newColumn.id]: newColumn,
+                }
+            };
+
+            this.setState(newState)
+            console.log(this.state.dataCoin)
             return;
-        if (destination.droppableId === source.droppableId && destination.index === source.index)
-            return;
+        }
 
-        const column = this.state.dataCoin.columns[source.droppableId];
-        const newCoinIds = Array.from(column.coinsIds);
-        newCoinIds.splice(source.index, 1);
-        newCoinIds.splice(destination.index, 0, draggableId);
+        // case if the DnD happens between columns
+        const startCoinIds = Array.from(start.coinsIds);
+        startCoinIds.splice(source.index, 1);
+        const newStar = {
+            ...start, coinsIds: startCoinIds
+        };
 
-        const newColumn = {
-            ...column,
-            coinsIds: newCoinIds,
+        const finishCoinIds = Array.from(finish.coinsIds);
+        finishCoinIds.splice(destination.index, 0, draggableId);
+        const newFinish = {
+            ...finish, coinsIds: finishCoinIds
         };
 
         const newState = {
             ...this.state.dataCoin,
             columns: {
                 ...this.state.dataCoin.columns,
-                [newColumn.id]: newColumn,
-
-            }
+                [newStar.id]: newStar,
+                [newFinish.id]: newFinish,
+            },
         };
 
-        this.setState((newState))
+        this.setState(newState)
+
     }
 
     render() {
-        return (
-            <DragDropContext
-                onDragEnd={this.onDragEnd}
-            >
-                {
-                    this.state.dataCoin.columnOrder.map((columnId) => {
-                        const column = structureData.columns[columnId];
-                        const coins = column.coinsIds.map(coinId => this.state.dataCoin.coins[coinId]);
-                        // <Column/> = spaces where we can drag and drop different items
-                        return (
-                            <div>
-                                <Column key={column.id} column={column} coins={coins}/>
-                            </div>
-                        )
+        const {dataCoin, isLoading, dataGameMonedas} = this.state
 
-                    })
-                }
-            </DragDropContext>
-        )
+        // check if the component is loading or not
+        if (!isLoading) {
+            return (
+                <div>
+                <MenuJuegosNavbar/>
+                    <div className="GameContainer-info">
+                        <h1>{dataGameMonedas.gameName}</h1>
+                        <p>En este juego aprenderemos a hacer uso de las monedas BLA BLA BLA BLA BLA</p>
+                    </div>
+                <div className="GameContainer">
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <div className="MonedasContainer">
+                            {
+                                dataCoin.columnOrder.map((columnId) => {
+                                    const column = structureData.columns[columnId];
+                                    const coins = column.coinsIds.map(coinId => dataCoin.coins[coinId]);
+                                    // <Column/> = spaces where we can drag and drop different items
+                                    return (
+                                        <Column key={column.id} column={column} coins={coins}/>
+                                    )
+                                })
+                            }
+                        </div>
+                    </DragDropContext>
+                </div>
+                </div>
+            )
 
+        } else {
+            return (
+                <div>
+                    <h1>cargando juego</h1>
+                </div>
+            )
+        }
     }
 }
 

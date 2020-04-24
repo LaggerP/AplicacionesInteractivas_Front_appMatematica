@@ -1,21 +1,37 @@
 // Monedas styles
+.GameContainer {
+  margin: 50px auto;
+  padding: 50px;
+  background-color: rgba(191, 191, 191, 0.21);
+
+  .MonedasContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+
+}
+
+
 
 // Column styles
 .ColumnContainer {
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
   &-coins {
     padding: 8px;
-    justify-content: center;
-    text-align: center;
-
+  }
+  &-title {
 
   }
 }
 
 // Coin styles
-
 .CoinContainer {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -38,8 +54,17 @@
     text-shadow: 2px 1px 1px rgba(0,0,0,0.2) ;
     -webkit-transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg)   ;
     transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg)   ;
-
   &-value {
     font-size: 17px;
   }
+}
+
+
+@media screen and(min-width: 500px) {
+
+
+  .ColumnContainer {
+    width: 100%;
+  }
+
 }

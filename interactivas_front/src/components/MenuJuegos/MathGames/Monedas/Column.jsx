@@ -6,7 +6,7 @@ import {Droppable} from "react-beautiful-dnd";
 const Column = (props) => {
     return (
         <div className="ColumnContainer">
-            <h3>{props.column.title}</h3>
+            <div className="ColumnContainer-title">{props.column.title}</div>
             <Droppable droppableId={props.column.id}>
                 {provided => (
                     <div
