@@ -7,20 +7,17 @@ const Column = (props) => {
     return (
         <div className="ColumnContainer">
             <div className="ColumnContainer-title">{props.column.title}</div>
-            <Droppable droppableId={props.column.id}>
-                {provided => (
+            <Droppable droppableId={props.column.id} direction="horizontal">
+                {(provided) => (
                     <div
                         ref={provided.innerRef}
                         className="ColumnContainer-coins"
                         {...provided.droppableProps}
                     >
-                        {props.coins.map(
-                            (coin, index) =>
-                                <Coin
-                                    key={coin !== undefined && coin.id}
-                                    coin={coin}
-                                    index={index}/>
-                        )}
+                        {props.coins.map((coin, index) => (
+                                <Coin key={coin !== undefined && coin.id} coin={coin} index={index}/>
+
+                            ))}
                         {provided.placeholder}
                     </div>
                 )}

@@ -1,65 +1,104 @@
 // Monedas styles
 .GameContainer {
-  margin: 50px auto;
+  margin: 50px auto 0 auto;
   padding: 50px;
-  background-color: rgba(191, 191, 191, 0.21);
+  background-color: rgba(238, 236, 236, 0.21);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+
 
   .MonedasContainer {
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
   }
 }
 
-// Column styles
+.GameContainer-gameDescription {
+  align-content: center;
+  & p {
+    font-size: 20px;
+  }
+
+  & p span {
+    font-weight: bold;
+  }
+}
+
+
+  // Column styles
 .ColumnContainer {
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  width: 300px;
-  display: flex;
-  justify-content: center;
+  min-height: 200px;
+
   &-coins {
-    padding: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
+
   &-title {
   }
 }
 
 // Coin styles
 .CoinContainer {
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    width: 49px;
-    height: 42px;
-    padding: 20px;
-    overflow: hidden;
-    border: 50% solid;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    font: normal 1px/2.5 Arial Black, Gadget, sans-serif;
-    color: rgba(0,0,0,1);
-    text-align: center;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    background: rgba(255,226,12,0.93);
-    -webkit-box-shadow: 14px 0 0 0 rgba(255,212,0,0.93) ;
-    box-shadow: 11px 0 0 0 rgba(171, 140, 0, 0.93);
-    text-shadow: 2px 1px 1px rgba(0,0,0,0.2) ;
-    -webkit-transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg)   ;
-    transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg)   ;
+  box-sizing: content-box;
+  width: 49px;
+  height: 42px;
+  margin: 10px;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 50%;
+  font: normal 1px/2.5 Arial Black, Gadget, sans-serif;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: rgba(255, 226, 12, 0.93);
+  box-shadow: 11px 0 0 0 rgba(171, 140, 0, 0.93);
+  text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.2);
+  transform: rotateX(-4.010704565915762deg) rotateY(33.80450991271857deg) rotateZ(0.5729577951308232deg);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
   &-value {
     font-size: 17px;
   }
 }
 
-
-@media screen and(min-width: 500px) {
-
-
-  .ColumnContainer {
+.NextLevelButton {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto 30px auto;
+  width: 100%;
+  height: 50px;
+  background-color: #44B39D;
+  cursor: pointer;
+  color: white;
+  & Button {
     width: 100%;
+    color: white;
+    font-size: 20px;
   }
+}
 
+
+@media screen and(max-width: 500px) {
+
+  .CoinContainer {
+    width: 34px;
+    height: 22px;
+    font: normal 1px/2 Arial Black, Gadget, sans-serif;
+
+    &-value {
+      font-size: 12px;
+    }
+  }
 }

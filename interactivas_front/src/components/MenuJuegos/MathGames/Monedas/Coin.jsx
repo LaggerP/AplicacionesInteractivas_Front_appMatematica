@@ -4,7 +4,7 @@ import {Draggable} from "react-beautiful-dnd";
 
 const Coin = (props) => {
     return (
-        <Draggable draggableId={props.coin.id} index={props.index}>
+        <Draggable draggableId={props.coin.id} id={props.coin.id} index={props.index}>
             {provided => (
                 <div
                     ref={provided.innerRef}
