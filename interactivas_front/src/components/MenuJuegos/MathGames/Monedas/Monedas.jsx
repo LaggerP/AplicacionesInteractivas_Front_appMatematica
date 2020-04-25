@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import data from '../../../../assets/jsonGames/monedas.json'
+import dataConsigna from '../../../../assets/jsonGames/monedas.json'
 import './Monedas.scss'
 import Column from './Column'
 import {DragDropContext} from "react-beautiful-dnd";
@@ -25,7 +25,7 @@ const structureData = {
         'cajaRegistradora': {
             id: 'caja',
             title: 'La caja',
-            coinsIds: []
+            coinsIds: ['coin-2']
         }
     },
     columnOrder: ['monedero', 'cajaRegistradora']
@@ -36,15 +36,16 @@ class Monedas extends Component {
         super();
         this.state = {
             dataCoin: [],
-            dataGameMonedas: data,
+            dataGameMonedas: dataConsigna,
             gamePoints: 0,
             isLoading: true,
+            error: false,
         }
     }
 
     componentDidMount() {
         this.setState({
-            dataCoin: structureData, // data set from json
+            dataCoin: structureData, // data set from structureData json
             isLoading: false
         })
     }
@@ -61,17 +62,21 @@ class Monedas extends Component {
 
         const start = this.state.dataCoin.columns[source.droppableId];
         const finish = this.state.dataCoin.columns[destination.droppableId];
+        console.log(start)
+
         // case if the DnD happens in the same column
         if (start === finish) {
             const newCoinIds = Array.from(start.coinsIds);
             newCoinIds.splice(source.index, 1);
             newCoinIds.splice(destination.index, 0, draggableId);
 
+            // coindIds has the new reordered column
             const newColumn = {
                 ...start,
                 coinsIds: newCoinIds,
             };
 
+            // coindIds is reordered
             const newState = {
                 ...this.state.dataCoin,
                 columns: {
@@ -80,9 +85,8 @@ class Monedas extends Component {
                 }
             };
 
-            this.setState(newState)
-            console.log(this.state.dataCoin)
-            return;
+            this.setState({dataCoin: newState});
+            return
         }
 
         // case if the DnD happens between columns
@@ -105,10 +109,10 @@ class Monedas extends Component {
                 [newStar.id]: newStar,
                 [newFinish.id]: newFinish,
             },
-        };
+        }
 
-        this.setState(newState)
-
+        this.setState({dataCoin: newState});
+        return
     }
 
     render() {
@@ -128,8 +132,8 @@ class Monedas extends Component {
                         <div className="MonedasContainer">
                             {
                                 dataCoin.columnOrder.map((columnId) => {
-                                    const column = structureData.columns[columnId];
-                                    const coins = column.coinsIds.map(coinId => dataCoin.coins[coinId]);
+                                    let column = dataCoin.columns[columnId];
+                                    let coins = column.coinsIds.map(coinId => dataCoin.coins[coinId]);
                                     // <Column/> = spaces where we can drag and drop different items
                                     return (
                                         <Column key={column.id} column={column} coins={coins}/>
@@ -141,7 +145,6 @@ class Monedas extends Component {
                 </div>
                 </div>
             )
-
         } else {
             return (
                 <div>
