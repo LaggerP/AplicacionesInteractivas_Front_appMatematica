@@ -15,7 +15,7 @@ const Container = styled("div")`
   background-color: ${props => (props.isDraggingOver ? "#639ee2" : "rgba(238, 236, 236, 0.21)")};
 `;
 
-const Monedas = () => {
+const Billetes = () => {
     const [starter, setStarter] = useState(initialData);
     const [gameData] = useState(consignasGameData)
     const [actualLevel, setActualLevel] = useState(0)
@@ -173,4 +173,4 @@ const Monedas = () => {
 
 };
 
-export default Monedas
+export default Billetes

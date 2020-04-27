@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Monedas from "./Monedas";
+import Billetes from "./Billetes";
 import InstruccionesMonedas from './InstruccionesMonedas'
 import {Button} from "@material-ui/core";
 import MenuJuegosNavbar from "../../MenuJuegosNavbar/MenuJuegosNavbar";
@@ -14,7 +14,6 @@ class StartGameMonedas extends Component {
 
     startGame = () => {
         this.setState({startGame: true})
-
     }
 
     render() {
@@ -31,7 +30,7 @@ class StartGameMonedas extends Component {
             return (
                 <div>
                     <MenuJuegosNavbar/>
-                    <Monedas/>
+                    <Billetes/>
                 </div>
             );
         }

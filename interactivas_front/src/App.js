@@ -17,7 +17,7 @@ function App() {
         <Route exact path="/auth/login" component={Login} />
         <ProtectedRoute exact path="/ranking" component={Ranking}/>
         <ProtectedRoute exact path="/games" component={MenuJuegos} />
-        <ProtectedRoute exact path="/games/monedas" component={StartGameMonedas} />
+        <ProtectedRoute exact path="/games/billetes" component={StartGameMonedas} />
         <Route path="*" component={()=>"404 not Found"}/>
       </Switch>
 

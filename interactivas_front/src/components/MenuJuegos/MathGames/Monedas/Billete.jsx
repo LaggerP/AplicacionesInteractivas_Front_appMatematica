@@ -3,13 +3,17 @@ import styled from "@emotion/styled";
 import { Draggable } from "react-beautiful-dnd";
 
 const Container = styled("div")`
-  border: 1px solid lightgrey;
   margin-bottom: 8px;
   border-radius: 5px;
   padding: 8px;
   color: white;
-  background: ${props => (props.isDragging ? "rgba(39,130,15,0.76)" : "#27820f")};
+  display:flex;
 `;
+
+const Img = styled("img")`
+    width: 160px
+`;
+
 
 const Billete = ({ billete, index }) => {
     return (
@@ -21,7 +25,7 @@ const Billete = ({ billete, index }) => {
                     {...provided.draggableProps}
                     isDragging={snapshot.isDragging}
                 >
-                    {billete.content}
+                    <Img src={billete.img} alt=""/>
                 </Container>
             )}
         </Draggable>

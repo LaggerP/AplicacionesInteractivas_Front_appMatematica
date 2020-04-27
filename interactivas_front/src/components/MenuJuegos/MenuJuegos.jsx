@@ -24,12 +24,10 @@ export default class MenuJuegos extends Component {
                <h3 className='Bienvenido2'>Elegi cualquiera de nuestros juegos y comenzá a divertirte</h3>
                <ul className="bodyContainer-cards">
                   <li className="bodyContainerMenuJuegos-cards-itemJuego">
-                     <Button component={Link} to="/games/monedas">
+                     <Button component={Link} to="/games/billetes">
                         <CardJuego
                         title="Monedas"
-                        detail="Vamos al super juntos! En este juego vamos aprender
-                              a recibir y dar el cambio de lo que compramos.
-                              Comenzemos a jugar"
+                        detail="¡Vamos de compra! En este juego vamos aprender a sumar. Comencemos a jugar"
                         img={money}>
                         </CardJuego>
                      </Button>
@@ -41,7 +39,7 @@ export default class MenuJuegos extends Component {
                         title="Fracciones"
                         detail="En este juego aprenderemos a usar fracciones de una
                                  forma muy divertida con imagenes cotidianas.
-                                 Ahora si, comenzemos a jugar!"
+                                 Ahora si, Comencemos a jugar!"
                         img={fractions}>
                         </CardJuego>
                      </Button>
@@ -54,7 +52,7 @@ export default class MenuJuegos extends Component {
                         title="Sumas"
                         detail="El juego de sumas se trata en agilizar la mente.
                                  Vamos a estar viendo sumas, restas, encontrar el mayor
-                                 y el menor de un numero. Empezemos a jugar!"
+                                 y el menor de un numero. Empecemos a jugar!"
                         img={sums}>
                         </CardJuego>
                      </Button>
