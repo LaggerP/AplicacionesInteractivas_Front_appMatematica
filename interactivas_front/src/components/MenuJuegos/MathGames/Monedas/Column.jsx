@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import styled from "@emotion/styled";
 import Billete from "./Billete";
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
 
 const Container = styled("div")`
   margin: 10px;
@@ -10,11 +11,13 @@ const Container = styled("div")`
   border: 1px solid lightgrey;
   display: flex;
   flex-direction: column;
-  width: 230px;
+  width: 400px;
   background: white;
 `;
-const Title = styled("h3")`
-  padding: 8px;
+
+const Title = styled("h2")`
+  padding: 15px 0 0 20px;
+  margin: 0;
 `;
 
 const BilleteList = styled("div")`
@@ -24,7 +27,7 @@ const BilleteList = styled("div")`
   border-radius: 2px;
   transition: background-color ease 0.2s;
   background-color: ${props =>
-    props.isDraggingOver ? "rgba(68, 179, 157, 0.27)" : "white"};
+    props.isDraggingOver ? "rgba(0,123,167,0.39)" : "rgba(234,234,234,0.14)"};
 `;
 
 const Column = ({ billetes, column, index }) => {
@@ -36,7 +39,9 @@ const Column = ({ billetes, column, index }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <Title>{column.title} $</Title>
+
+                    <Title>{column.title}</Title>
+                    <hr/>
                     <Droppable droppableId={column.id} type="task">
                         {(provided, snapshot) => (
                             <BilleteList

@@ -16,7 +16,7 @@ const useStyles = (theme) => ({
         flexGrow: 1,
     },
     appBar: {
-        background: '#45B39D',
+        background: '#007BA7',
     },
     title: {
         flexGrow: 1,

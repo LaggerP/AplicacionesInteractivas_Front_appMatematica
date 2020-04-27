@@ -1,0 +1,69 @@
+
+* {
+}
+// Billetes styles
+.BilletesContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .BilletesConsigna {
+    width: 100%;
+    min-height: 200px;
+    background-color: #ececec !important;
+    & p {
+      font-size: 20px;
+    }
+    & #rankingValue {
+      margin-top: 35px;
+      font-size: 15px;
+    }
+
+  }
+}
+
+// Column styles
+
+
+// Coin styles
+
+.NextLevelButton {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 60px;
+  background-color: #007BA7;
+  cursor: pointer;
+  color: white;
+  border-radius: 0px;
+
+  & Button {
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    transition: .3s;
+    border-radius: 0 !important;
+    &:hover {
+      background-color: #ec9090;
+    }
+  }
+}
+
+.NextLevelButtonWarning {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 60px;
+  background-color: #007BA7;
+  cursor: none;
+  color: white;
+  border-radius: 0px;
+
+  & span {
+    font-size: 15px;
+    margin: 20px
+  }
+}

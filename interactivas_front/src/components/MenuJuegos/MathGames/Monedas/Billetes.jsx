@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import './Monedas.scss'
+import './Billetes.scss'
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
 import consignasGameData from "../../../../assets/jsonGames/Monedas/monedasConsignas.json";
 import Column from "./Column";
 import Button from "@material-ui/core/Button";
 
+
 const Container = styled("div")`
   display: flex;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  background-color: ${props => (props.isDraggingOver ? "#639ee2" : "rgba(238, 236, 236, 0.21)")};
+  flex-direction: row;
+  background-color: ${props => (props.isDraggingOver ? "rgba(99,158,226,0.56)" : "#E9F0F5")};
 `;
 
 const Billetes = () => {
@@ -20,8 +22,16 @@ const Billetes = () => {
     const [gameData] = useState(consignasGameData)
     const [actualLevel, setActualLevel] = useState(0)
     const [finishGame, setFinishGame] = useState(false)
+    const [loadingQuestion, setLoadingQuestion] = useState(false)
     const [userGamePoint, setUserGamePoint] = useState(0)
     const [billetesTotales, setBilletesTotales] = useState(0)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoadingQuestion(true)
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const onDragEnd = ({ destination, source, draggableId, type }) => {
         if (!destination) return;
@@ -90,12 +100,13 @@ const Billetes = () => {
                 [end.id]: endTaskColumn
             }
         });
-        setBilletesTotales (calculateTotalMoney(endTaskColumn.billeteIds, starter))
+            setBilletesTotales (calculateTotalMoney(endTaskColumn.billeteIds, starter))
     };
 
-    const calculateTotalMoney = (billeteDado, starter) => {
+    const calculateTotalMoney = (billeteDado = '', starter) => {
         let plataDada = []
         billeteDado.map( (billete, total) => {
+            console.log(starter.billetes[billete])
             plataDada.push(starter.billetes[billete].value)
         })
         return plataDada.reduce( (a,b) => a + b);
@@ -124,11 +135,8 @@ const Billetes = () => {
     }
     if (!finishGame) {
         return (
-            <div>
+            <div className="BilletesContainer">
                 <h1>{gameData.descriptionGame}</h1>
-                <h4>{gameData.levels[actualLevel].descriptionProblem}</h4>
-                <h3>tu puntaje {userGamePoint}</h3>
-                <h4>{billetesTotales}</h4>
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId="all-column" type="column">
                         {(provided, snapshot) => (
@@ -137,6 +145,18 @@ const Billetes = () => {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
+                                <div className="BilletesConsigna">
+                                    { !loadingQuestion ? <p>Cargando consigna...</p>
+                                    :
+                                        <div>
+                                            <h1>Consigna:</h1>
+                                            <p>{gameData.levels[actualLevel].descriptionProblem}</p>
+                                            <p id="rankingValue">Tu posición el el ranking: {userGamePoint}/100</p>
+                                            <p id="rankingValue">Tu puntaje actual: {userGamePoint}</p>
+                                        </div>
+                                    }
+                                </div>
+
                                 {starter.columnOrder.map((columnId, index) => {
                                     const column = starter.columns[columnId];
                                     const billetes = column.billeteIds.map(billetesId => starter.billetes[billetesId]);
@@ -152,12 +172,22 @@ const Billetes = () => {
                                 })}
                                 {provided.placeholder}
                             </Container>
+
                         )}
+
                     </Droppable>
                 </DragDropContext>
-                <div className="NextLevelButton">
-                    <Button onClick={nextLevel}>Siguiente nivel</Button>
-                </div>
+                {
+                    billetesTotales>0 ?
+                        <div className="NextLevelButton">
+                         <Button onClick={nextLevel}>Siguiente nivel</Button>
+                        </div>
+                        :
+                        <div className="NextLevelButtonWarning">
+                            <span>Arrastre al menos un billete para continuar</span>
+                        </div>
+                }
+
             </div>
 
         );

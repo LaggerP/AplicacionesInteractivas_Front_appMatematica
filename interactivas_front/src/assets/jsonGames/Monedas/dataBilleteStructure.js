@@ -22,12 +22,12 @@ export default {
   columns: {
     "column-1": {
       id: "column-1",
-      title: "Billetera",
+      title: "Tu billetera💰",
       billeteIds: ['billete-2', 'billete-5', 'billete-10', 'billete-15', 'billete-20', 'billete-50', 'billete-100']
     },
     "column-2": {
       id: "column-2",
-      title: "Caja",
+      title: "La caja 🛒",
       billeteIds: []
     }
   },

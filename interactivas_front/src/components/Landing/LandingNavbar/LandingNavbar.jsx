@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
    },
    appBar: {
-      background: '#45B39D',
+      background: '#007BA7',
       position: 'fixed',
    },
    Button: {

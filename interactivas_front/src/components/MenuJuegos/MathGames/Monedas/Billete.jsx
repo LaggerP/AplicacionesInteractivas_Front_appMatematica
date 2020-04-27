@@ -7,7 +7,7 @@ const Container = styled("div")`
   border-radius: 5px;
   padding: 8px;
   color: white;
-  display:flex;
+  width: 160px
 `;
 
 const Img = styled("img")`
