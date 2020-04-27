@@ -1,59 +1,30 @@
-import React, {Component} from 'react';
-import dataConsigna from '../../../../assets/jsonGames/Monedas/monedasConsignas.json'
-import structureData from "../../../../assets/jsonGames/Monedas/dataCoinStructure";
+import React, { useState } from "react";
+import styled from "@emotion/styled";
 import './Monedas.scss'
-import Column from './Column'
-import {DragDropContext} from "react-beautiful-dnd";
-import MenuJuegosNavbar from "../../MenuJuegosNavbar/MenuJuegosNavbar";
-import CongratulationGame from "./CongratulationGame";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
+import consignasGameData from "../../../../assets/jsonGames/Monedas/monedasConsignas.json";
+import Column from "./Column";
 import Button from "@material-ui/core/Button";
 
-class Monedas extends Component {
-    constructor() {
-        super();
-        this.state = {
-            dataCoin: [],
-            dataGameMonedas: dataConsigna,
-            actualLevel: 0,
-            problemNumber: 'first',
-            gamePoints: 0,
-            isLoading: true,
-            error: false,
-        }
-    }
+const Container = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: ${props => (props.isDraggingOver ? "#639ee2" : "rgba(238, 236, 236, 0.21)")};
+`;
 
-    componentDidMount() {
-        this.setState({
-            dataCoin: structureData, // data set from structureData json
-            isLoading: false
-        })
-    }
+const Monedas = () => {
+    const [starter, setStarter] = useState(initialData);
+    const [gameData] = useState(consignasGameData)
+    const [actualLevel, setActualLevel] = useState(0)
+    const [finishGame, setFinishGame] = useState(false)
+    const [userGamePoint, setUserGamePoint] = useState(0)
+    const [billetesTotales, setBilletesTotales] = useState(0)
 
-    nextProblem = () => {
-        const indexProblem = ['first', 'second', 'third'];
-
-        if (this.state.problemNumber === 'first')
-            this.setState({problemNumber: indexProblem[1]})
-        else if (this.state.problemNumber === 'second')
-            this.setState({problemNumber: indexProblem[2]})
-        else
-            this.nextLevel(); // If I don't have any more level problems
-    }
-
-    nextLevel = () => {
-        this.setState({actualLevel: this.state.actualLevel + 1})
-    }
-
-    updateGamePoints() {
-        this.setState({gamePoints: this.state.gamePoints + 1})
-    }
-
-    onDragEnd = result => {
-        const {destination, source, draggableId} = result;
-
-        if (!destination) {
-            return;
-        }
+    const onDragEnd = ({ destination, source, draggableId, type }) => {
+        if (!destination) return;
         if (
             destination.droppableId === source.droppableId &&
             destination.index === source.index
@@ -61,114 +32,145 @@ class Monedas extends Component {
             return;
         }
 
-        const start = this.state.dataCoin.columns[source.droppableId];
-        const finish = this.state.dataCoin.columns[destination.droppableId];
-        console.log(finish)
+        const start = starter.columns[source.droppableId];
+        const end = starter.columns[destination.droppableId];
 
-        // case if the DnD happens in the same column
-        if (start === finish) {
-            const newCoinIds = Array.from(start.coinsIds);
-            newCoinIds.splice(source.index, 1);
-            newCoinIds.splice(destination.index, 0, draggableId);
+        if (type === "column") {
+            const newOrder = [...starter.columnOrder];
+            newOrder.splice(source.index, 1);
+            newOrder.splice(destination.index, 0, draggableId);
 
-            // coindIds has the new reordered column
+            setStarter({
+                ...starter,
+                columnOrder: newOrder
+            });
+            return;
+        }
+
+        if (start === end) {
+            const column = starter.columns[source.droppableId];
+            const billeteIds = [...column.billeteIds];
+            billeteIds.splice(source.index, 1);
+            billeteIds.splice(destination.index, 0, draggableId);
             const newColumn = {
-                ...start,
-                coinsIds: newCoinIds,
+                ...column,
+                billeteIds
             };
-
-            // coindIds is reordered
-            const newState = {
-                ...this.state.dataCoin,
+            setStarter({
+                ...starter,
                 columns: {
-                    ...this.state.dataCoin.columns,
-                    [newColumn.id]: newColumn,
+                    ...starter.columns,
+                    [column.id]: newColumn
                 }
-            };
-            this.setState({dataCoin: newState});
-            return
+            });
+            return;
         }
 
-        // Moving from one list to another
-        const startCoinIds = Array.from(start.coinsIds)
-        startCoinIds.splice(source.index, 1)
+        const startbilletesIds = [...start.billeteIds];
+        const endbilletesIds = [...end.billeteIds];
 
-        const newStart = {
+        startbilletesIds.splice(source.index, 1);
+        endbilletesIds.splice(destination.index, 0, draggableId);
+
+
+        const newStartColumn = {
             ...start,
-            coinsIds: startCoinIds
-        }
+            billeteIds: startbilletesIds
+        };
+        const endTaskColumn = {
+            ...end,
+            billeteIds: endbilletesIds
+        };
 
-        const finishCoinIds = Array.from(finish.coinsIds)
-        finishCoinIds.splice(destination.index, 0, draggableId)
-
-        const newFinish = {
-            ...finish,
-            coinsIds: finishCoinIds,
-        }
-
-        const newState = {
-            ...this.state.coinsIds,
+        setStarter({
+            ...starter,
             columns: {
-                ...this.state.coinsIds.columns,
-                [newStart.id]: newStart,
-                [newFinish.id]: newFinish
+                ...starter.columns,
+                [start.id]: newStartColumn,
+                [end.id]: endTaskColumn
             }
-        }
-        this.setState(newState);
-        return;
+        });
+        setBilletesTotales (calculateTotalMoney(endTaskColumn.billeteIds, starter))
+    };
+
+    const calculateTotalMoney = (billeteDado, starter) => {
+        let plataDada = []
+        billeteDado.map( (billete, total) => {
+            plataDada.push(starter.billetes[billete].value)
+        })
+        return plataDada.reduce( (a,b) => a + b);
     }
 
-    render() {
-        const {dataCoin, isLoading, dataGameMonedas, actualLevel, problemNumber} = this.state
-        console.log(dataGameMonedas.levels[1].allProblems[0])
-        // check if the component is loading or not
-        if (!isLoading && dataGameMonedas.levels.length > actualLevel) {
-            return (
-                <div>
-                    <MenuJuegosNavbar/>
-                    <div className="GameContainer-welcome">
-                        <h1>{dataGameMonedas.gameName}</h1>
-                        <p>En este juego aprenderemos a hacer uso de las monedas BLA BLA BLA BLA BLA</p>
-                    </div>
-                    <div className="GameContainer-gameDescription">
-                        <p>Esta jugando el nivel: <span>{dataGameMonedas.levels[actualLevel].level}</span></p>
-                        <p>{dataGameMonedas.levels[actualLevel].descriptionProblem}</p>
-                        <p>{dataGameMonedas.levels[actualLevel].allProblems[0][problemNumber].problem}</p>
-                    </div>
-                    <div className="GameContainer">
+    const nextLevel = () => {
+        console.log(gameData.levels[actualLevel].successAnswer,billetesTotales)
+        if (gameData.levels[actualLevel].successAnswer === billetesTotales){
+            // TODO: function to add points in the ranking
+            // if the kid answer well will add points in the ranking
+            setUserGamePoint(userGamePoint + gameData.levels[actualLevel].levelPoint)
 
-                        <DragDropContext onDragEnd={this.onDragEnd}>
-                            <div className="MonedasContainer">
-                                {
-                                    dataCoin.columnOrder.map((columnId) => {
-                                        let column = dataCoin.columns[columnId];
-                                        let coins = column.coinsIds.map(coinId => dataCoin.coins[coinId]);
-                                        // <Column/> = spaces where we can drag and drop different items
-                                        return (
-                                            <Column key={column.id} column={column} coins={coins}/>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </DragDropContext>
-                    </div>
-                    <div className="NextLevelButton">
-                        <Button onClick={this.nextProblem}>Siguiente nivel</Button>
-
-                    </div>
-                </div>
-            )
         } else {
-            return (<CongratulationGame/>)
+            // TODO: function to subtract points in the ranking
+            // if the kid answer wrong will subtract points in the ranking
+            setUserGamePoint(userGamePoint - 30)
         }
-        if (isLoading) {
-            return (
-                <div>
-                    <h1>cargando juego</h1>
-                </div>
-            )
+        if (actualLevel<gameData.levels.length-1){
+            setActualLevel(actualLevel + 1 )
+            setStarter(initialData)
         }
-    }
-}
+        else{
+            setFinishGame(true)
+        }
 
-export default Monedas;
+    }
+    if (!finishGame) {
+        return (
+            <div>
+                <h1>{gameData.descriptionGame}</h1>
+                <h4>{gameData.levels[actualLevel].descriptionProblem}</h4>
+                <h3>tu puntaje {userGamePoint}</h3>
+                <h4>{billetesTotales}</h4>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="all-column" type="column">
+                        {(provided, snapshot) => (
+                            <Container
+                                isDraggingOver={snapshot.isDraggingOver}
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                {starter.columnOrder.map((columnId, index) => {
+                                    const column = starter.columns[columnId];
+                                    const billetes = column.billeteIds.map(billetesId => starter.billetes[billetesId]);
+
+                                    return (
+                                        <Column
+                                            index={index}
+                                            key={column.id}
+                                            column={column}
+                                            billetes={billetes}
+                                        />
+                                    );
+                                })}
+                                {provided.placeholder}
+                            </Container>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                <div className="NextLevelButton">
+                    <Button onClick={nextLevel}>Siguiente nivel</Button>
+                </div>
+            </div>
+
+        );
+    }
+    else
+        return (
+            <div>
+                <h1>terminaste</h1>
+                <h5>Tu puntaje final fue de {userGamePoint}</h5>
+
+            </div>
+        )
+
+};
+
+export default Monedas
