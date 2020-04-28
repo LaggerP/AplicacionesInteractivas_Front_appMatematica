@@ -1,10 +1,35 @@
 import React from 'react';
+import './Billetes.scss'
+import Grid from '@material-ui/core/Grid';
+import gifGame from '../../../../assets/Images/GamesImages/Billetes/comojugar.gif'
+import {Button} from "@material-ui/core";
 
-const InstruccionesMonedas = () => {
+
+const InstruccionesMonedas = (props) => {
     return (
         <div>
-            <h1>¡Hola!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consequuntur, cupiditate doloribus earum fugit hic nemo perspiciatis tenetur. Ab ad adipisci alias amet architecto assumenda beatae blanditiis commodi, consequatur debitis ducimus ea enim error hic impedit in ipsum laborum mollitia numquam obcaecati pariatur porro praesentium provident quas quasi quis quisquam ratione repellendus sapiente sed sequi sint sunt ullam unde velit veritatis voluptate? Animi commodi dignissimos est id mollitia officiis perferendis quam quas quidem, quo temporibus totam! Alias at consectetur cupiditate eaque et, excepturi fuga in inventore ipsa maiores, natus perferendis provident quos tenetur, voluptate. Distinctio dolore dolorum quia sunt. Veniam?</p>
+            <Grid container className="GridContainer" >
+                <Grid container
+                      spacing={0}
+                      direction="column"
+                      alignItems="center"
+                      justify="center" xs={12} className="GridContainer--img">
+                    <h1>¡Jugar es muy simple!</h1>
+                    <img src={gifGame} alt=""/>
+                </Grid>
+                <Grid xs={12} className="GridContainer--description">
+
+                    <p>Para jugar, tenes que arrastrar los billetes desde <span>'Tu billetera💰'</span>  a  <span> 'La caja 🛒'</span></p>
+                    <p>No te preocupes si te equivocas! El cajero te devolverá la plata hasta que decidas pasar al siguiente nivel 😉</p>
+                    <p>Por cada ejercicio fallido se descontará 30 puntos del puntaje! Ten cuidado con esto, afectará a tu ranking global!</p>
+
+
+                </Grid>
+            </Grid>
+            <div className="NextLevelButton">
+                <Button onClick={props.startGame}>Comenzar</Button>
+            </div>
+
         </div>
     );
 };

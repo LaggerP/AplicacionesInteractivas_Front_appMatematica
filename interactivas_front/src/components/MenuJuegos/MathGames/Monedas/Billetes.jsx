@@ -14,7 +14,7 @@ const Container = styled("div")`
   align-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  background-color: ${props => (props.isDraggingOver ? "rgba(99,158,226,0.56)" : "#E9F0F5")};
+  background-color: ${props => (props.isDraggingOver ? "rgba(99,158,226,0.56)" : "white")};
 `;
 
 const Billetes = () => {

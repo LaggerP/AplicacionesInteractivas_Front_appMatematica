@@ -22,8 +22,7 @@ class StartGameMonedas extends Component {
             return (
                 <div>
                     <MenuJuegosNavbar/>
-                    <InstruccionesMonedas/>
-                    <Button onClick={this.startGame}>Comenzar</Button>
+                    <InstruccionesMonedas startGame={this.startGame}/>
                 </div>
             );
         } else {
