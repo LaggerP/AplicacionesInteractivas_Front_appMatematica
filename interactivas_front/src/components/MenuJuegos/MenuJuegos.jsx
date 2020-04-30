@@ -1,65 +1,76 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import {Link} from "react-router-dom";
 import './MenuJuegos.scss';
-import CardJuego from './CustomComponent/CardJuego/CardJuego'
-import Button from '@material-ui/core/Button'
 import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
-import { Link } from 'react-router-dom'
-import fractions from '../../assets/Images/fractions.png';
-import money from '../../assets/Images/monedas.png';
-import sums from '../../assets/Images/sumas.png';
+import fracciones from '../../assets/Images/GamesImages/Fracciones/fracciones.png';
+import billetes from '../../assets/Images/GamesImages/Billetes/billetes.png';
+import sumas from '../../assets/Images/GamesImages/Sumas/sumas.png';
 import auth from "../../ProtectedRoutes/auth";
 
 export default class MenuJuegos extends Component {
 
-   getUser () {
-      return auth.getUser()
-   }
+    getUser() {
+        return auth.getUser()
+    }
 
-   render() {
-      return (
-         <div>
-            <MenuJuegosNavbar/>
-            <div className="bodyContainerMenuJuegos">
-               <h1 className='Bienvenido1'>¡Hola {this.getUser()}!</h1>
-               <h3 className='Bienvenido2'>Elegi cualquiera de nuestros juegos y comenzá a divertirte</h3>
-               <ul className="bodyContainer-cards">
-                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
-                     <Button component={Link} to="/games/billetes">
-                        <CardJuego
-                        title="Monedas"
-                        detail="¡Vamos de compra! En este juego vamos aprender a sumar. Comencemos a jugar"
-                        img={money}>
-                        </CardJuego>
-                     </Button>
-                  </li>
-               
-                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
-                     <Button>
-                        <CardJuego
-                        title="Fracciones"
-                        detail="En este juego aprenderemos a usar fracciones de una
-                                 forma muy divertida con imagenes cotidianas.
-                                 Ahora si, Comencemos a jugar!"
-                        img={fractions}>
-                        </CardJuego>
-                     </Button>
-                  </li>
-               
-               
-                  <li className="bodyContainerMenuJuegos-cards-itemJuego">
-                     <Button>
-                        <CardJuego
-                        title="Sumas"
-                        detail="El juego de sumas se trata en agilizar la mente.
-                                 Vamos a estar viendo sumas, restas, encontrar el mayor
-                                 y el menor de un numero. Empecemos a jugar!"
-                        img={sums}>
-                        </CardJuego>
-                     </Button>
-                  </li>
-               </ul>
+
+    render() {
+
+        return (
+            <div>
+                <MenuJuegosNavbar/>
+                <div className="MenuJuegosContainer">
+                    <div className="MenuJuegosContainer--title">
+                        <h1>Hola {this.getUser()}</h1>
+                        <h2>¡Elige al juego que deseas jugar!</h2>
+                        <h4>Tu posición en el ranking es: 1/100</h4>
+                    </div>
+
+                    <div className="MenuJuegosContainer--cards">
+                        <Link to="/games/billetes" className="Link">
+                            <div className="MenuJuegosContainer--cards-item">
+                                <div className="MenuJuegosContainer--cards-item-imgBackground">
+                                    <img src={billetes} alt=""/>
+                                </div>
+                                <div className="MenuJuegosContainer--cards-item-description">
+                                    <h2>Billetes</h2>
+                                    <p>¡Vayamos de compras!
+                                        <br/>
+                                    Usemos billetes para comprar cosas ricas y divertidas.
+                                        <br/>
+                                    ¡Solo basta con arrastrar billetes a la caja!</p>
+                                </div>
+
+                            </div>
+                        </Link>
+                        <Link to="/games/billetes" className="Link">
+                            <div className="MenuJuegosContainer--cards-item">
+                                <div className="MenuJuegosContainer--cards-item-imgBackground">
+                                    <img src={fracciones} alt=""/>
+                                </div>
+                                <div className="MenuJuegosContainer--cards-item-description">
+                                    <h2>Fracciones</h2>
+                                    <p>En este juego aprenderemos a usar fracciones de una forma muy divertida con imagenes cotidianas. <br/>Ahora si, ¡comencemos a jugar!</p>
+                                </div>
+                            </div>
+                        </Link>
+
+                        <Link to="/games/billetes" className="Link">
+                            <div className="MenuJuegosContainer--cards-item">
+                                <div className="MenuJuegosContainer--cards-item-imgBackground">
+                                    <img src={sumas} alt=""/>
+                                </div>
+                                <div className="MenuJuegosContainer--cards-item-description">
+                                    <h2>Sumas</h2>
+                                    <p>El juego de sumas se trata en agilizar la mente. Vamos a estar viendo sumas, restas, encontrar el mayor y el menor de un numero. <br/>¡Empecemos a jugar!</p>
+                                </div>
+                            </div>
+                        </Link>
+
+                    </div>
+                </div>
+
             </div>
-         </div>
-      )
-   }
+        )
+    }
 }
