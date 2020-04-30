@@ -16,7 +16,7 @@ const useStyles = (theme) => ({
         flexGrow: 1,
     },
     appBar: {
-        background: '#45B39D',
+        background: '#007BA7',
     },
     title: {
         flexGrow: 1,
@@ -62,7 +62,7 @@ class MenuJuegosNavbar extends Component {
                                     onClick={this.signOut}
                                     startIcon={<ExitToAppIcon/>}
                                     className="MenuNavbarButton">
-                                   <span>Salir</span>
+                                   Salir
                                 </Button>
                             </li>
                         </ul>

@@ -1,0 +1,24 @@
+{
+  "gameName": "Billetes",
+  "descriptionGame": "Completa los siguientes ejercicios haciendo uso de los billetes",
+  "levels": [
+    {
+      "level": 1,
+      "descriptionProblem": "Estas en un kiosco y decidiste comprar una gaseosa. El señor del kiosco te dice que la gaseosa sale $25. Arraste los billetes al Kiosquero para llegar a $25.",
+      "successAnswer": 25,
+      "levelPoint": 100
+    },
+    {
+      "level": 2,
+      "descriptionProblem": "Estas en un supermercado y decidiste comprar galletitas y chocolatada para la merienda. El señor de la caja te dice que las galletitas y la chocolatada salen $135. Arraste los billetes al cajero para llegar a $125.",
+      "successAnswer": 125,
+      "levelPoint": 124
+    },
+    {
+      "level": 3,
+      "descriptionProblem": "Estas en una juguetería y decidiste comprar unas cartas para jugar con tus amigos en el colegio. El precio de las cartas es de $185. Arrastre los billetes necesarios para llegar a $185.",
+      "successAnswer": 185,
+      "levelPoint": 200
+    }
+  ]
+}
