@@ -62,7 +62,7 @@ class MenuJuegosNavbar extends Component {
                                     onClick={this.signOut}
                                     startIcon={<ExitToAppIcon/>}
                                     className="MenuNavbarButton">
-                                   <span>Salir</span>
+                                   Salir
                                 </Button>
                             </li>
                         </ul>
