@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "@emotion/styled";
 import './Billetes.scss'
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
 import consignasGameData from "../../../../assets/jsonGames/Monedas/monedasConsignas.json";
 import Column from "./Column";
 import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
+import RankingTable from "../../Ranking/CustomComponent/RankingTable";
 
 
 const Container = styled("div")`
@@ -15,6 +17,14 @@ const Container = styled("div")`
   flex-wrap: wrap;
   flex-direction: row;
   background-color: ${props => (props.isDraggingOver ? "rgba(99,158,226,0.56)" : "white")};
+`;
+
+const RankingContainer = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
 `;
 
 const Billetes = () => {
@@ -33,14 +43,10 @@ const Billetes = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const onDragEnd = ({ destination, source, draggableId, type }) => {
+    const onDragEnd = ({destination, source, draggableId, type}) => {
         if (!destination) return;
-        if (
-            destination.droppableId === source.droppableId &&
-            destination.index === source.index
-        ) {
-            return;
-        }
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) return;
 
         const start = starter.columns[source.droppableId];
         const end = starter.columns[destination.droppableId];
@@ -82,7 +88,6 @@ const Billetes = () => {
         startbilletesIds.splice(source.index, 1);
         endbilletesIds.splice(destination.index, 0, draggableId);
 
-
         const newStartColumn = {
             ...start,
             billeteIds: startbilletesIds
@@ -100,39 +105,36 @@ const Billetes = () => {
                 [end.id]: endTaskColumn
             }
         });
-            setBilletesTotales (calculateTotalMoney(endTaskColumn.billeteIds, starter))
+        setBilletesTotales(calculateTotalMoney(endTaskColumn.billeteIds, starter))
     };
 
     const calculateTotalMoney = (billeteDado = '', starter) => {
         let plataDada = []
-        billeteDado.map( (billete, total) => {
-            console.log(starter.billetes[billete])
+        billeteDado.map(billete => {
             plataDada.push(starter.billetes[billete].value)
-        })
-        return plataDada.reduce( (a,b) => a + b);
+        });
+        return plataDada.reduce((a, b) => a + b);
     }
 
     const nextLevel = () => {
-        console.log(gameData.levels[actualLevel].successAnswer,billetesTotales)
-        if (gameData.levels[actualLevel].successAnswer === billetesTotales){
+        if (gameData.levels[actualLevel].successAnswer === billetesTotales) {
             // TODO: function to add points in the ranking
-            // if the kid answer well will add points in the ranking
+            // if the kid answer well - add points in the ranking
             setUserGamePoint(userGamePoint + gameData.levels[actualLevel].levelPoint)
 
         } else {
             // TODO: function to subtract points in the ranking
-            // if the kid answer wrong will subtract points in the ranking
+            // if the kid answer wrong - subtract points in the ranking
             setUserGamePoint(userGamePoint - 30)
         }
-        if (actualLevel<gameData.levels.length-1){
-            setActualLevel(actualLevel + 1 )
+        if (actualLevel < gameData.levels.length - 1) {
+            setActualLevel(actualLevel + 1)
             setStarter(initialData)
-        }
-        else{
+        } else {
             setFinishGame(true)
         }
-
     }
+
     if (!finishGame) {
         return (
             <div className="BilletesContainer">
@@ -146,8 +148,8 @@ const Billetes = () => {
                                 ref={provided.innerRef}
                             >
                                 <div className="BilletesConsigna">
-                                    { !loadingQuestion ? <p>Cargando consigna...</p>
-                                    :
+                                    {!loadingQuestion ? <p>Cargando consigna...</p>
+                                        :
                                         <div>
                                             <h1>Consigna:</h1>
                                             <p>{gameData.levels[actualLevel].descriptionProblem}</p>
@@ -172,35 +174,50 @@ const Billetes = () => {
                                 })}
                                 {provided.placeholder}
                             </Container>
-
                         )}
 
                     </Droppable>
                 </DragDropContext>
                 {
-                    billetesTotales>0 ?
+                    billetesTotales > 0 ?
                         <div className="NextLevelButton">
-                         <Button onClick={nextLevel}>Siguiente nivel</Button>
+                            <Button onClick={nextLevel}>Siguiente nivel</Button>
                         </div>
                         :
                         <div className="NextLevelButtonWarning">
                             <span>Arrastre al menos un billete para continuar</span>
                         </div>
                 }
-
             </div>
-
         );
+    } else {
+        if (userGamePoint < 0) {
+            return (
+                <div>
+                    <RankingContainer>
+                        <h1>¡La proxima te ira mejor!</h1>
+                        <h1>No te preocupes, podes volver a jugar cuando quieras</h1>
+                        <h1>Tu puntaje final fue de {userGamePoint}</h1>
+                        <RankingTable/>
+                        <br/>
+                        <Button component={Link} to="/games">Volver</Button>
+                    </RankingContainer>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <RankingContainer>
+                            <h1>¡Terminaste!</h1>
+                            <h1>Tu puntaje final fue de {userGamePoint}</h1>
+                            <RankingTable/>
+                            <br/>
+                            <Button component={Link} to="/games">Volver</Button>
+                    </RankingContainer>
+                </div>
+            )
+        }
     }
-    else
-        return (
-            <div>
-                <h1>terminaste</h1>
-                <h5>Tu puntaje final fue de {userGamePoint}</h5>
-
-            </div>
-        )
-
 };
 
 export default Billetes

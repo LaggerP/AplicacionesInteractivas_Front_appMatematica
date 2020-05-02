@@ -26,13 +26,12 @@
       &-title {
         color: white;
       }
-
       &-divInput {
         &-input {
           text-align: center;
           outline: none;
           border: none;
-          background: rgba(205, 206, 204, 0.42);
+          background: rgba(205, 206, 204, 0.61);
           width: 400px;
           height: 60px;
           font-size: 30px;
@@ -46,8 +45,6 @@
           }
         }
       }
-
-
       & .formSubmitButton {
         width: 420px;
         height: 70px;
@@ -61,7 +58,7 @@
         cursor: pointer;
         border-color: transparent;
         &:hover, &:active, &:focus {
-          background: white;
+          background: rgba(255, 255, 255, 0.91);
           color: #007BA7;
         }
       }
@@ -72,7 +69,6 @@
           color: white;
           cursor: pointer;
           transition: .2s;
-
           &:hover {
             color: #1b493f;
           }
@@ -92,7 +88,6 @@
             width: 300px;
           }
         }
-
         & .formSubmitButton {
           width: 320px;
         }
