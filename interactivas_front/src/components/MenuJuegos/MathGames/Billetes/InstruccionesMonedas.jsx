@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import gifGame from '../../../../assets/Images/GamesImages/Billetes/comojugar.gif'
 import {Button} from "@material-ui/core";
 
-
 const InstruccionesMonedas = (props) => {
     return (
         <div>
