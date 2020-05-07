@@ -18,4 +18,4 @@ El Stack del proyecto Front End está compuesto por:
  - ReactJS.
  - JavaScript (con estándares ^ES5).
  - Scss.
- - Material UI - React-Bootstrap (a definir)
+ - Material UI
