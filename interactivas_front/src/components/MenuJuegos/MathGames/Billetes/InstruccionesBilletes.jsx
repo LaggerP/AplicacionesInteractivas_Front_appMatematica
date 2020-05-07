@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import gifGame from '../../../../assets/Images/GamesImages/Billetes/comojugar.gif'
 import {Button} from "@material-ui/core";
 
-const InstruccionesMonedas = (props) => {
+const InstruccionesBilletes = (props) => {
     return (
         <div>
             <Grid container className="GridContainer" >
@@ -33,4 +33,4 @@ const InstruccionesMonedas = (props) => {
     );
 };
 
-export default InstruccionesMonedas;
+export default InstruccionesBilletes;

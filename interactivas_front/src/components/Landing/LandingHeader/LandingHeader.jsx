@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import './LandingHeader.scss'
 import './../../../animate.css'
 import auth from "../../../ProtectedRoutes/auth";
@@ -37,7 +37,6 @@ class Header extends Component {
         e.preventDefault();
         this.setState({isLoading: true})
         const userData = {nickName: this.state.nickName, password: this.state.password}
-        console.log(userData)
         if (userData.nickName !== '' && userData.password !== '') {
             this.setState({loading: true})
             localStorage.setItem('sessionName', userData.nickName); // Se guarda en localStorage el nombre.
@@ -50,6 +49,7 @@ class Header extends Component {
         }
     };
 
+    // TODO: register form
     register = (e) => {
         e.preventDefault();
         this.setState({loading: true})
