@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Billetes from "./Billetes";
-import InstruccionesMonedas from './InstruccionesMonedas'
+import InstruccionesBilletes from './InstruccionesBilletes'
 import MenuJuegosNavbar from "../../MenuJuegosNavbar/MenuJuegosNavbar";
 
 class StartGameBilletes extends Component {
@@ -19,7 +19,7 @@ class StartGameBilletes extends Component {
             return (
                 <div>
                     <MenuJuegosNavbar/>
-                    <InstruccionesMonedas startGame={this.startGame}/>
+                    <InstruccionesBilletes startGame={this.startGame}/>
                 </div>
             );
         } else {
