@@ -26,7 +26,7 @@ const Billete = ({ billete, index }) => {
                     {...provided.draggableProps}
                     isDragging={snapshot.isDragging}
                 >
-                    <Img src={billete.img} alt=""/>
+                    <Img src={billete.img} alt="" />
                 </Container>
             )}
         </Draggable>
