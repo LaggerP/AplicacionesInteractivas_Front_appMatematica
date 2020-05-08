@@ -7,6 +7,7 @@ import fractions from '../../assets/Images/fractions.png';
 import money from '../../assets/Images/monedas.png';
 import sums from '../../assets/Images/sumas.png';
 import auth from "../../ProtectedRoutes/auth";
+import { Link } from 'react-router-dom';
 
 export default class MenuJuegos extends Component {
 
@@ -35,10 +36,10 @@ export default class MenuJuegos extends Component {
                   </li>
                
                   <li className="bodyContainerMenuJuegos-cards-itemJuego">
-                     <Button>
+                     <Button component = {Link} to = "/games/multiplicacion">
                         <CardJuego
-                        title="Fracciones"
-                        detail="En este juego aprenderemos a usar fracciones de una
+                        title="Multiplicación"
+                        detail="En este juego aprenderemos a multiplicar
                                  forma muy divertida con imagenes cotidianas.
                                  Ahora si, comenzemos a jugar!"
                         img={fractions}>

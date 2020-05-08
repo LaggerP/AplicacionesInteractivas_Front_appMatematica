@@ -6,6 +6,7 @@ import Login from './components/Auth/Login/Login';
 import Ranking from './components/MenuJuegos/Ranking/Ranking';
 import MenuJuegos from './components/MenuJuegos/MenuJuegos'
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute'
+import Multiplicacion from './components/MenuJuegos/MathGames/Multiplicacion/Multiplicacion'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/auth/login" component={Login} />
         <ProtectedRoute exact path="/ranking" component={Ranking}/>
         <ProtectedRoute exact path="/games" component={MenuJuegos} />
+        <ProtectedRoute exact path="/games/multiplicacion" component={Multiplicacion} />
         <Route path="*" component={()=>"404 not Found"}/>
       </Switch>
 
