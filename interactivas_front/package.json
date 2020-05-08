@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/styled": "^10.0.27",
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
@@ -14,6 +15,7 @@
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-flipcard-2": "^0.3.2",
@@ -21,6 +23,8 @@
     "react-scripts": "3.4.1",
     "react-spinners": "^0.8.1",
     "shuffle-array": "^1.0.1"
+    "react-spinners": "^0.8.1",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

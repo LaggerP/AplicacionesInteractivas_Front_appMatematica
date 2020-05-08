@@ -14,6 +14,7 @@ export class Landing extends Component {
          <div>
             <LandingNavbar />
             <LandingHeader />
+
             <LandingBody />
          </div>
       )

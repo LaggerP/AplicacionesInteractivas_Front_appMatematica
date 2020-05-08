@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import './LandingHeader.scss'
 import './../../../animate.css'
 import auth from "../../../ProtectedRoutes/auth";
-import { css } from "@emotion/core";
+import {css} from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const override = css`
@@ -14,7 +14,7 @@ const override = css`
     border-width: 2px;
     border-style: solid;
     border-image: initial;
-    border-color: rgb(54, 215, 183) rgb(54, 215, 183) transparent;
+    border-color: #007BA7 #007BA7 transparent;
     animation: 0.75s linear 0s infinite normal both running animation-s8tf20;
     background: transparent !important;
 `;
@@ -28,8 +28,7 @@ class Header extends Component {
             loading: false,
             isRegister: true,
             isLoading: false,
-
-    }
+        }
     }
 
     handleChange = name => event => this.setState({[name]: event.target.value})
@@ -38,7 +37,6 @@ class Header extends Component {
         e.preventDefault();
         this.setState({isLoading: true})
         const userData = {nickName: this.state.nickName, password: this.state.password}
-        console.log(userData)
         if (userData.nickName !== '' && userData.password !== '') {
             this.setState({loading: true})
             localStorage.setItem('sessionName', userData.nickName); // Se guarda en localStorage el nombre.
@@ -51,6 +49,7 @@ class Header extends Component {
         }
     };
 
+    // TODO: register form
     register = (e) => {
         e.preventDefault();
         this.setState({loading: true})
@@ -95,7 +94,7 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
-                        
+
                                     {!this.state.loading ? <span>JUGAR</span>
                                         :
                                         <ClipLoader
@@ -133,7 +132,8 @@ class Header extends Component {
                                            required
                                     />
                                     <div className="divViewSpan animated zoomIn">
-                                        <span className="formViewSpan" onClick={this.changeForm}>Ya tengo una cuenta</span>
+                                        <span className="formViewSpan"
+                                              onClick={this.changeForm}>Ya tengo una cuenta</span>
 
                                     </div>
                                 </div>
@@ -141,11 +141,11 @@ class Header extends Component {
                                     {!this.state.loading ? <span>REGISTRARSE</span>
                                         :
                                         <ClipLoader
-                                        css={override}
-                                        size={150}
-                                        color={"#123abc"}
-                                        loading={this.state.loading}
-                                    />}
+                                            css={override}
+                                            size={150}
+                                            color={"#123abc"}
+                                            loading={this.state.loading}
+                                        />}
                                 </button>
 
                             </div>
