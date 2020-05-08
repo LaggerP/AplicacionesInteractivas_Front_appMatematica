@@ -19,7 +19,6 @@ import cuarentaynueve from '../../../../assets/Images/cuarentaynueve.png';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Divider } from '@material-ui/core';
 
-import ReactCardFlip from 'react-card-flip';
 
 import MyCard from './MyCard';
 
