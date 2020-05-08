@@ -6,6 +6,7 @@ import Login from './components/Auth/Login/Login';
 import Ranking from './components/MenuJuegos/Ranking/Ranking';
 import MenuJuegos from './components/MenuJuegos/MenuJuegos'
 import StartGameBilletes from './components/MenuJuegos/MathGames/Billetes/StartGameBilletes'
+import StartSumasRestasMyM from './components/MenuJuegos/MathGames/SumasRestasMyM/StartSumasRestasMyM'
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute'
 import Multiplicacion from './components/MenuJuegos/MathGames/Multiplicacion/Multiplicacion'
 import NotFound from "./components/NotFound";
@@ -21,6 +22,7 @@ function App() {
         <ProtectedRoute exact path="/games" component={MenuJuegos} />
         <ProtectedRoute exact path="/games/multiplicacion" component={Multiplicacion} />
         <ProtectedRoute exact path="/games/billetes" component={StartGameBilletes} />
+        <ProtectedRoute exact path="/games/SumasRestasMyM" component={StartSumasRestasMyM} />
         <Route path="*" component={NotFound}/>
       </Switch>
 
