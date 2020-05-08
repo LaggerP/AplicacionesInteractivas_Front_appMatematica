@@ -214,6 +214,7 @@ export default class Tablero extends Component {
         if (isLoading) {
             return (
                 <Grid
+                    xs={12}
                     container
                     direction="row"
                     justify="center"

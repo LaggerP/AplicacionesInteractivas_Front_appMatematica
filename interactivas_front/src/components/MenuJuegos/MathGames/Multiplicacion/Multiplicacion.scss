@@ -9,19 +9,31 @@
         font-weight: 400;
         color: #ffffff;
         background: #ffffff;
-        justify-content: center;
         display: flex;
         text-rendering: auto;
         flex-wrap: wrap;
-
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         .img-class {
             border: 5px solid grey;
             border-radius: 30%;
             height: auto;
             text-align: left;
         }
+
+        .pizarronDiv {
+            align-items: center;
+            justify-content: center;
+            .pizarron {
+                width: 200px;
+            }
+        }
+        
+        
     }
 }
+
 
 .Juego-titulo {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",

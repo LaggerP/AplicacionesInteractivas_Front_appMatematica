@@ -1,4 +1,8 @@
+
 import React from 'react'
+import './Tablero.css'
+
+
 
 function MyCard({ front, back, status }) {
     return (

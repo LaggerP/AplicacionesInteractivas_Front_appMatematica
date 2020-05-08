@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './MenuJuegos.scss';
 import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
 import fracciones from '../../assets/Images/GamesImages/Fracciones/fracciones.png';
+import multiplicacion from '../../assets/Images/multiplicacion.png'
 import billetes from '../../assets/Images/GamesImages/Billetes/billetes.png';
 import sumas from '../../assets/Images/GamesImages/Sumas/sumas.png';
 import auth from "../../ProtectedRoutes/auth";
@@ -46,7 +47,7 @@ export default class MenuJuegos extends Component {
                         <Link to="/games/multiplicacion" className="Link">
                             <div className="MenuJuegosContainer--cards-item">
                                 <div className="MenuJuegosContainer--cards-item-imgBackground">
-                                    <img src={fracciones} alt=""/>
+                                    <img src={multiplicacion} alt=""/>
                                 </div>
                                 <div className="MenuJuegosContainer--cards-item-description">
                                     <h2>Multiplicación</h2>

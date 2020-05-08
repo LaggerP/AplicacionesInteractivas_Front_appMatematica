@@ -40,14 +40,22 @@ class Multiplicacion extends Component {
                     <div className="Multiplicacion-game">
                         <p>
                             En este juego, vamos a practicar las tablas de multiplicar de una manera diferente: a través de un juego de memoria.
-                    <br />Al comenzar el juego, vas a encontrarte con cartas boca abajo: del otro lado, las cartas tendrán un resultado, o una multiplicación.
-                </p>
+                            <br />
+                            Al comenzar el juego, vas a encontrarte con cartas boca abajo: del otro lado, las cartas tendrán un resultado, o una multiplicación.
+                        </p>
                         <br />
-                        <img src={piz} alt="pizarron" /> <img src={piz} alt="pizarron" />
+                        <div className="pizarronDiv">
+
+                            <img src={piz} alt="pizarron" className="pizarron"/> 
+                            <img src={piz} alt="pizarron" className="pizarron"/>
+                        </div>
                         <p>Toca una tarjeta para darla vuelta, y memorizarla, y luego, toca otra carta para encontrar su pareja.
-                <br /> <img src={m2x2} alt="multiplicacion" className="img-class" /> <img src={n4} alt="numero" className="img-class" />
-                            <br /> Si encontrás la tarjeta ganadora, las cartas desaparecerán. Caso contrario, ambas tarjetas se darán vuelta nuevamente y tendrás otra oportunidad.
-                <br /> El objetivo del juego es encontrar todas las parejas.
+                            <br /> 
+                            <img src={m2x2} alt="multiplicacion" className="img-class" /> <img src={n4} alt="numero" className="img-class" />
+                            <br /> 
+                            Si encontrás la tarjeta ganadora, las cartas desaparecerán. Caso contrario, ambas tarjetas se darán vuelta nuevamente y tendrás otra oportunidad.
+                            <br /> 
+                            El objetivo del juego es encontrar todas las parejas.
                 </p>
                         <Button onClick={this.nextLevel} variant="contained" color="secondary" size="large" text-align="center" >
                             COMENZAR A JUGAR
