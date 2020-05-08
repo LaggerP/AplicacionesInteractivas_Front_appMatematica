@@ -55,14 +55,18 @@ export default class MenuJuegos extends Component {
                             </div>
                         </Link>
 
-                        <Link to="/games/billetes" className="Link">
+                        <Link to="/games/SumasRestasMyM" className="Link">
                             <div className="MenuJuegosContainer--cards-item">
                                 <div className="MenuJuegosContainer--cards-item-imgBackground">
                                     <img src={sumas} alt=""/>
                                 </div>
                                 <div className="MenuJuegosContainer--cards-item-description">
                                     <h2>Sumas</h2>
-                                    <p>El juego de sumas se trata en agilizar la mente. Vamos a estar viendo sumas, restas, encontrar el mayor y el menor de un numero. <br/>¡Empecemos a jugar!</p>
+                                    <p>El juego de sumas se trata en agilizar la mente. 
+                                       Vamos a estar viendo sumas, restas, 
+                                       encontrar el mayor y el menor de un numero. 
+                                       <br/>
+                                       ¡Empecemos a jugar!</p>
                                 </div>
                             </div>
                         </Link>
