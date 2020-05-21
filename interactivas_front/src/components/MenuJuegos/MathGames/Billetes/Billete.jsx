@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 import { Draggable } from "react-beautiful-dnd";
 
 const Container = styled("div")`
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   border-radius: 5px;
-  padding: 8px;
+  padding: 4px;
   color: white;
   width: 160px
 `;
@@ -26,7 +26,7 @@ const Billete = ({ billete, index }) => {
                     {...provided.draggableProps}
                     isDragging={snapshot.isDragging}
                 >
-                    <Img src={billete.img} alt=""/>
+                    <Img src={billete.img} alt="" />
                 </Container>
             )}
         </Draggable>

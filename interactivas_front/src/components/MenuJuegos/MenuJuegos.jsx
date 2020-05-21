@@ -1,11 +1,12 @@
-import React, {Component} from 'react'
-import {Link} from "react-router-dom";
+import React, { Component } from 'react'
 import './MenuJuegos.scss';
 import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
 import fracciones from '../../assets/Images/GamesImages/Fracciones/fracciones.png';
+import multiplicacion from '../../assets/Images/multiplicacion.png'
 import billetes from '../../assets/Images/GamesImages/Billetes/billetes.png';
 import sumas from '../../assets/Images/GamesImages/Sumas/sumas.png';
 import auth from "../../ProtectedRoutes/auth";
+import { Link } from 'react-router-dom';
 
 export default class MenuJuegos extends Component {
 
@@ -43,14 +44,14 @@ export default class MenuJuegos extends Component {
 
                             </div>
                         </Link>
-                        <Link to="/games/billetes" className="Link">
+                        <Link to="/games/multiplicacion" className="Link">
                             <div className="MenuJuegosContainer--cards-item">
                                 <div className="MenuJuegosContainer--cards-item-imgBackground">
-                                    <img src={fracciones} alt=""/>
+                                    <img src={multiplicacion} alt=""/>
                                 </div>
                                 <div className="MenuJuegosContainer--cards-item-description">
-                                    <h2>Fracciones</h2>
-                                    <p>En este juego aprenderemos a usar fracciones de una forma muy divertida con imagenes cotidianas. <br/>Ahora si, ¡comencemos a jugar!</p>
+                                    <h2>Multiplicación</h2>
+                                    <p>En este juego aprenderemos a multiplicar de una forma muy divertida con imagenes cotidianas. <br/>Ahora si, ¡comencemos a jugar!</p>
                                 </div>
                             </div>
                         </Link>
