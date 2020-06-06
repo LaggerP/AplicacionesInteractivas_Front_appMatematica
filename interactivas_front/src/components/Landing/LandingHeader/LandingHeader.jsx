@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import './LandingHeader.scss'
 import './../../../animate.css'
 import auth from "../../../ProtectedRoutes/auth";
+import apiService from "../../../services/apiServices"
 import {css} from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -23,7 +24,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nickName: '',
+            username: '',
             password: '',
             loading: false,
             isRegister: true,
@@ -33,27 +34,21 @@ class Header extends Component {
 
     handleChange = name => event => this.setState({[name]: event.target.value})
 
-    login = (e) => {
+    // TODO: login form
+    login = async (e) => {
         e.preventDefault();
         this.setState({isLoading: true})
-        const userData = {nickName: this.state.nickName, password: this.state.password}
-        if (userData.nickName !== '' && userData.password !== '') {
-            this.setState({loading: true})
-            localStorage.setItem('sessionName', userData.nickName); // Se guarda en localStorage el nombre.
-            setTimeout(
-                () => auth.authenticate(() => this.props.history.push({
-                    pathname: '/games',
-                    state: {nick: userData.nickName}
-                }))
-                , 2000);
-        }
-    };
+        const userData = {username: this.state.username, password: this.state.password}
+        const responseLogin = await apiService.login(userData)
+    
+    }
 
     // TODO: register form
-    register = (e) => {
+    register = async (e) => {
         e.preventDefault();
         this.setState({loading: true})
-        const userData = {nickName: this.state.nickName, password: this.state.password}
+        const userData = {username: this.state.username, password: this.state.password}
+        const responseRegister = await apiService.register(userData)
     }
 
     changeForm = () => {
@@ -73,8 +68,8 @@ class Header extends Component {
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
                                            placeholder="Tu nickname"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="username"
+                                           onChange={this.handleChange('username')}
                                            required
                                     />
                                 </div>
@@ -116,8 +111,8 @@ class Header extends Component {
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
                                            placeholder="Tu nickname"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="username"
+                                           onChange={this.handleChange('username')}
                                            required
                                     />
                                 </div>
@@ -127,8 +122,8 @@ class Header extends Component {
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
                                            placeholder="Tu contraseña"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="password"
+                                           onChange={this.handleChange('password')}
                                            required
                                     />
                                     <div className="divViewSpan animated zoomIn">
