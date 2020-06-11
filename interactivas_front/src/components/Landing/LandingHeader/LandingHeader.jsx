@@ -2,8 +2,7 @@ import React, {Component} from 'react'
 import { withRouter } from "react-router-dom";
 import './LandingHeader.scss'
 import './../../../animate.css'
-import auth from "../../../ProtectedRoutes/auth";
-import apiService from "../../../services/apiServices"
+import {register, login} from "../../../services/apiServices"
 import {css} from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -32,6 +31,7 @@ class Header extends Component {
         }
     }
 
+    
     handleChange = name => event => this.setState({[name]: event.target.value})
 
     // TODO: login form
@@ -39,8 +39,10 @@ class Header extends Component {
         e.preventDefault();
         this.setState({isLoading: true})
         const userData = {username: this.state.username, password: this.state.password}
-        const responseLogin = await apiService.login(userData)
-    
+        const responseLogin = await login(userData)
+        if (responseLogin.data.token.length > 0) {
+            this.props.history.push('/games')
+        }
     }
 
     // TODO: register form
@@ -48,7 +50,9 @@ class Header extends Component {
         e.preventDefault();
         this.setState({loading: true})
         const userData = {username: this.state.username, password: this.state.password}
-        const responseRegister = await apiService.register(userData)
+        const reg = await register(userData);
+        console.log(reg)
+        //this.props.history.push('/games')
     }
 
     changeForm = () => {

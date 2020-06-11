@@ -4,7 +4,9 @@ import {withStyles} from '@material-ui/core/styles';
 import {withRouter, Link} from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import auth from '../../../ProtectedRoutes/auth'
+
+import {logOut} from '../../../services/apiServices'
+
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
@@ -25,9 +27,9 @@ const useStyles = (theme) => ({
 
 class MenuJuegosNavbar extends Component {
 
-    signOut = (e) => {
+    exit = (e) => {
         e.preventDefault();
-        auth.signOut(() => this.props.history.push('/'))
+        logOut(() => this.props.history.push('/'))
     }
 
     render() {
@@ -59,7 +61,7 @@ class MenuJuegosNavbar extends Component {
                             </li>
                             <li>
                                 <Button
-                                    onClick={this.signOut}
+                                    onClick={this.exit}
                                     startIcon={<ExitToAppIcon/>}
                                     className="MenuNavbarButton">
                                    Salir

@@ -15,6 +15,10 @@ class Ranking extends Component {
         this.state = {rankingAct: "RankingTotal"}
     }
 
+    componentDidMount() {
+        
+    }
+
     handleChange = (event, newValue) => {
         this.setState({rankingAct: newValue})
     }

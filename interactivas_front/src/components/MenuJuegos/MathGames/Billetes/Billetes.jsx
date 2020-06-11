@@ -8,6 +8,7 @@ import Column from "./Column";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import RankingTable from "../../Ranking/CustomComponent/RankingTable";
+import {saveLevelPoint} from '../../../../services/rankingServices'
 
 
 const Container = styled("div")`
@@ -116,16 +117,27 @@ const Billetes = () => {
         return plataDada.reduce((a, b) => a + b);
     }
 
-    const nextLevel = () => {
+    const nextLevel = async () => {
         if (gameData.levels[actualLevel].successAnswer === billetesTotales) {
             // TODO: function to add points in the ranking
             // if the kid answer well - add points in the ranking
             setUserGamePoint(userGamePoint + gameData.levels[actualLevel].levelPoint)
+            let dataPoints = {
+                gamePoint: userGamePoint + gameData.levels[actualLevel].levelPoint,
+                userId: 51
+            } 
+            await saveLevelPoint(dataPoints, 'billetes')
 
         } else {
             // TODO: function to subtract points in the ranking
             // if the kid answer wrong - subtract points in the ranking
             setUserGamePoint(userGamePoint - 30)
+
+            let dataPoints = {
+                gamePoint: userGamePoint - 30,
+                userId: 51
+            } 
+            await saveLevelPoint(dataPoints, 'billetes')
         }
         if (actualLevel < gameData.levels.length - 1) {
             setActualLevel(actualLevel + 1)

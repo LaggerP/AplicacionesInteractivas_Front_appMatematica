@@ -5,17 +5,13 @@ import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
 import fracciones from '../../assets/Images/GamesImages/Fracciones/fracciones.png';
 import billetes from '../../assets/Images/GamesImages/Billetes/billetes.png';
 import sumas from '../../assets/Images/GamesImages/Sumas/sumas.png';
-import auth from "../../ProtectedRoutes/auth";
+import {getUser} from '../../services/apiServices'
 
 export default class MenuJuegos extends Component {
 
-    getUser() {
-        return auth.getUser()
-    }
-
+    getUser() { return getUser }
 
     render() {
-
         return (
             <div>
                 <MenuJuegosNavbar/>

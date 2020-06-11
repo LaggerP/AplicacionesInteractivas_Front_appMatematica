@@ -8,12 +8,11 @@ const fakeAuth = {
    },
    signOut(cb) {
       this.isAuthenticated = false;
-      localStorage.removeItem('session');
-      localStorage.removeItem('sessionName');
+      sessionStorage.removeItem('sessionToken');
       setTimeout(cb, 100);
    },
    isConnected() {
-      return localStorage.getItem('session') ? true : false;
+      return sessionStorage.getItem('sessionToken') ? true : false;
   },
    getUser() {
       return localStorage.getItem('sessionName');

@@ -1,19 +1,27 @@
+import endpoints from './endpoints';
 const axios = require('axios');
 
-const register = async (userData) => {
+
+export const register = async (userData) => {
     try {
-        const response = await axios.post('http://localhost:8000/api/auth/register', {username: userData.username, password: userData.password})
-        sessionStorage.setItem('sessionToken', response.data.token)
+        const data = { username: userData.username, password: userData.password }
+        const response = await axios.post(endpoints.register, data)
+
+        sessionStorage.setItem('token', response.data.token)
+        localStorage.setItem('activeSession', true);
         return response;
     } catch (error) {
         console.log(error)
     }
 }
 
-const login = async (userData) => {
+export const login = async (userData) => {
     try {
-        const response = await axios.post('http://localhost:8000/api/auth/login', {username: userData.username, password: userData.password})
-        sessionStorage.setItem('sessionToken', response.data.token)
+        const data = { username: userData.username, password: userData.password }
+        const response = await axios.post(endpoints.login, data)
+
+        sessionStorage.setItem('token', response.data.token)
+        localStorage.setItem('activeSession', true);
         return response;
     } catch (error) {
         console.log(error)
@@ -21,7 +29,25 @@ const login = async (userData) => {
 }
 
 
-module.exports = {
-    register,
-    login,
+export const checkToken = async () => {
+    try {
+        const token = sessionStorage.getItem('token');
+        const response = await axios.post(endpoints.isSessionActive, { token: token })
+        return response
+    } catch (error) {
+        console.log(error)
+    }
 }
+
+
+// Non api internal functionalities
+
+export const isConnected = () => localStorage.getItem('activeSession')
+export const getUser = () => localStorage.getItem('sessionName')
+export const logOut = (cb) => {
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('activeSession');
+    setTimeout(cb, 100);
+}
+
+
