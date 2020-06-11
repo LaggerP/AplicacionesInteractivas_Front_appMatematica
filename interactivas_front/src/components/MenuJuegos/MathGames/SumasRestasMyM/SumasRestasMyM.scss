@@ -1,0 +1,117 @@
+.DescSumasRestasMyM{
+    position: relative;
+    text-align: center;
+    & p{
+        line-height : 50px;
+    }
+    & h1{
+      margin-bottom: 1%;
+      color: #007BA7;
+    }
+    & h2{
+      margin-bottom: 0;
+      color: #007BA7;
+    }
+}
+.ComenzarButton {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    height: 70px;
+    width: 100%;
+    background-color: #007BA7;
+    & Button {
+        width: 100%;
+        color: white;
+        font-size: 25px;
+        transition: .3s;
+        border-radius: 0;
+        &:hover {
+          background-color: #ec9090;
+        }
+      }
+  }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 580px) {
+  .ComenzarButton{
+    position: relative;
+  }
+  }
+  
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    .ComenzarButton{
+      position: absolute;
+    }
+  }
+
+
+  .Operacion{
+    justify-content: center;
+    display: grid;
+    & h1{
+      font-size: 5rem;
+    }
+    & h2{
+      font-size: 4rem;
+    }
+    & Button{
+      color: white;
+      font-size: 25px;
+      background-color: #007BA7;
+      &:hover{
+        background-color: rgb(57, 151, 185);
+      }
+    }
+  }
+  .icon{
+    background-color: green;
+  }
+
+.CheckList{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+
+  & input[type=radio]{
+    display: none;
+  }
+
+  & #CheckSi:checked+label {
+    border: 5px solid #00bb00; 
+    border-radius: 10%;
+  }
+
+  & #CheckNo:checked+label {
+    border: 5px solid red;
+    border-radius: 10%;
+  }
+  & #CheckClean:checked+label {
+    border: none;
+  }
+
+  & .LabelCheckSi{
+    font-size:600%;
+    color: #00bb00;
+    border: none;
+    transition-property: border-bottom;
+    transition-duration: 0.30s;
+    &:hover{
+      border-bottom: 5px solid #00bb00;
+      cursor: pointer;
+    }
+  }
+  & .LabelCheckNo{
+    font-size:600%;
+    color: red;
+    border: none;
+    transition-property: border-bottom;
+    transition-duration: 0.30s;
+    &:hover{
+      border-bottom: 5px solid red;
+      cursor: pointer;
+    }
+  }
+}

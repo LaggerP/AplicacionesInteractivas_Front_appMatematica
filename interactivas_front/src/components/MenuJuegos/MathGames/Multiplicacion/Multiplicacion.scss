@@ -1,0 +1,54 @@
+.JuegoMultiplicacion {
+    background-color: palegreen;
+    flex-wrap: wrap;
+    display: block;
+    .Multiplicacion-game {
+        position: relative;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        color: #ffffff;
+        background: #ffffff;
+        display: flex;
+        text-rendering: auto;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .img-class {
+            border: 5px solid grey;
+            border-radius: 30%;
+            height: auto;
+            text-align: left;
+        }
+
+        .pizarronDiv {
+            align-items: center;
+            justify-content: center;
+            .pizarron {
+                width: 200px;
+            }
+        }
+        
+        
+    }
+}
+
+
+.Juego-titulo {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+    font-size: xx-large;
+    color: black;
+    align-items: center;
+}
+
+.Juego {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    //height:400px;
+    //width: 400px;
+    color: pink;
+    background-color: white;
+}
