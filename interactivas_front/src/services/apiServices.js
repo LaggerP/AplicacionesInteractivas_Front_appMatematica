@@ -9,6 +9,7 @@ export const register = async (userData) => {
 
         sessionStorage.setItem('token', response.data.token)
         localStorage.setItem('activeSession', true);
+        localStorage.setItem('sessionName', userData.username)
         return response;
     } catch (error) {
         console.log(error)
@@ -22,6 +23,7 @@ export const login = async (userData) => {
 
         sessionStorage.setItem('token', response.data.token)
         localStorage.setItem('activeSession', true);
+        localStorage.setItem('sessionName', userData.username)
         return response;
     } catch (error) {
         console.log(error)
@@ -47,6 +49,7 @@ export const getUser = () => localStorage.getItem('sessionName')
 export const logOut = (cb) => {
     sessionStorage.removeItem('token');
     localStorage.removeItem('activeSession');
+    localStorage.removeItem('sessionName')
     setTimeout(cb, 100);
 }
 

@@ -2,7 +2,7 @@ import endpoints from './endpoints';
 const axios = require('axios');
 
 
-export const getAllRanking = async () => {
+export const getAllRankings = async () => {
     try {
         const response = await axios.get(endpoints.getAllRanking)
         return response;

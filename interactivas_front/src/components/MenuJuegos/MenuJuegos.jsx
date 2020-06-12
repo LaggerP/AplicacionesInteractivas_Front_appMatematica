@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export default class MenuJuegos extends Component {
 
-    getUser() { return getUser }
+    getUser() { return getUser() }
 
     render() {
         return (
