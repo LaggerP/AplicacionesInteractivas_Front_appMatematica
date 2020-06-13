@@ -39,15 +39,15 @@ class InteractiveList extends Component{
     witchBadge(index){
         if (index === 0 ){
             return(
-                <img src={TrofeoOro} alt=""/>
+                <img id="trofeo" src={TrofeoOro} alt=""/>
             )}
         else if (index === 1){
             return(
-                <img src={TrofeoPlata} alt=""/>
+                <img id="trofeo" src={TrofeoPlata} alt=""/>
             )}
         else if(index === 2){
             return(
-                <img src={TrofeoBronce} alt=""/>
+                <img id="trofeo" src={TrofeoBronce} alt=""/>
             )}
     }
 
