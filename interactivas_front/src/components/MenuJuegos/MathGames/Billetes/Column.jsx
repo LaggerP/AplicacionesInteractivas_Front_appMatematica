@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import styled from "@emotion/styled";
 import Billete from "./Billete";
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
