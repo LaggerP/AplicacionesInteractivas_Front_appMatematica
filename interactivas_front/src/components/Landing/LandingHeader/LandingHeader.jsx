@@ -33,7 +33,6 @@ class Header extends Component {
 
     handleChange = name => event => this.setState({ [name]: event.target.value })
 
-    // TODO: login form
     login = async (e) => {
         e.preventDefault();
         this.setState({ isLoading: true })
@@ -44,7 +43,6 @@ class Header extends Component {
         } 
     }
 
-    // TODO: register form
     register = async (e) => {
         e.preventDefault();
         this.setState({ loading: true })
@@ -53,7 +51,7 @@ class Header extends Component {
         if (responseRegister.status === 200) {
             this.props.history.push('/games')
         } else {
-            this.setState({ isError: true, loading: false })
+            this.setState({ loading: false })
         }
     }
 
@@ -62,9 +60,8 @@ class Header extends Component {
     }
 
     render() {
-        const { isError, isRegister, loading } = this.state
-        if (!isError) {
-            return (
+        const { isRegister, loading } = this.state
+        return (
                 <div className="header" id="home">
                     <div className="header-body">
                         {isRegister ?
@@ -155,20 +152,6 @@ class Header extends Component {
                     </div>
                 </div>
             )
-        } else {
-            return (
-                <div className="header" id="home">
-                    <div className="header-body">
-                        <div className="header-body--inputs ">
-                            <h2>¡Oh no! <br/><br />  Ocurrió un error</h2>
-                            <button type="submit" className="formSubmitButton animated zoomIn" onClick={() => this.setState({isError: false})} >
-                                Volver
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
     }
 }
 

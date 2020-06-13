@@ -124,7 +124,7 @@ const Billetes = () => {
             setUserGamePoint(userGamePoint + gameData.levels[actualLevel].levelPoint)
             let dataPoints = {
                 gamePoint: userGamePoint + gameData.levels[actualLevel].levelPoint,
-                userId: 51
+                username: localStorage.getItem('sessionName')
             } 
             await saveLevelPoint(dataPoints, 'billetes')
 
@@ -135,7 +135,7 @@ const Billetes = () => {
 
             let dataPoints = {
                 gamePoint: userGamePoint - 30,
-                userId: 51
+                username: localStorage.getItem('sessionName')
             } 
             await saveLevelPoint(dataPoints, 'billetes')
         }

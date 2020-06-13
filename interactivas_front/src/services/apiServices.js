@@ -1,7 +1,6 @@
 import endpoints from './endpoints';
 const axios = require('axios');
 
-
 export const register = async (userData) => {
     try {
         const data = { username: userData.username, password: userData.password }
@@ -26,10 +25,10 @@ export const login = async (userData) => {
         localStorage.setItem('sessionName', userData.username)
         return response;
     } catch (error) {
+
         console.log(error)
     }
 }
-
 
 export const checkToken = async () => {
     try {
@@ -38,6 +37,9 @@ export const checkToken = async () => {
         return response
     } catch (error) {
         console.log(error)
+        sessionStorage.removeItem('token');
+        localStorage.removeItem('activeSession');
+        localStorage.removeItem('sessionName')
     }
 }
 
@@ -51,6 +53,12 @@ export const logOut = (cb) => {
     localStorage.removeItem('activeSession');
     localStorage.removeItem('sessionName')
     setTimeout(cb, 100);
+}
+
+const removeStorageData = () => {
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('activeSession');
+    localStorage.removeItem('sessionName')
 }
 
 
