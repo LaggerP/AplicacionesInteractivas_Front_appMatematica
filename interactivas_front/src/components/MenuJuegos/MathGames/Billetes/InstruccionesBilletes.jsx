@@ -17,8 +17,8 @@ const InstruccionesBilletes = (props) => {
                     <img src={gifGame} alt="" />
                 </Grid>
                 <Grid xs={12} className="GridContainer--description">
-                    <p>Para jugar, tenes que arrastrar los billetes desde <span>'Tu billetera💰'</span>  a  <span> 'La caja 🛒'</span></p>
-                    <p>No te preocupes si te equivocas! El cajero te devolverá la plata hasta que decidas pasar al siguiente nivel 😉</p>
+                    <p>Para jugar, tenes que arrastrar los billetes desde <span role="img" aria-label="billetera">'Tu billetera💰'</span>  a  <span role="img" aria-label="carrito"> 'La caja 🛒'</span></p>
+                    <p>No te preocupes si te equivocas! El cajero te devolverá la plata hasta que decidas pasar al siguiente nivel <span role="img" aria-label="carita">😉</span></p>
                     <p>Por cada ejercicio fallido se descontará 30 puntos del puntaje! Ten cuidado con esto, afectará a tu ranking global!</p>
                 </Grid>
             </Grid>

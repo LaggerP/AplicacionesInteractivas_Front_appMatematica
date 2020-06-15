@@ -12,8 +12,9 @@ import TrofeoPlata from '../../../../assets/Images/RankingTrofeos/plata.png'
 import TrofeoBronce from '../../../../assets/Images/RankingTrofeos/bronce.png'
 import CountUp from 'react-countup';
 
-
 import '../Ranking.scss';
+
+import {getAllRankings} from '../../../../services/rankingServices'
 
 import data from '../../../../assets/jsonGeneral/data.json'//Simulacion de usuarios
 
@@ -25,23 +26,28 @@ class InteractiveList extends Component{
     }
 
     componentDidMount(){
+        this.getAllRankingData();
         var sortUsersRanking = data.sort((a, b) => b.ranking - a.ranking);
-        console.log(sortUsersRanking)
         this.setState({users: sortUsersRanking});
+    }
+
+    async getAllRankingData(){
+        const data = await getAllRankings()
+        console.log(data)
     }
 
     witchBadge(index){
         if (index === 0 ){
             return(
-                <img src={TrofeoOro} alt=""/>
+                <img id="trofeo" src={TrofeoOro} alt=""/>
             )}
         else if (index === 1){
             return(
-                <img src={TrofeoPlata} alt=""/>
+                <img id="trofeo" src={TrofeoPlata} alt=""/>
             )}
         else if(index === 2){
             return(
-                <img src={TrofeoBronce} alt=""/>
+                <img id="trofeo" src={TrofeoBronce} alt=""/>
             )}
     }
 
@@ -55,8 +61,7 @@ class InteractiveList extends Component{
                                 <TableRow>
                                     <TableCell className="tableCell">Posición</TableCell>
                                     <TableCell  className="tableCell">Nickname</TableCell>
-                                    <TableCell numeric
-                                               className="tableCell">Puntaje</TableCell>
+                                    <TableCell numeric className="tableCell">Puntaje</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -80,8 +85,6 @@ class InteractiveList extends Component{
                         </Table>
                     </Paper>
                 </Container>
-
-
             </div>
         )
     }

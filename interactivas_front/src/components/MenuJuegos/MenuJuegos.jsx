@@ -5,18 +5,14 @@ import fracciones from '../../assets/Images/GamesImages/Fracciones/fracciones.pn
 import multiplicacion from '../../assets/Images/multiplicacion.png'
 import billetes from '../../assets/Images/GamesImages/Billetes/billetes.png';
 import sumas from '../../assets/Images/GamesImages/Sumas/sumas.png';
-import auth from "../../ProtectedRoutes/auth";
+import {getUser} from '../../services/apiServices'
 import { Link } from 'react-router-dom';
 
 export default class MenuJuegos extends Component {
 
-    getUser() {
-        return auth.getUser()
-    }
-
+    getUser() { return getUser() }
 
     render() {
-
         return (
             <div>
                 <MenuJuegosNavbar/>
