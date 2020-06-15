@@ -38,7 +38,7 @@ class MenuJuegosNavbar extends Component {
                 <AppBar position="static" className={this.props.classes.appBar}>
                     <Toolbar>
                         <Typography variant="h6" className={this.props.classes.title}>
-                            Virtu
+                            MathApp
                         </Typography>
                         <ul className="MenuGames">
                             <li>
