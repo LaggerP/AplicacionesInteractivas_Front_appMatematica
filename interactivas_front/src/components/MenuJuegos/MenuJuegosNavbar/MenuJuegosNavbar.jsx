@@ -4,9 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {withRouter, Link} from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-
-import {logOut} from '../../../services/apiServices'
-
+import auth from '../../../ProtectedRoutes/auth'
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
@@ -27,9 +25,9 @@ const useStyles = (theme) => ({
 
 class MenuJuegosNavbar extends Component {
 
-    exit = (e) => {
+    signOut = (e) => {
         e.preventDefault();
-        logOut(() => this.props.history.push('/'))
+        auth.signOut(() => this.props.history.push('/'))
     }
 
     render() {
@@ -38,7 +36,7 @@ class MenuJuegosNavbar extends Component {
                 <AppBar position="static" className={this.props.classes.appBar}>
                     <Toolbar>
                         <Typography variant="h6" className={this.props.classes.title}>
-                            Virtu
+                            MathApp
                         </Typography>
                         <ul className="MenuGames">
                             <li>
@@ -61,7 +59,7 @@ class MenuJuegosNavbar extends Component {
                             </li>
                             <li>
                                 <Button
-                                    onClick={this.exit}
+                                    onClick={this.signOut}
                                     startIcon={<ExitToAppIcon/>}
                                     className="MenuNavbarButton">
                                    Salir

@@ -33,9 +33,8 @@ export const saveLevelPoint = async (dataPoints, gameType) => {
             } catch (error) {
             }
           break;
-
-        
+          
+        default: console.log('Operacion Inexistente');
       }
-    
 }
 

@@ -16,10 +16,6 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={Landing} />
-<<<<<<< HEAD
-        <Route exact path="/auth/login" component={Landing} />
-=======
->>>>>>> f8df56c827f89193b202ffbc60b4dd42653d0523
         <ProtectedRoute exact path="/ranking" component={Ranking}/>
         <ProtectedRoute exact path="/games" component={MenuJuegos} />
         <ProtectedRoute exact path="/games/multiplicacion" component={Multiplicacion} />
