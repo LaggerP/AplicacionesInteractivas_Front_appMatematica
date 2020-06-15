@@ -13,6 +13,11 @@
       color: #007BA7;
     }
 }
+
+.CountUpNumber{
+  font-size: 50px;
+}
+
 .ComenzarButton {
     display: flex;
     justify-content: center;
@@ -35,22 +40,110 @@
       }
   }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 580px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 767px) {
   .ComenzarButton{
+    position: fixed;
+  }
+  .JuegoTerminado{
     position: relative;
+    margin-bottom: 40%;
   }
+  .ObtenerPuntajeFinal{
+    position: fixed;
   }
+  .DescPuntajes{
+    margin-bottom: 30%;
+  }
+  .Operacion, .OperacionMyM{
+    display: contents;
+    & Button {
+      width: 50%;
+      margin-top: 12px;
+    }
+  }
+}
+
   
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  @media only screen and (min-device-width : 768px){
     .ComenzarButton{
-      position: absolute;
+      position: fixed;
+    }
+    .JuegoTerminado{
+      position: relative;
+      margin-bottom: 15%;
+    }
+    .ObtenerPuntajeFinal{
+      position: fixed;
+    }
+    .DescPuntajes{
+      margin-bottom: 15%;
+    }
+    .Operacion, .OperacionMyM{
+      display: grid;
+      & Button {
+        width: 100%;
+      }
     }
   }
 
+  .JuegoTerminado{
+    justify-content: center;
+    align-content: center;
+    display: grid;
+    & h2{
+      font-size: 2rem;
+    }
+    & h3{
+      font-size: 3rem;
+    }
+    & Button {
+      bottom: 0;
+      width: 100%;
+      color: white;
+      font-size: 25px;
+      transition: .3s;
+      border-radius: 0;
+      &:hover {
+        background-color: #ec9090;
+      }
+    }
+  }
 
-  .Operacion{
+  .ObtenerPuntajeFinal{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    bottom: 0;
+    margin: 0 auto;
+    height: 70px;
+    width: 100%;
+    background-color: #007BA7;
+    & Button {
+      width: 100%;
+      color: white;
+      font-size: 25px;
+      transition: .3s;
+      border-radius: 0;
+      &:hover {
+        background-color: #ec9090;
+      }
+    }
+  }
+
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+  
+
+  .Ganador{
     justify-content: center;
     display: grid;
+    margin-bottom: 30px;
     & h1{
       font-size: 5rem;
     }
@@ -66,6 +159,40 @@
       }
     }
   }
+
+
+  .Operacion{
+    justify-content: center;
+    margin-top: -30px;
+    & h1{
+      font-size: 4rem;
+    }
+    & Button{
+      color: white;
+      font-size: 25px;
+      background-color: #007BA7;
+      &:hover{
+        background-color: rgb(57, 151, 185);
+      }
+    }
+  }
+
+  .OperacionMyM{
+    justify-content: center;
+    margin-top: -50px;
+    & h1{
+      font-size: 3.5rem;
+    }
+    & Button{
+      color: white;
+      font-size: 25px;
+      background-color: #007BA7;
+      &:hover{
+        background-color: rgb(57, 151, 185);
+      }
+    }
+  }
+
   .icon{
     background-color: green;
   }
@@ -87,9 +214,6 @@
   & #CheckNo:checked+label {
     border: 5px solid red;
     border-radius: 10%;
-  }
-  & #CheckClean:checked+label {
-    border: none;
   }
 
   & .LabelCheckSi{

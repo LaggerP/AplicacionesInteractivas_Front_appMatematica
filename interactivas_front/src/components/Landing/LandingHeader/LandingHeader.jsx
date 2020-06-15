@@ -6,6 +6,8 @@ import auth from "../../../ProtectedRoutes/auth";
 import apiService from "../../../services/apiServices"
 import {css} from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 const override = css`
     width: 40px;
@@ -28,6 +30,9 @@ class Header extends Component {
             password: '',
             loading: false,
             isRegister: true,
+            isAlert: false,
+            alertMessage: '',
+            alertType: '',
             isLoading: false,
         }
     }
@@ -40,15 +45,67 @@ class Header extends Component {
         this.setState({isLoading: true})
         const userData = {username: this.state.username, password: this.state.password}
         const responseLogin = await apiService.login(userData)
-    
+        console.log(responseLogin)
+        if (responseLogin.data.token){
+            this.setState({loading: false});
+            console.log(responseLogin.data.message);
+            this.setState({alertMessage: responseLogin.data.message})
+            this.setState({alertType:'success'})
+            this.setState({isAlert: true});
+            auth.authenticate();
+            localStorage.setItem('sessionName', userData.username);
+            setTimeout(() => this.props.history.push({pathname: '/games',}), 1000);
+        }
+        else{
+            this.setState({loading: false});
+            this.setState({alertMessage:responseLogin.data.message})
+            this.setState({alertType:'error'})
+            this.setState({isAlert: true});
+            this.cleanInput();
+        }
     }
 
     // TODO: register form
     register = async (e) => {
         e.preventDefault();
-        this.setState({loading: true})
+        this.setState({loading: true});
         const userData = {username: this.state.username, password: this.state.password}
-        const responseRegister = await apiService.register(userData)
+        const responseRegister = await apiService.register(userData);
+        if (responseRegister.data.token){
+            this.setState({loading: false});
+            console.log(responseRegister.data.message);
+            this.setState({alertMessage: responseRegister.data.message})
+            this.setState({alertType:'success'})
+            this.setState({isAlert: true});
+            this.changeForm();
+            this.cleanInput();
+        }
+        else{
+            this.setState({loading: false});
+            this.setState({alertMessage:'Ocurrio un error al registrar al jugador'})
+            this.setState({alertType:'error'})
+            this.setState({isAlert: true});
+            this.cleanInput();
+        }
+    }
+
+    cleanInput = () => {
+        this.setState({username: ''});
+        this.setState({password: ''});
+    }
+
+    showAlert = (message,type) => {
+        return (
+            <Snackbar open={this.state.isAlert} autoHideDuration={2000} onClose={this.closeAlert}>
+                <Alert style={{width:'100%'}} elevation={6} variant='filled' onClose={this.closeAlert} severity={type}>
+                    {message}
+                </Alert>
+            </Snackbar>
+        )
+    }
+
+    closeAlert = (event, reason) => {
+        this.setState({isAlert: false});        
     }
 
     changeForm = () => {
@@ -67,6 +124,7 @@ class Header extends Component {
                                     <input type="text"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.username}
                                            placeholder="Tu nickname"
                                            name="username"
                                            onChange={this.handleChange('username')}
@@ -78,6 +136,7 @@ class Header extends Component {
                                     <input type="password"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.password}
                                            placeholder="Tu contraseña"
                                            name="password"
                                            onChange={this.handleChange('password')}
@@ -110,6 +169,7 @@ class Header extends Component {
                                     <input type="text"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.username}
                                            placeholder="Tu nickname"
                                            name="username"
                                            onChange={this.handleChange('username')}
@@ -121,6 +181,7 @@ class Header extends Component {
                                     <input type="password"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.password}
                                            placeholder="Tu contraseña"
                                            name="password"
                                            onChange={this.handleChange('password')}
@@ -146,6 +207,7 @@ class Header extends Component {
                             </div>
                         </form>
                     }
+                    {this.showAlert(this.state.alertMessage,this.state.alertType)}
                 </div>
             </div>
         )
