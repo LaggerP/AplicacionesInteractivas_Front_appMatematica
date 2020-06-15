@@ -5,7 +5,7 @@ import {withRouter, Link} from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import {logOut} from '../../../services/apiServices'
+import {logOut} from '../../../services/authenticationServices'
 
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";

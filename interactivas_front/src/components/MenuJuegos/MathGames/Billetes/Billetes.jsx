@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import './Billetes.scss'
-import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
 import consignasGameData from "../../../../assets/jsonGames/Monedas/monedasConsignas.json";
 import Column from "./Column";
 import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import RankingTable from "../../Ranking/CustomComponent/RankingTable";
-import {saveLevelPoint} from '../../../../services/rankingServices'
+import { saveLevelPoint } from '../../../../services/rankingServices'
+
+import { getAllBilletesLevels } from '../../../../services/billetesJuegosServices'
 
 
 const Container = styled("div")`
@@ -30,21 +32,44 @@ const RankingContainer = styled("div")`
 
 const Billetes = () => {
     const [starter, setStarter] = useState(initialData);
-    const [gameData] = useState(consignasGameData)
-    const [actualLevel, setActualLevel] = useState(0)
+    const [gameData, setGameData] = useState([])
+    const [allLevels, setAllLevels] = useState([])
+    const [actualLevel, setActualLevel] = useState(1)
     const [finishGame, setFinishGame] = useState(false)
     const [loadingQuestion, setLoadingQuestion] = useState(false)
     const [userGamePoint, setUserGamePoint] = useState(0)
     const [billetesTotales, setBilletesTotales] = useState(0)
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoadingQuestion(true)
-        }, 3000);
-        return () => clearTimeout(timer);
-    }, []);
+        fetchInitialData(allLevels);
+        console.log(allLevels)
+    }, [allLevels]);
 
-    const onDragEnd = ({destination, source, draggableId, type}) => {
+    const fetchInitialData = async () => {
+        const allBilletesGameData =  await getAllBilletesLevels();
+        setAllLevels(allBilletesGameData.data)
+
+        /*
+        const gameByLevel = await getGameByLevel(allBilletesGameData.data)
+        console.log(gameByLevel)
+        setGameData([gameByLevel])
+        console.log(gameData)
+       */
+    };
+
+    // Filter all games by lvl and return one of them
+    const getGameByLevel = (games => {
+        let gamesData = []
+        games.map(game => {
+            if (game.level === actualLevel)
+                gamesData.push(game)
+        })
+        return gamesData[Math.floor(Math.random() * gamesData.length)];
+    });
+
+
+
+    const onDragEnd = ({ destination, source, draggableId, type }) => {
         if (!destination) return;
         if (destination.droppableId === source.droppableId &&
             destination.index === source.index) return;
@@ -118,6 +143,7 @@ const Billetes = () => {
     }
 
     const nextLevel = async () => {
+        //getRandomGameByLevel(gameData)
         if (gameData.levels[actualLevel].successAnswer === billetesTotales) {
             // TODO: function to add points in the ranking
             // if the kid answer well - add points in the ranking
@@ -125,7 +151,7 @@ const Billetes = () => {
             let dataPoints = {
                 gamePoint: userGamePoint + gameData.levels[actualLevel].levelPoint,
                 username: localStorage.getItem('sessionName')
-            } 
+            }
             await saveLevelPoint(dataPoints, 'billetes')
 
         } else {
@@ -136,7 +162,7 @@ const Billetes = () => {
             let dataPoints = {
                 gamePoint: userGamePoint - 30,
                 username: localStorage.getItem('sessionName')
-            } 
+            }
             await saveLevelPoint(dataPoints, 'billetes')
         }
         if (actualLevel < gameData.levels.length - 1) {
@@ -150,7 +176,7 @@ const Billetes = () => {
     if (!finishGame) {
         return (
             <div className="BilletesContainer">
-                <h1>{gameData.descriptionGame}</h1>
+                <h1>Completa los siguientes ejercicios haciendo uso de los billetes</h1>
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId="all-column" type="column">
                         {(provided, snapshot) => (
@@ -164,9 +190,14 @@ const Billetes = () => {
                                         :
                                         <div>
                                             <h1>Consigna:</h1>
-                                            <p>{gameData.levels[actualLevel].descriptionProblem}</p>
+                                            {
+                                                /*
+                                                <p>{gameData.levels[actualLevel].descriptionProblem}</p>
                                             <p id="rankingValue">Tu posición el el ranking: {userGamePoint}/100</p>
                                             <p id="rankingValue">Tu puntaje actual: {userGamePoint}</p>
+                                            */
+                                            }
+
                                         </div>
                                     }
                                 </div>
@@ -210,8 +241,8 @@ const Billetes = () => {
                         <h1>¡La proxima te ira mejor!</h1>
                         <h1>No te preocupes, podes volver a jugar cuando quieras</h1>
                         <h1>Tu puntaje final fue de {userGamePoint}</h1>
-                        <RankingTable/>
-                        <br/>
+                        <RankingTable />
+                        <br />
                         <Button component={Link} to="/games">Volver</Button>
                     </RankingContainer>
                 </div>
@@ -220,11 +251,11 @@ const Billetes = () => {
             return (
                 <div>
                     <RankingContainer>
-                            <h1>¡Terminaste!</h1>
-                            <h1>Tu puntaje final fue de {userGamePoint}</h1>
-                            <RankingTable/>
-                            <br/>
-                            <Button component={Link} to="/games">Volver</Button>
+                        <h1>¡Terminaste!</h1>
+                        <h1>Tu puntaje final fue de {userGamePoint}</h1>
+                        <RankingTable />
+                        <br />
+                        <Button component={Link} to="/games">Volver</Button>
                     </RankingContainer>
                 </div>
             )

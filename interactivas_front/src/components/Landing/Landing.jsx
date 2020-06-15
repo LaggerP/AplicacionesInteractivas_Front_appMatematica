@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LandingHeader from './LandingHeader/LandingHeader'
 import LandingBody from './LandingBody/LandingBody'
 
-import {isConnected} from '../../services/apiServices'
+import {isConnected} from '../../services/authenticationServices'
 import LandingNavbar from "./LandingNavbar/LandingNavbar";
 
 export class Landing extends Component {
