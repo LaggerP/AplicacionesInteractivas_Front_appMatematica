@@ -16,7 +16,12 @@ const endpoints = {
     updateSumas: `${urlApi}/api/ranking/update_sumas`,
     updateMultiplicacion: `${urlApi}/api/ranking/update_multi`,
     getAllRanking: `${urlApi}/api/ranking/list`,
-    getRankingByUserId: `${urlApi}/api/ranking/find/:id`,
+    getRankingByUsername: `${urlApi}/api/ranking/find/`,
+
+
+    //billetes games endpoints
+    billestesGameLevels: `${urlApi}/api/billetesjuegos/list`,
+    billetesGameLevelsByLevel:`${urlApi}/api/billetesjuegos/find/:level`
 
 }
 

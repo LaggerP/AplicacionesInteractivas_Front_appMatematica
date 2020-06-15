@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 import './LandingHeader.scss'
 import './../../../animate.css'
-import { register, login } from "../../../services/apiServices"
+import { register, login } from "../../../services/authenticationServices"
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 

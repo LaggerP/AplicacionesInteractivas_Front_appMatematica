@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import {isConnected} from '../services/apiServices'
+import {isConnected} from '../services/authenticationServices'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
    
