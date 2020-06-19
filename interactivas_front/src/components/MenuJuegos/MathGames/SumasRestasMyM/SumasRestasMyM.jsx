@@ -5,9 +5,11 @@ import UserTextField from "./CustomComponent/UserTextField";
 import UserCheckBoxField from "./CustomComponent/UserCheckBoxField";
 import UserDialog from './CustomComponent/UserDialog';
 import CountUp from 'react-countup';
+import {saveLevelPoint} from '../../../../services/rankingServices';
 
 class SumasRestasMyM extends Component {
 
+    // States del juego
     state ={Juega:true,
             Finish: false,
             isFinishing:false,
@@ -30,18 +32,61 @@ class SumasRestasMyM extends Component {
         return min + (Math.floor((max - min) * Math.random()));
     }
 
+    //Actualiza los estados para volver a intentar jugar
     volverIntentar = ()=> {
-        this.setState({perdido:false});
-        this.setState({Juega: true});
-        this.setState({nextLevel: false});
+        this.setState({
+            perdido:false,
+            Juega: true,
+            nextLevel: false
+        });
     }
 
     // Obtiene el resultado de la respuesta y lo guarde en el estado Result
-    getResult = (Result) =>{
-        this.setState({Result:Result});
+    getResult = (ResultOperation) =>{
+        this.setState({Result: ResultOperation});
     }
 
-    // Valida si es Suma, Resta, MayorMenor y hace la operacion correspondiente
+     //Termina el juego
+     finishGame = () =>{
+        console.log('TERMINO EL JUEGO, OBTENER RESULTADOS.')
+        // Aca guarda el RESULTADO FINAL a la tabla de ranking
+        this.updateScore();
+        this.setState({Finish: true});
+    }
+
+    // Actualiza la tabla ranking
+    updateScore = async () => {
+        console.log('Guarda puntaje a la tabla ranking')
+        let dataPoints = {
+            username: localStorage.getItem('sessionName'), 
+            gamePoint: this.state.puntaje 
+        }
+        await saveLevelPoint(dataPoints, 'sumas');
+    }
+
+    // Valida si se gano o se perdio el nivel
+    winLostLevel = () =>{
+        if(this.state.countQues === 1 && this.state.countCorrects >= 7){
+            console.log('Gano');
+            this.setState({
+                Juega: false,
+                perdido: false,
+                nextLevel: true
+            });            
+        }
+        else if(this.state.countQues === 1 && this.state.countCorrects < 7){
+            console.log('Perdio');
+            this.setState({
+                countCorrects: 0,
+                countQues: 15,
+                Juega: true,
+                perdido: true,
+                nextLevel: false
+            });
+        }
+    }
+
+    // Valida que operacion es y hace la operacion correspondiente
     correctResult(var1,var2,oper){
         switch(oper){
             case 'Suma':
@@ -73,66 +118,46 @@ class SumasRestasMyM extends Component {
     isCorrect = ()=>{
         const operaciones = ['Suma', 'Resta', 'MyM'];
         var operacion = operaciones[Math.floor(Math.random()*operaciones.length)];
+        var result = this.state.Result;
+
         while (operacion === 'MyM' & operacion === this.state.oper){
             operacion = operaciones[Math.floor(Math.random()*operaciones.length)];
         }
 
-        var result = this.state.Result
-
         if(this.state.oper === 'Suma' || this.state.oper === 'Resta'){
             result = parseInt(this.state.Result);
         }
+
         // Valida respuesta
         if (this.correctResult(this.state.Var1,this.state.Var2,this.state.oper) === result){
             console.log('ES CORRECTO');
 
-            this.setState({oper:operacion});
-            this.setState({Var1: this.randomInt(this.state.Min,this.state.Max)});
-            this.setState({Var2: this.randomInt(this.state.Min,this.state.Max)});
-
-            this.setState({countCorrects: this.state.countCorrects + 1});
-            this.setState({countQues: this.state.countQues - 1});
-            this.setState({puntaje: this.state.puntaje + 100});
-
-            this.setState({Result:''});
+            this.setState({
+                oper:operacion,
+                Var1: this.randomInt(this.state.Min,this.state.Max),
+                Var2: this.randomInt(this.state.Min,this.state.Max),
+                countCorrects: this.state.countCorrects + 1,
+                countQues: this.state.countQues - 1,
+                puntaje: this.state.puntaje + 100,
+                Result:''
+            });
         }
         else{
             console.log('ES INCORRECTO');
 
-            this.setState({oper:operacion});
-            this.setState({Var1: this.randomInt(this.state.Min,this.state.Max)});
-            this.setState({Var2: this.randomInt(this.state.Min,this.state.Max)});
-
-            this.setState({puntaje: this.state.puntaje - 30});
-            this.setState({countQues: this.state.countQues - 1});
-
-            this.setState({Result:''});
+            this.setState({
+                oper:operacion,
+                Var1: this.randomInt(this.state.Min,this.state.Max),
+                Var2: this.randomInt(this.state.Min,this.state.Max),
+                puntaje: this.state.puntaje - 30,
+                countQues: this.state.countQues - 1,
+                Result:''
+            });
         }
-        // Valida si gano el nivel
-        if(this.state.countQues === 1 && this.state.countCorrects >= 7){
-            console.log('Gano');
-            this.setState({Juega: false});
-            this.setState({perdido: false});
-            this.setState({nextLevel: true});
-            
-        }
-        // Valida si perdio el nivel
-        else if(this.state.countQues === 1 && this.state.countCorrects < 7){
-            console.log('Perdio');
-            this.setState({countCorrects: 0});
-            this.setState({countQues: 15});
-            this.setState({Juega: true});
-            this.setState({perdido: true});
-            this.setState({nextLevel: false});
-        }
+        this.winLostLevel();
     }
 
-    //Termina el juego
-    finishGame = () =>{
-        console.log('TERMINO, OBTENER RESULTADOS.')
-        this.setState({Finish: true});
-    }
-
+    // Valida que boton mostrar segundo el estado del juego
     ConfirmLevelScore = ()=> {
         if (!this.state.isFinishing){
             return(
@@ -159,35 +184,42 @@ class SumasRestasMyM extends Component {
             }
         }
     }
+
     // Cambia los estados para pasar al siguiente nivel.
     getNextLevel = () =>{
         if (this.state.level + 1 === 3){
-            this.setState({isFinishing: true});
             console.log('Completa nivel y termina el juego');
-            this.setState({Juega: true});
-            this.setState({nextLevel: false});
-            this.setState({level: this.state.level + 1});
-            this.setState({puntaje: this.state.puntaje});
-            this.setState({countQues: 15});
-            this.setState({countCorrects: 0});
-            this.setState({Min:this.state.Max});
-            this.setState({Max:this.state.Max + 60});
-            this.setState({Var1:this.randomInt(this.state.Min,this.state.Max)});
-            this.setState({Var2:this.randomInt(this.state.Min,this.state.Max)});
+            this.setState({
+                isFinishing: true,
+                Juega: true,
+                nextLevel: false,
+                level: this.state.level + 1,
+                puntaje: this.state.puntaje,
+                countQues: 15,
+                countCorrects: 0,
+                Min:this.state.Max,
+                Max:this.state.Max + 60,
+                Var1:this.randomInt(this.state.Min,this.state.Max),
+                Var2:this.randomInt(this.state.Min,this.state.Max)
+            });
         }
         else{
-            this.setState({Juega: true});
-            this.setState({nextLevel: false});
-            this.setState({level: this.state.level + 1});
-            this.setState({puntaje: this.state.puntaje});
-            this.setState({countQues: 15});
-            this.setState({countCorrects: 0});
-            this.setState({Min:this.state.Max});
-            this.setState({Max:this.state.Max + 60});
-            this.setState({Var1:this.randomInt(this.state.Min,this.state.Max)});
-            this.setState({Var2:this.randomInt(this.state.Min,this.state.Max)});
+            this.setState({
+                Juega: true,
+                nextLevel: false,
+                level: this.state.level + 1,
+                puntaje: this.state.puntaje,
+                countQues: 15,
+                countCorrects: 0,
+                Min:this.state.Max,
+                Max:this.state.Max + 60,
+                Var1:this.randomInt(this.state.Min,this.state.Max),
+                Var2:this.randomInt(this.state.Min,this.state.Max)
+            });
             console.log('Pasa al siguiente nivel');
         }
+        // Guarda el puntaje a la tabla de rankings del nivel que paso.
+        this.updateScore();
     }
     // Elementos de retorno segun situacion de juego
     Operation = (var1,var2,oper) => {
@@ -270,6 +302,7 @@ class SumasRestasMyM extends Component {
             }
         }
     }
+
     render() {        
         return (
             <div>
