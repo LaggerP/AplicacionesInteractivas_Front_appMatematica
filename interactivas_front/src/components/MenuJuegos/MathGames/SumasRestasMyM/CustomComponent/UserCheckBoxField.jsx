@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class UserCheckBoxField extends Component {
-
+  
   handleChange = (e) => {
     this.props.callback(e.target.value);
   }

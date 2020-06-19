@@ -24,11 +24,11 @@ export const login = async (userData) => {
         setStorageData(response.data.token, userData.username)
         return response;
     } catch (error) {
-
-        console.log(error)
+        if (error.response) {
+            return error.response;
+        }
     }
 }
-
 
 // Non api internal functionalities
 export const isConnected = () => localStorage.getItem('activeSession')

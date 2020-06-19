@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from '@material-ui/core/styles';
+import '../SumasRestasMyM.scss';
 
 const styles = {
     input: {
@@ -9,11 +10,12 @@ const styles = {
         textAlign: "center",
         width:'24rem',
     }
-};
+  }
 
 class UserTextField extends Component {
 
   handleChange = (e) => {
+    e.preventDefault();
     this.props.callback(e.target.value);
   }
 
@@ -21,6 +23,7 @@ class UserTextField extends Component {
     return (
       <div>
         <TextField
+          type='number'
           required={true}
           autoFocus={true}
           value={this.props.valueRes}
