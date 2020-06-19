@@ -41,12 +41,13 @@ const Billetes = () => {
     const [billetesTotales, setBilletesTotales] = useState(0)
 
     useEffect(() => {
-        fetchInitialData(allLevels);
-        console.log(allLevels)
-    }, [allLevels]);
+        fetchInitialData();
+        console.log()
+    }, []);
 
     const fetchInitialData = async () => {
         const allBilletesGameData =  await getAllBilletesLevels();
+        console.log(allBilletesGameData.data)
         setAllLevels(allBilletesGameData.data)
 
         /*
