@@ -10,8 +10,8 @@ import './Ranking.scss';
 import RankingTable from "./CustomComponent/RankingTable";
 
 class Ranking extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {rankingAct: "RankingTotal"}
     }
 
@@ -40,13 +40,13 @@ class Ranking extends Component {
                                 icon={<PollOutlinedIcon/>}
                             />
                             <BottomNavigationAction
-                                label="Monedas"
-                                value="Monedas"
+                                label="Billetes"
+                                value="Billetes"
                                 icon={<InsertChartOutlinedRoundedIcon/>}
                             />
                             <BottomNavigationAction
-                                label="Fracciones"
-                                value="Fracciones"
+                                label="Multiplicaciones"
+                                value="Multiplicaciones"
                                 icon={<InsertChartOutlinedOutlinedIcon/>}
                             />
                             <BottomNavigationAction
@@ -55,11 +55,9 @@ class Ranking extends Component {
                                 icon={<AssessmentOutlinedIcon/>}
                             />
                         </BottomNavigation>
-                        <RankingTable/>
-
+                        <RankingTable />
                     </div>
                 </div>
-
             </div>
         )
     }
