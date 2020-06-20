@@ -11,6 +11,7 @@ import RankingTable from "../../Ranking/CustomComponent/RankingTable";
 import { saveLevelPoint } from '../../../../services/rankingServices'
 
 import { getAllBilletesLevels } from '../../../../services/billetesJuegosServices'
+import { act } from "react-dom/test-utils";
 
 
 const Container = styled("div")`
@@ -33,29 +34,24 @@ const RankingContainer = styled("div")`
 const Billetes = () => {
     const [starter, setStarter] = useState(initialData);
     const [gameData, setGameData] = useState([])
-    const [allLevels, setAllLevels] = useState([])
-    const [actualLevel, setActualLevel] = useState(1)
+    const [allLevels, setAllLevels] = React.useState([])
     const [finishGame, setFinishGame] = useState(false)
     const [loadingQuestion, setLoadingQuestion] = useState(false)
     const [userGamePoint, setUserGamePoint] = useState(0)
     const [billetesTotales, setBilletesTotales] = useState(0)
-
+    let actualLevel = 1 
+    
     useEffect(() => {
         fetchInitialData();
-        console.log()
-    }, []);
+        setLoadingQuestion(true)
+    },[]);
 
-    const fetchInitialData = async () => {
-        const allBilletesGameData =  await getAllBilletesLevels();
-        console.log(allBilletesGameData.data)
+    async function fetchInitialData() {
+        let allBilletesGameData =  await getAllBilletesLevels();
         setAllLevels(allBilletesGameData.data)
-
-        /*
         const gameByLevel = await getGameByLevel(allBilletesGameData.data)
-        console.log(gameByLevel)
-        setGameData([gameByLevel])
-        console.log(gameData)
-       */
+        setGameData(gameByLevel)
+       
     };
 
     // Filter all games by lvl and return one of them
@@ -67,8 +63,6 @@ const Billetes = () => {
         })
         return gamesData[Math.floor(Math.random() * gamesData.length)];
     });
-
-
 
     const onDragEnd = ({ destination, source, draggableId, type }) => {
         if (!destination) return;
@@ -144,37 +138,39 @@ const Billetes = () => {
     }
 
     const nextLevel = async () => {
-        //getRandomGameByLevel(gameData)
-        if (gameData.levels[actualLevel].successAnswer === billetesTotales) {
-            // TODO: function to add points in the ranking
-            // if the kid answer well - add points in the ranking
-            setUserGamePoint(userGamePoint + gameData.levels[actualLevel].levelPoint)
-            let dataPoints = {
-                gamePoint: userGamePoint + gameData.levels[actualLevel].levelPoint,
-                username: localStorage.getItem('sessionName')
+        if (actualLevel <= 3) {
+            console.log("nivel actual ", actualLevel)
+            const gameByLevel = await getGameByLevel(allLevels)
+            setGameData(gameByLevel)
+            if (gameData.success_answer === billetesTotales) {
+                setUserGamePoint(userGamePoint + gameData.level_point)
+                let dataPoints = {
+                    gamePoint: userGamePoint + gameData.level_point,
+                    username: localStorage.getItem('sessionName')
+                }
+                await saveLevelPoint(dataPoints, 'billetes')
+    
+            } else {
+                setUserGamePoint(userGamePoint - 30)
+                let dataPoints = {
+                    gamePoint: userGamePoint - 30,
+                    username: localStorage.getItem('sessionName')
+                }
+                await saveLevelPoint(dataPoints, 'billetes')
             }
-            await saveLevelPoint(dataPoints, 'billetes')
 
-        } else {
-            // TODO: function to subtract points in the ranking
-            // if the kid answer wrong - subtract points in the ranking
-            setUserGamePoint(userGamePoint - 30)
+            actualLevel++
+            console.log("nivel actualizado ", actualLevel)
 
-            let dataPoints = {
-                gamePoint: userGamePoint - 30,
-                username: localStorage.getItem('sessionName')
-            }
-            await saveLevelPoint(dataPoints, 'billetes')
         }
-        if (actualLevel < gameData.levels.length - 1) {
-            setActualLevel(actualLevel + 1)
-            setStarter(initialData)
-        } else {
+        else {
             setFinishGame(true)
         }
     }
 
     if (!finishGame) {
+        console.log(allLevels)
+        console.log(gameData)
         return (
             <div className="BilletesContainer">
                 <h1>Completa los siguientes ejercicios haciendo uso de los billetes</h1>
@@ -191,14 +187,8 @@ const Billetes = () => {
                                         :
                                         <div>
                                             <h1>Consigna:</h1>
-                                            {
-                                                /*
-                                                <p>{gameData.levels[actualLevel].descriptionProblem}</p>
-                                            <p id="rankingValue">Tu posición el el ranking: {userGamePoint}/100</p>
-                                            <p id="rankingValue">Tu puntaje actual: {userGamePoint}</p>
-                                            */
-                                            }
-
+                                                <p>{gameData.description}</p>
+                                                <p id="rankingValue">Tu puntaje actual: {userGamePoint}</p>
                                         </div>
                                     }
                                 </div>
