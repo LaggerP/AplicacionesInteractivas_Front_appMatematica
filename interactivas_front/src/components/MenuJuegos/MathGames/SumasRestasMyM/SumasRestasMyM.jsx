@@ -24,6 +24,7 @@ class SumasRestasMyM extends Component {
             perdido:false, 
             countQues:15,
             puntaje: 0,
+            levelPuntaje: 0,
             countCorrects: 0
         };
     
@@ -37,7 +38,9 @@ class SumasRestasMyM extends Component {
         this.setState({
             perdido:false,
             Juega: true,
-            nextLevel: false
+            nextLevel: false,
+            puntaje: this.state.levelPuntaje,
+            countCorrects: 0
         });
     }
 
@@ -71,7 +74,8 @@ class SumasRestasMyM extends Component {
             this.setState({
                 Juega: false,
                 perdido: false,
-                nextLevel: true
+                nextLevel: true,
+                levelPuntaje: this.state.puntaje
             });            
         }
         else if(this.state.countQues === 1 && this.state.countCorrects < 7){
@@ -81,7 +85,7 @@ class SumasRestasMyM extends Component {
                 countQues: 15,
                 Juega: true,
                 perdido: true,
-                nextLevel: false
+                nextLevel: false,
             });
         }
     }

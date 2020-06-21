@@ -20,11 +20,18 @@ class InteractiveList extends Component{
         this.state = { users: [] };
     }
 
-    async componentDidMount(){
+    async componentWillMount(){
         const data = await this.getAllRankingData();
         var sortUsersRanking = data.sort((a, b) => b.puntaje_total - a.puntaje_total);
         this.setState({users: sortUsersRanking});
-        console.log(this.props.gameTypeRanking)
+    }
+
+    async componentDidUpdate(previousProps) {
+        if (previousProps.RankingGame !== this.props.RankingGame) {
+            await this.rankingDataByGame(this.props.RankingGame).then(dataRanking =>{
+                this.setState({users: dataRanking});
+            })
+        }
     }
 
     async getAllRankingData(){
@@ -33,6 +40,31 @@ class InteractiveList extends Component{
             return d['puntaje_total']=d.puntaje_billetes + d.puntaje_multiplicacion + d.puntaje_sumas
         })
        return data
+    }
+
+    async rankingDataByGame(game){
+        const data = await getAllRankings()
+        const userData = [];
+        data.map( user => {
+            switch (game){
+                case 'RankingTotal':
+                    userData.push({id: user.id, username:user.username, puntaje_total: user.puntaje_billetes + user.puntaje_multiplicacion + user.puntaje_sumas})
+                    break;
+                case 'Sumas':
+                    userData.push({id: user.id, username:user.username, puntaje_total: user.puntaje_sumas})
+                    break
+                case 'Multiplicaciones':
+                    userData.push({id: user.id, username:user.username, puntaje_total: user.puntaje_multiplicacion})
+                    break
+                case 'Billetes':
+                    userData.push({id: user.id, username:user.username, puntaje_total: user.puntaje_billetes})
+                    break
+                default:
+                    break;
+            }            
+            return userData;
+        })
+        return userData.sort((a, b) => b.puntaje_total - a.puntaje_total);
     }
 
     witchBadge(index){
@@ -53,14 +85,14 @@ class InteractiveList extends Component{
     render(){
         return(
             <div className="rankingTable">
-                <Container maxWidth="md" maxHe>
+                <Container maxWidth="md">
                     <Paper className="root">
                         <Table className="table">
                             <TableHead className="tableHead">
                                 <TableRow>
                                     <TableCell className="tableCell">Posición</TableCell>
-                                    <TableCell  className="tableCell">Nickname</TableCell>
-                                    <TableCell numeric className="tableCell">Puntaje</TableCell>
+                                    <TableCell className="tableCell">Nickname</TableCell>
+                                    <TableCell className="tableCell">Puntaje</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -70,8 +102,8 @@ class InteractiveList extends Component{
                                             <TableCell component="th" scope="row" className="TableCell">
                                                 {(index<=2) ? this.witchBadge(index) : index+1}
                                             </TableCell>
-                                            <TableCell numeric className="tableCell">{user.username}</TableCell>
-                                            <TableCell numeric className="tableCell">
+                                            <TableCell className="tableCell">{user.username}</TableCell>
+                                            <TableCell className="tableCell">
                                                 <CountUp
                                                     end={user.puntaje_total}
                                                     duration={3}

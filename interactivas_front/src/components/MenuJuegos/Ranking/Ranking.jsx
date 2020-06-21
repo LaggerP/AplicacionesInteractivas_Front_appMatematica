@@ -55,7 +55,7 @@ class Ranking extends Component {
                                 icon={<AssessmentOutlinedIcon/>}
                             />
                         </BottomNavigation>
-                        <RankingTable />
+                        <RankingTable RankingGame={this.state.rankingAct} />
                     </div>
                 </div>
             </div>
