@@ -3,13 +3,11 @@ import styled from "@emotion/styled";
 import './Billetes.scss'
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
-import consignasGameData from "../../../../assets/jsonGames/Monedas/monedasConsignas.json";
 import Column from "./Column";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import RankingTable from "../../Ranking/CustomComponent/RankingTable";
 import { saveLevelPoint } from '../../../../services/rankingServices'
-
 import { getAllBilletesLevels } from '../../../../services/billetesJuegosServices'
 
 
@@ -34,28 +32,23 @@ const Billetes = () => {
     const [starter, setStarter] = useState(initialData);
     const [gameData, setGameData] = useState([])
     const [allLevels, setAllLevels] = useState([])
-    const [actualLevel, setActualLevel] = useState(1)
     const [finishGame, setFinishGame] = useState(false)
     const [loadingQuestion, setLoadingQuestion] = useState(false)
     const [userGamePoint, setUserGamePoint] = useState(0)
     const [billetesTotales, setBilletesTotales] = useState(0)
+    const [actualLevel, setActualLevel] = useState(1)
 
     useEffect(() => {
         fetchInitialData();
-        console.log()
     }, []);
 
-    const fetchInitialData = async () => {
-        const allBilletesGameData =  await getAllBilletesLevels();
-        console.log(allBilletesGameData.data)
+    // First get data from database. Run once. 
+    async function fetchInitialData() {
+        let allBilletesGameData = await getAllBilletesLevels();
         setAllLevels(allBilletesGameData.data)
-
-        /*
-        const gameByLevel = await getGameByLevel(allBilletesGameData.data)
-        console.log(gameByLevel)
-        setGameData([gameByLevel])
-        console.log(gameData)
-       */
+        setGameData(getGameByLevel(allBilletesGameData.data))
+        setActualLevel(actualLevel + 1)
+        setLoadingQuestion(true) 
     };
 
     // Filter all games by lvl and return one of them
@@ -68,8 +61,7 @@ const Billetes = () => {
         return gamesData[Math.floor(Math.random() * gamesData.length)];
     });
 
-
-
+    // DnD logic
     const onDragEnd = ({ destination, source, draggableId, type }) => {
         if (!destination) return;
         if (destination.droppableId === source.droppableId &&
@@ -135,6 +127,7 @@ const Billetes = () => {
         setBilletesTotales(calculateTotalMoney(endTaskColumn.billeteIds, starter))
     };
 
+    // Calculate the amount of money the player selected
     const calculateTotalMoney = (billeteDado = '', starter) => {
         let plataDada = []
         billeteDado.map(billete => {
@@ -143,34 +136,30 @@ const Billetes = () => {
         return plataDada.reduce((a, b) => a + b);
     }
 
+    // Send data to database and get the next level
     const nextLevel = async () => {
-        //getRandomGameByLevel(gameData)
-        if (gameData.levels[actualLevel].successAnswer === billetesTotales) {
-            // TODO: function to add points in the ranking
-            // if the kid answer well - add points in the ranking
-            setUserGamePoint(userGamePoint + gameData.levels[actualLevel].levelPoint)
+        if (gameData.success_answer === billetesTotales) {
+            setUserGamePoint(userGamePoint + gameData.level_point)
             let dataPoints = {
-                gamePoint: userGamePoint + gameData.levels[actualLevel].levelPoint,
+                gamePoint: userGamePoint + gameData.level_point,
                 username: localStorage.getItem('sessionName')
             }
             await saveLevelPoint(dataPoints, 'billetes')
 
         } else {
-            // TODO: function to subtract points in the ranking
-            // if the kid answer wrong - subtract points in the ranking
             setUserGamePoint(userGamePoint - 30)
-
             let dataPoints = {
                 gamePoint: userGamePoint - 30,
                 username: localStorage.getItem('sessionName')
             }
             await saveLevelPoint(dataPoints, 'billetes')
         }
-        if (actualLevel < gameData.levels.length - 1) {
-            setActualLevel(actualLevel + 1)
-            setStarter(initialData)
-        } else {
+
+        if (actualLevel > 3) {
             setFinishGame(true)
+        } else {
+            setActualLevel(actualLevel + 1)
+            setGameData(getGameByLevel(allLevels))
         }
     }
 
@@ -191,14 +180,8 @@ const Billetes = () => {
                                         :
                                         <div>
                                             <h1>Consigna:</h1>
-                                            {
-                                                /*
-                                                <p>{gameData.levels[actualLevel].descriptionProblem}</p>
-                                            <p id="rankingValue">Tu posición el el ranking: {userGamePoint}/100</p>
+                                            <p>{gameData.description}</p>
                                             <p id="rankingValue">Tu puntaje actual: {userGamePoint}</p>
-                                            */
-                                            }
-
                                         </div>
                                     }
                                 </div>
@@ -219,7 +202,6 @@ const Billetes = () => {
                                 {provided.placeholder}
                             </Container>
                         )}
-
                     </Droppable>
                 </DragDropContext>
                 {
