@@ -1,6 +1,6 @@
 # Aplicaciones Interactivas - UADE
 
-Este repositorio corresponde al proyecto *Front End* de la materia ***Aplicaciones Interactivas*** de la Universidad Argentina de la Empresa.
+Este repositorio corresponde al proyecto *Front End* Matemática de la materia ***Aplicaciones Interactivas*** de la Universidad Argentina de la Empresa.
 
 # ¿Cómo correr el proyecto?
 
@@ -19,3 +19,6 @@ El Stack del proyecto Front End está compuesto por:
  - JavaScript (con estándares ^ES5).
  - Scss.
  - Material UI
+
+## API - BackEnd
+Este proyecto hace uso de una API codificada con NodeJS, Express, Sequelize, MySQL. Para visualizar este proyecto hacer clic **[aquí](https://github.com/LaggerP/AplicacionesInteractivas_Back_mate)**.
