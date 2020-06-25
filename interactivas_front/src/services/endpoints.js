@@ -1,4 +1,4 @@
-const urlApi = 'https://apibe.herokuapp.com' || "http://localhost:8000";
+const urlApi = 'https://apibe.herokuapp.com' //|| "http://localhost:8000";
 
 
 const endpoints = {
