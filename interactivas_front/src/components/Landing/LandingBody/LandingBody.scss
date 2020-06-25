@@ -36,7 +36,6 @@
 @media (max-width: 1200px) {
    .bodyContainer {
       &-cards {
-
          &-item {
             padding: 1rem;
          }
@@ -46,11 +45,20 @@
 
 @media (max-width: 800px) {
    .bodyContainer {
-
       &-cards {
          &-item {
             width: 400px;
             padding: 1rem;
+         }
+      }
+   }
+}
+
+@media (max-width: 500px) {
+   .bodyContainer {
+      &-cards {
+         &-item {
+            margin-top: 30px;
          }
       }
    }

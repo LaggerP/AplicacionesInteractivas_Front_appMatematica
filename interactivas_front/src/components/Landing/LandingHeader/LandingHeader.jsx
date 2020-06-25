@@ -1,10 +1,12 @@
-import React, {Component} from 'react'
-import {withRouter} from "react-router-dom";
+import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
 import './LandingHeader.scss'
 import './../../../animate.css'
-import auth from "../../../ProtectedRoutes/auth";
+import { register, login } from "../../../services/authenticationServices"
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 const override = css`
     width: 40px;
@@ -14,7 +16,7 @@ const override = css`
     border-width: 2px;
     border-style: solid;
     border-image: initial;
-    border-color: rgb(54, 215, 183) rgb(54, 215, 183) transparent;
+    border-color: #007BA7 #007BA7 transparent;
     animation: 0.75s linear 0s infinite normal both running animation-s8tf20;
     background: transparent !important;
 `;
@@ -23,38 +25,80 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nickName: '',
+            username: '',
             password: '',
             loading: false,
             isRegister: true,
+            isAlert: false,
+            alertMessage: '',
+            alertType: '',
             isLoading: false,
-
-    }
+        }
     }
 
     handleChange = name => event => this.setState({[name]: event.target.value})
 
-    login = (e) => {
+    login = async (e) => {
         e.preventDefault();
         this.setState({isLoading: true})
-        const userData = {nickName: this.state.nickName, password: this.state.password}
-        console.log(userData)
-        if (userData.nickName !== '' && userData.password !== '') {
-            this.setState({loading: true})
-            localStorage.setItem('sessionName', userData.nickName); // Se guarda en localStorage el nombre.
-            setTimeout(
-                () => auth.authenticate(() => this.props.history.push({
-                    pathname: '/games',
-                    state: {nick: userData.nickName}
-                }))
-                , 2000);
+        const userData = {username: this.state.username, password: this.state.password}
+        const responseLogin = await login(userData);
+        if (responseLogin.status === 200){
+            this.setState({loading: false});
+            this.setState({alertMessage: responseLogin.data.message})
+            this.setState({alertType:'success'})
+            this.setState({isAlert: true});
+            localStorage.setItem('sessionName', userData.username);
+            setTimeout(() => this.props.history.push({pathname: '/games',}), 1000);
         }
-    };
+        else{
+            this.setState({loading: false});
+            this.setState({alertMessage:responseLogin.data.message})
+            this.setState({alertType:'error'})
+            this.setState({isAlert: true});
+            this.cleanInput();
+        }
+    }
 
-    register = (e) => {
+    register = async (e) => {
         e.preventDefault();
-        this.setState({loading: true})
-        const userData = {nickName: this.state.nickName, password: this.state.password}
+        this.setState({loading: true});
+        const userData = {username: this.state.username, password: this.state.password}
+        const responseRegister = await register(userData);
+        if (responseRegister.status === 200){
+            this.setState({loading: false});
+            this.setState({alertMessage: responseRegister.data.message})
+            this.setState({alertType:'success'})
+            this.setState({isAlert: true});
+            this.changeForm();
+            this.cleanInput();
+        }
+        else{
+            this.setState({loading: false});
+            this.setState({alertMessage:'Ocurrio un error al registrar al jugador'})
+            this.setState({alertType:'error'})
+            this.setState({isAlert: true});
+            this.cleanInput();
+        }
+    }
+
+    cleanInput = () => {
+        this.setState({username: ''});
+        this.setState({password: ''});
+    }
+
+    showAlert = (message,type) => {
+        return (
+            <Snackbar open={this.state.isAlert} autoHideDuration={2000} onClose={this.closeAlert}>
+                <Alert style={{width:'100%'}} elevation={6} variant='filled' onClose={this.closeAlert} severity={type}>
+                    {message}
+                </Alert>
+            </Snackbar>
+        )
+    }
+
+    closeAlert = (event, reason) => {
+        this.setState({isAlert: false});
     }
 
     changeForm = () => {
@@ -73,9 +117,10 @@ class Header extends Component {
                                     <input type="text"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.username}
                                            placeholder="Tu nickname"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="username"
+                                           onChange={this.handleChange('username')}
                                            required
                                     />
                                 </div>
@@ -84,6 +129,7 @@ class Header extends Component {
                                     <input type="password"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.password}
                                            placeholder="Tu contraseña"
                                            name="password"
                                            onChange={this.handleChange('password')}
@@ -95,7 +141,7 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
-                        
+
                                     {!this.state.loading ? <span>JUGAR</span>
                                         :
                                         <ClipLoader
@@ -116,9 +162,10 @@ class Header extends Component {
                                     <input type="text"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.username}
                                            placeholder="Tu nickname"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="username"
+                                           onChange={this.handleChange('username')}
                                            required
                                     />
                                 </div>
@@ -127,13 +174,15 @@ class Header extends Component {
                                     <input type="password"
                                            className="header-body--inputs-divInput-input animated zoomIn"
                                            maxLength="10"
+                                           value={this.state.password}
                                            placeholder="Tu contraseña"
-                                           name="nickName"
-                                           onChange={this.handleChange('nickName')}
+                                           name="password"
+                                           onChange={this.handleChange('password')}
                                            required
                                     />
                                     <div className="divViewSpan animated zoomIn">
-                                        <span className="formViewSpan" onClick={this.changeForm}>Ya tengo una cuenta</span>
+                                        <span className="formViewSpan"
+                                              onClick={this.changeForm}>Ya tengo una cuenta</span>
 
                                     </div>
                                 </div>
@@ -141,16 +190,17 @@ class Header extends Component {
                                     {!this.state.loading ? <span>REGISTRARSE</span>
                                         :
                                         <ClipLoader
-                                        css={override}
-                                        size={150}
-                                        color={"#123abc"}
-                                        loading={this.state.loading}
-                                    />}
+                                            css={override}
+                                            size={150}
+                                            color={"#123abc"}
+                                            loading={this.state.loading}
+                                        />}
                                 </button>
 
                             </div>
                         </form>
                     }
+                    {this.showAlert(this.state.alertMessage,this.state.alertType)}
                 </div>
             </div>
         )

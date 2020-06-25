@@ -4,7 +4,9 @@ import {withStyles} from '@material-ui/core/styles';
 import {withRouter, Link} from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import auth from '../../../ProtectedRoutes/auth'
+
+import {logOut} from '../../../services/authenticationServices'
+
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
@@ -16,7 +18,7 @@ const useStyles = (theme) => ({
         flexGrow: 1,
     },
     appBar: {
-        background: '#45B39D',
+        background: '#007BA7',
     },
     title: {
         flexGrow: 1,
@@ -25,9 +27,9 @@ const useStyles = (theme) => ({
 
 class MenuJuegosNavbar extends Component {
 
-    signOut = (e) => {
+    exit = (e) => {
         e.preventDefault();
-        auth.signOut(() => this.props.history.push('/'))
+        logOut(() => this.props.history.push('/'))
     }
 
     render() {
@@ -36,7 +38,7 @@ class MenuJuegosNavbar extends Component {
                 <AppBar position="static" className={this.props.classes.appBar}>
                     <Toolbar>
                         <Typography variant="h6" className={this.props.classes.title}>
-                            Virtu
+                            MathApp
                         </Typography>
                         <ul className="MenuGames">
                             <li>
@@ -59,10 +61,10 @@ class MenuJuegosNavbar extends Component {
                             </li>
                             <li>
                                 <Button
-                                    onClick={this.signOut}
+                                    onClick={this.exit}
                                     startIcon={<ExitToAppIcon/>}
                                     className="MenuNavbarButton">
-                                   <span>Salir</span>
+                                   Salir
                                 </Button>
                             </li>
                         </ul>

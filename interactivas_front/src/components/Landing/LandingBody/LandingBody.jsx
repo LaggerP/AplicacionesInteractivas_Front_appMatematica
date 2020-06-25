@@ -26,7 +26,7 @@ export default class LandingBody extends Component {
                <li className="bodyContainer-cards-item">
                   <Card
                       title="Para todas las edades 🧑‍🎓"
-                      detail="¡Juegos de matemática y gramática!"
+                      detail="¡Juegos de matemática!"
                       img={kidLaptop}/>
                </li>
             </ul>

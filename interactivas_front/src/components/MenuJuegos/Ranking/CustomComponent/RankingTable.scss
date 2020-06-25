@@ -1,5 +1,4 @@
-.rankingTable{
-}
+.rankingTable{}
 
 .root {
   display:flex;
@@ -10,14 +9,19 @@
 }
 
 .tableHead{
-  background-color: #45b39d;
+  background-color: #007BA7;
   color: white;
+  & .tableCell{
+    color: white;
+
+  }
 }
-.table {
-}
+.table {}
 
 .tableCell{
   padding-left: 5px;
   padding-right: 4px;
   font-size: 15px !important;
 }
+
+#trofeo {width: 25px;}
