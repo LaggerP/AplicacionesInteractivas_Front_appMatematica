@@ -30,7 +30,8 @@ export const saveLevelPoint = async (dataPoints, gameType) => {
         case "billetes":
             try {
                 //verificar http 400
-                const response = await axios.patch(endpoints.updateBilletes, {puntaje_billetes: dataPoints.gamePoint, username: dataPoints.username}, authorizationConfig)
+				const response = await axios.patch(endpoints.updateBilletes, {puntaje_billetes: dataPoints.gamePoint, username: dataPoints.username}, authorizationConfig)
+				console.log(response)
                 return response;
             } catch (error) {
                 console.log(error)
@@ -46,7 +47,7 @@ export const saveLevelPoint = async (dataPoints, gameType) => {
           break;
         case "multiplicacion":
             try {
-
+              
             } catch (error) {
 
             }

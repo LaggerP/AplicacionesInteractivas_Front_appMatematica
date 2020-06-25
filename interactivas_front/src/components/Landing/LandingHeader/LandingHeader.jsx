@@ -43,10 +43,8 @@ class Header extends Component {
         this.setState({isLoading: true})
         const userData = {username: this.state.username, password: this.state.password}
         const responseLogin = await login(userData);
-        console.log(responseLogin)
         if (responseLogin.status === 200){
             this.setState({loading: false});
-            console.log(responseLogin.data.message);
             this.setState({alertMessage: responseLogin.data.message})
             this.setState({alertType:'success'})
             this.setState({isAlert: true});
@@ -69,7 +67,6 @@ class Header extends Component {
         const responseRegister = await register(userData);
         if (responseRegister.status === 200){
             this.setState({loading: false});
-            console.log(responseRegister.data.message);
             this.setState({alertMessage: responseRegister.data.message})
             this.setState({alertType:'success'})
             this.setState({isAlert: true});
