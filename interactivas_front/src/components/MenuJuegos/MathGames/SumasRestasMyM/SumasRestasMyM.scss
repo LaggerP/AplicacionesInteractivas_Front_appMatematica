@@ -1,0 +1,241 @@
+.DescSumasRestasMyM{
+    position: relative;
+    text-align: center;
+    & p{
+        line-height : 50px;
+    }
+    & h1{
+      margin-bottom: 1%;
+      color: #007BA7;
+    }
+    & h2{
+      margin-bottom: 0;
+      color: #007BA7;
+    }
+}
+
+.CountUpNumber{
+  font-size: 50px;
+}
+
+.ComenzarButton {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    height: 70px;
+    width: 100%;
+    background-color: #007BA7;
+    & Button {
+        width: 100%;
+        color: white;
+        font-size: 25px;
+        transition: .3s;
+        border-radius: 0;
+        &:hover {
+          background-color: #ec9090;
+        }
+      }
+  }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 767px) {
+  .ComenzarButton{
+    position: fixed;
+  }
+  .JuegoTerminado{
+    position: relative;
+    margin-bottom: 40%;
+  }
+  .ObtenerPuntajeFinal{
+    position: fixed;
+  }
+  .DescPuntajes{
+    margin-bottom: 30%;
+  }
+  .Operacion, .OperacionMyM{
+    display: contents;
+    & Button {
+      width: 50%;
+      margin-top: 12px;
+    }
+  }
+}
+
+  
+  @media only screen and (min-device-width : 768px){
+    .ComenzarButton{
+      position: fixed;
+    }
+    .JuegoTerminado{
+      position: relative;
+      margin-bottom: 15%;
+    }
+    .ObtenerPuntajeFinal{
+      position: fixed;
+    }
+    .DescPuntajes{
+      margin-bottom: 15%;
+    }
+    .Operacion, .OperacionMyM{
+      display: grid;
+      & Button {
+        width: 100%;
+      }
+    }
+  }
+
+  .JuegoTerminado{
+    justify-content: center;
+    align-content: center;
+    display: grid;
+    & h2{
+      font-size: 2rem;
+    }
+    & h3{
+      font-size: 3rem;
+    }
+    & Button {
+      bottom: 0;
+      width: 100%;
+      color: white;
+      font-size: 25px;
+      transition: .3s;
+      border-radius: 0;
+      &:hover {
+        background-color: #ec9090;
+      }
+    }
+  }
+
+  .ObtenerPuntajeFinal{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    bottom: 0;
+    margin: 0 auto;
+    height: 70px;
+    width: 100%;
+    background-color: #007BA7;
+    & Button {
+      width: 100%;
+      color: white;
+      font-size: 25px;
+      transition: .3s;
+      border-radius: 0;
+      &:hover {
+        background-color: #ec9090;
+      }
+    }
+  }
+
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+  
+
+  .Ganador{
+    justify-content: center;
+    display: grid;
+    margin-bottom: 30px;
+    & h1{
+      font-size: 5rem;
+    }
+    & h2{
+      font-size: 4rem;
+    }
+    & Button{
+      color: white;
+      font-size: 25px;
+      background-color: #007BA7;
+      &:hover{
+        background-color: rgb(57, 151, 185);
+      }
+    }
+  }
+
+
+  .Operacion{
+    justify-content: center;
+    margin-top: -30px;
+    & h1{
+      font-size: 4rem;
+    }
+    & Button{
+      color: white;
+      font-size: 25px;
+      background-color: #007BA7;
+      &:hover{
+        background-color: rgb(57, 151, 185);
+      }
+    }
+  }
+
+  .OperacionMyM{
+    justify-content: center;
+    margin-top: -50px;
+    & h1{
+      font-size: 3.5rem;
+    }
+    & Button{
+      color: white;
+      font-size: 25px;
+      background-color: #007BA7;
+      &:hover{
+        background-color: rgb(57, 151, 185);
+      }
+    }
+  }
+
+  .icon{
+    background-color: green;
+  }
+
+.CheckList{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+
+  & input[type=radio]{
+    display: none;
+  }
+
+  & #CheckSi:checked+label {
+    border: 5px solid #00bb00; 
+    border-radius: 10%;
+  }
+
+  & #CheckNo:checked+label {
+    border: 5px solid red;
+    border-radius: 10%;
+  }
+
+  & .LabelCheckSi{
+    font-size:600%;
+    color: #00bb00;
+    border: none;
+    transition-property: border-bottom;
+    transition-duration: 0.30s;
+    &:hover{
+      border-bottom: 5px solid #00bb00;
+      cursor: pointer;
+    }
+  }
+  & .LabelCheckNo{
+    font-size:600%;
+    color: red;
+    border: none;
+    transition-property: border-bottom;
+    transition-duration: 0.30s;
+    &:hover{
+      border-bottom: 5px solid red;
+      cursor: pointer;
+    }
+  }
+}

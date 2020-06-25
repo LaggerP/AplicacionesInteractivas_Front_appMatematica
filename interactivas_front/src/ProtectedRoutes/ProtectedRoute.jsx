@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import auth from './auth'
+import {isConnected} from '../services/authenticationServices'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
    
@@ -19,12 +19,12 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       <Route
          {...rest}
          render={props => {
-            if (auth.isConnected()) {
+            if (isConnected()) {
                return <Component {...props} />
             } else {
                return <Redirect
                   to={{
-                     pathname: '/auth/login',
+                     pathname: '/',
                      state: {
                         from: props.location
                      }

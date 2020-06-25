@@ -11,6 +11,7 @@
       font-size: 20px;
       border-radius: 3px !important;
       width: 120px;
+      padding: 0;
       &:hover, &:active, &:focus {
         background-color: transparent;
       }
@@ -20,7 +21,6 @@
           text-shadow: 5px 2px 5px rgba(4, 10, 8, 0.58);
         }
       }
-
     }
   }
 }

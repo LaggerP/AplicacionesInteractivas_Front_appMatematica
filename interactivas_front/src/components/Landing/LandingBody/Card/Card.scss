@@ -7,18 +7,18 @@
    display: flex;
    flex-direction: column;
    overflow: hidden;
-
+   width: 400px;
+   height: auto;
    &-image {
       & img {
          height: auto;
-         max-width: 100%;
+         min-width: 100%;
          vertical-align: middle;
       }
    }
-
    &-content {
       padding: 1rem;
-      background: #45b39d;
+      background: #007BA7;
       &--title {
          color: #ffffff;
          font-size: 22px;
