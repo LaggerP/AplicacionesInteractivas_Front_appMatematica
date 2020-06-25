@@ -51,7 +51,6 @@ class SumasRestasMyM extends Component {
 
      //Termina el juego
      finishGame = () =>{
-        console.log('TERMINO EL JUEGO, OBTENER RESULTADOS.')
         // Aca guarda el RESULTADO FINAL a la tabla de ranking
         this.updateScore();
         this.setState({Finish: true});
@@ -59,7 +58,6 @@ class SumasRestasMyM extends Component {
 
     // Actualiza la tabla ranking
     updateScore = async () => {
-        console.log('Guarda puntaje a la tabla ranking')
         let dataPoints = {
             username: localStorage.getItem('sessionName'), 
             gamePoint: this.state.puntaje 
@@ -70,7 +68,6 @@ class SumasRestasMyM extends Component {
     // Valida si se gano o se perdio el nivel
     winLostLevel = () =>{
         if(this.state.countQues === 1 && this.state.countCorrects >= 7){
-            console.log('Gano');
             this.setState({
                 Juega: false,
                 perdido: false,
@@ -79,7 +76,6 @@ class SumasRestasMyM extends Component {
             });            
         }
         else if(this.state.countQues === 1 && this.state.countCorrects < 7){
-            console.log('Perdio');
             this.setState({
                 countCorrects: 0,
                 countQues: 15,
@@ -94,19 +90,15 @@ class SumasRestasMyM extends Component {
     correctResult(var1,var2,oper){
         switch(oper){
             case 'Suma':
-                console.log(var1 + var2);
                 return var1 + var2;
             case 'Resta':
                 if(var1 > var2){
-                    console.log(var1 - var2);
                     return var1 - var2;
                 }
                 else{
-                    console.log(var2 - var1);
                     return var2 - var1;
                 }
             case 'MyM':
-                console.log(var1 > var2 ? 'ES MAYOR': 'NO ES MAYOR');
                 if(var1 > var2){
                     return 'SI';
                 }
@@ -114,7 +106,7 @@ class SumasRestasMyM extends Component {
                     return 'NO';
                 }
             default:
-                return console.log('No existen operaciones');
+                return;
         }
     }
 
@@ -134,7 +126,6 @@ class SumasRestasMyM extends Component {
 
         // Valida respuesta
         if (this.correctResult(this.state.Var1,this.state.Var2,this.state.oper) === result){
-            console.log('ES CORRECTO');
 
             this.setState({
                 oper:operacion,
@@ -147,7 +138,6 @@ class SumasRestasMyM extends Component {
             });
         }
         else{
-            console.log('ES INCORRECTO');
 
             this.setState({
                 oper:operacion,
@@ -192,7 +182,6 @@ class SumasRestasMyM extends Component {
     // Cambia los estados para pasar al siguiente nivel.
     getNextLevel = () =>{
         if (this.state.level + 1 === 3){
-            console.log('Completa nivel y termina el juego');
             this.setState({
                 isFinishing: true,
                 Juega: true,
@@ -220,7 +209,6 @@ class SumasRestasMyM extends Component {
                 Var1:this.randomInt(this.state.Min,this.state.Max),
                 Var2:this.randomInt(this.state.Min,this.state.Max)
             });
-            console.log('Pasa al siguiente nivel');
         }
         // Guarda el puntaje a la tabla de rankings del nivel que paso.
         this.updateScore();
@@ -283,7 +271,7 @@ class SumasRestasMyM extends Component {
                                 </div>
                             );
                         default:
-                            return console.log('Operacion no soportada');
+                            return ;
                     }
                 }
             }

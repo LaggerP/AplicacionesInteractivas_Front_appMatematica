@@ -2,7 +2,6 @@ import endpoints from './endpoints';
 const axios = require('axios');
 
 const token = sessionStorage.getItem('token');
-console.log(token);
 const authorizationConfig = {
     headers: { Authorization: `Bearer ${token}` }
 };
@@ -31,7 +30,6 @@ export const saveLevelPoint = async (dataPoints, gameType) => {
             try {
                 //verificar http 400
 				const response = await axios.patch(endpoints.updateBilletes, {puntaje_billetes: dataPoints.gamePoint, username: dataPoints.username}, authorizationConfig)
-				console.log(response)
                 return response;
             } catch (error) {
                 console.log(error)
@@ -53,7 +51,7 @@ export const saveLevelPoint = async (dataPoints, gameType) => {
             }
           break;
         default:
-              console.log('No soportado');
+              return ;
       }
 }
 
