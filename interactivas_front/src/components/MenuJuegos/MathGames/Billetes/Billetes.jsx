@@ -24,7 +24,7 @@ const Billetes = () => {
     const [starter, setStarter] = useState(initialData);
     const [gameData, setGameData] = useState([])
     const [allLevels, setAllLevels] = useState([])
-    const [finishGame, setFinishGame] = useState(true)
+    const [finishGame, setFinishGame] = useState(false)
     const [loadingQuestion, setLoadingQuestion] = useState(false)
     const [userGamePoint, setUserGamePoint] = useState(0)
     const [billetesTotales, setBilletesTotales] = useState(0)
