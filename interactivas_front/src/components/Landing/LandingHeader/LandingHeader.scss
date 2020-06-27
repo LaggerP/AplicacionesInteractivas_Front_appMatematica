@@ -58,19 +58,20 @@
         cursor: pointer;
         border-color: transparent;
         &:hover, &:active, &:focus {
-          background: rgba(255, 255, 255, 0.91);
+          background: rgba(255, 255, 255, 0.89);
           color: #007BA7;
         }
       }
       .divViewSpan {
         margin: 12px;
         .formViewSpan {
-          font-size: 15px;
+          font-size: 18px;
           color: white;
           cursor: pointer;
           transition: .2s;
           &:hover {
             color: #1b493f;
+            text-decoration: underline;
           }
         }
       }

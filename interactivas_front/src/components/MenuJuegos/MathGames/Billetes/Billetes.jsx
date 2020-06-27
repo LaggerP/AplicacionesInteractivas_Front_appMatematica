@@ -5,10 +5,10 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
 import Column from "./Column";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 import RankingTable from "../../Ranking/CustomComponent/RankingTable";
 import { saveLevelPoint } from '../../../../services/rankingServices'
 import { getAllBilletesLevels } from '../../../../services/billetesJuegosServices'
+import RankingBilletes from './RankingBilletes'
 
 
 const Container = styled("div")`
@@ -18,14 +18,6 @@ const Container = styled("div")`
   flex-wrap: wrap;
   flex-direction: row;
   background-color: ${props => (props.isDraggingOver ? "rgba(99,158,226,0.56)" : "white")};
-`;
-
-const RankingContainer = styled("div")`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  flex-direction: column;
 `;
 
 const Billetes = () => {
@@ -216,33 +208,11 @@ const Billetes = () => {
                 }
             </div>
         );
-    } else {
-        if (userGamePoint < 0) {
-            return (
-                <div>
-                    <RankingContainer>
-                        <h1>¡La proxima te ira mejor!</h1>
-                        <h1>No te preocupes, podes volver a jugar cuando quieras</h1>
-                        <h1>Tu puntaje final fue de {userGamePoint}</h1>
-                        <RankingTable />
-                        <br />
-                        <Button component={Link} to="/games">Volver</Button>
-                    </RankingContainer>
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <RankingContainer>
-                        <h1>¡Terminaste!</h1>
-                        <h1>Tu puntaje final fue de {userGamePoint}</h1>
-                        <RankingTable />
-                        <br />
-                        <Button component={Link} to="/games">Volver</Button>
-                    </RankingContainer>
-                </div>
-            )
-        }
+    } else { 
+        return (
+            <RankingBilletes userGamePoint={userGamePoint}/>
+
+        )
     }
 };
 

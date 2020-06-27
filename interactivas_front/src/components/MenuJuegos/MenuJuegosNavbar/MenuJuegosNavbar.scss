@@ -28,22 +28,27 @@
 @media (max-width: 740px) {
   .MenuGames {
     overflow-x: hidden;
+    padding-left: 22px;
     & li {
+      padding: 0;
       cursor: pointer;
       &:nth-child(1){
-        padding-right: 5px;
+        padding: 0;
+        margin-right: 28px;
       }
       &:nth-child(2){
-        padding-right: 5px;
         margin-right: 13px;
       }
       &:nth-child(3){
-        padding-right: 5px;
+        padding-right: 6px;
       }
       & .MenuNavbarButton {
-        width: 70px;
+        width: 30px;
         font-size: 13px;
         color: white;
+        & span>span {
+          margin-right: 5px;
+        }
       }
     }
   }
