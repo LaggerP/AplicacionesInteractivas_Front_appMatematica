@@ -41,13 +41,13 @@ export const logOut = (cb) => {
 const removeStorageData = () => {
     sessionStorage.removeItem('token');
     localStorage.removeItem('activeSession');
-    localStorage.removeItem('sessionName')
+    localStorage.removeItem('sessionName');
 }
 
 const setStorageData = (token, username) => {
     sessionStorage.setItem('token', token)
     localStorage.setItem('activeSession', true);
-    localStorage.setItem('sessionName', username)
+    localStorage.setItem('sessionName', username);
 }
 
 

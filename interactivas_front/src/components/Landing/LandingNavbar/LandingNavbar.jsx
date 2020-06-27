@@ -38,7 +38,7 @@ export default function LandingNavbar() {
             <Toolbar>
 
                <Typography variant="h6" className={classes.title}>
-                  Virtu
+                  MathGame
                </Typography>
                <ul className="MenuUl">
                   <li>
