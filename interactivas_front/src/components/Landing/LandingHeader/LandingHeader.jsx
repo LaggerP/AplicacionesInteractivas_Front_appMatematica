@@ -27,7 +27,6 @@ class Header extends Component {
         this.state = {
             username: '',
             password: '',
-            loading: false,
             isRegister: true,
             isAlert: false,
             alertMessage: '',
@@ -44,40 +43,47 @@ class Header extends Component {
         const userData = {username: this.state.username, password: this.state.password}
         const responseLogin = await login(userData);
         if (responseLogin.status === 200){
-            this.setState({loading: false});
-            this.setState({alertMessage: responseLogin.data.message})
-            this.setState({alertType:'success'})
-            this.setState({isAlert: true});
-            localStorage.setItem('sessionName', userData.username);
-            setTimeout(() => this.props.history.push({pathname: '/games',}), 1000);
+            this.setState({
+                isLoading: false,
+                alertMessage: responseLogin.data.message,
+                alertType:'success',
+                isAlert: true,
+            });
+            setTimeout(() => this.props.history.push({pathname: '/games',}), 2000);
         }
         else{
-            this.setState({loading: false});
-            this.setState({alertMessage:responseLogin.data.message})
-            this.setState({alertType:'error'})
-            this.setState({isAlert: true});
+            this.setState({
+                isLoading: false,
+                alertMessage: responseLogin.data.message,
+                alertType:'error',
+                isAlert: true,
+            });
             this.cleanInput();
         }
     }
 
     register = async (e) => {
         e.preventDefault();
-        this.setState({loading: true});
+        this.setState({isLoading: true});
         const userData = {username: this.state.username, password: this.state.password}
         const responseRegister = await register(userData);
         if (responseRegister.status === 200){
-            this.setState({loading: false});
-            this.setState({alertMessage: responseRegister.data.message})
-            this.setState({alertType:'success'})
-            this.setState({isAlert: true});
+            this.setState({
+                isLoading: false,
+                alertMessage: responseRegister.data.message,
+                alertType:'success',
+                isAlert: true,
+            });
             this.changeForm();
             this.cleanInput();
         }
         else{
-            this.setState({loading: false});
-            this.setState({alertMessage:'Ocurrio un error al registrar al jugador'})
-            this.setState({alertType:'error'})
-            this.setState({isAlert: true});
+            this.setState({
+                isLoading: false,
+                alertMessage: responseRegister.data.message,
+                alertType:'error',
+                isAlert: true,
+            });
             this.cleanInput();
         }
     }
@@ -142,13 +148,13 @@ class Header extends Component {
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
 
-                                    {!this.state.loading ? <span>JUGAR</span>
+                                    {!this.state.isLoading ? <span>JUGAR</span>
                                         :
                                         <ClipLoader
                                             css={override}
                                             size={150}
                                             color={"#123abc"}
-                                            loading={this.state.loading}
+                                            loading={this.state.isLoading}
                                         />}
                                 </button>
 
@@ -187,13 +193,13 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <button type="submit" className="formSubmitButton animated zoomIn">
-                                    {!this.state.loading ? <span>REGISTRARSE</span>
+                                    {!this.state.isLoading ? <span>REGISTRARSE</span>
                                         :
                                         <ClipLoader
                                             css={override}
                                             size={150}
                                             color={"#123abc"}
-                                            loading={this.state.loading}
+                                            loading={this.state.isLoading}
                                         />}
                                 </button>
 

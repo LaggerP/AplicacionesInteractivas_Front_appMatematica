@@ -10,7 +10,7 @@ export const register = async (userData) => {
     try {
         const data = { username: userData.username, password: userData.password }
         const response = await axios.post(endpoints.register, data)
-        setStorageData(response.data.token, userData.username)
+        await setStorageData(response.data.token, userData.username)
         return response;
     } catch (error) {
         console.log(error)
@@ -21,7 +21,7 @@ export const login = async (userData) => {
     try {
         const data = { username: userData.username, password: userData.password }
         const response = await axios.post(endpoints.login, data)
-        setStorageData(response.data.token, userData.username)
+        await setStorageData(response.data.token, userData.username)
         return response;
     } catch (error) {
         if (error.response) {
