@@ -58,7 +58,7 @@
         transition: .5s;
         cursor: pointer;
         border-color: transparent;
-        &:hover, &:active, &:focus {
+        &:hover, &:active {
           background: rgba(255, 255, 255, 0.89);
           color: #007BA7;
         }

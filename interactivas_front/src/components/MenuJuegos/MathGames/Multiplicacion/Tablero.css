@@ -1,10 +1,10 @@
-.tablero {
+/*.tablero {
     color: white;
     max-height: 500px;
     width: 700px;
     margin: 0 auto;
     justify-content: space-around;
-}
+}*/
 .hola-class {
     color: pink;
     border: 5px solid grey;

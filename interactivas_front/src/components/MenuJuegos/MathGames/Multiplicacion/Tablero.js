@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import './Tablero.css'
+//import './Tablero.css'
 
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
-
 import imagePizarron from '../../../../assets/Images/pizarron.png';
 import dospordos from '../../../../assets/Images/2por2.jpg';
 import cuatro from '../../../../assets/Images/cuatro.jpg';
@@ -13,7 +13,9 @@ import seisporseis from '../../../../assets/Images/6por6.png';
 import treintayseis from '../../../../assets/Images/treintayseis.png';
 import sieteporsiete from '../../../../assets/Images/7por7.jpg';
 import cuarentaynueve from '../../../../assets/Images/cuarentaynueve.png';
+import cuatroporcuatro from '../../../../assets/Images/4por4.jpg';
 //import veinticinco from '../../../../assets/Images/veinticinco.png';
+import dieciseis from '../../../../assets/Images/dieciseis.png';
 //import cuarentaynueve from '../../../../assets/Images/cuarentaynueve.png';
 
 import MuiAlert from '@material-ui/lab/Alert';
@@ -91,6 +93,16 @@ const cardArray = [
         pizarron: imagePizarron,
         img: cuatro
     },
+    {
+        name: 'cuatro',
+        pizarron: imagePizarron,
+        img: dieciseis
+    },
+    {
+        name: 'cuatro',
+        pizarron: imagePizarron,
+        img: cuatroporcuatro
+    },
 
 
 
@@ -109,6 +121,7 @@ export default class Tablero extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            puntaje: 0,
             cardArray: cardArray,
             cardArrayChosen: cardArrayChosen,
             cardArrayWon: cardArrayWon,
@@ -116,15 +129,14 @@ export default class Tablero extends Component {
             cardArrayAux: cardArrayAux,
             imagePizarron: imagePizarron,
             isLoading: false,
-            isFlip: cardArrayInicial.map((element) => false)
+            isFlip: cardArrayInicial.map((element) => false),
+            gano:false,
+            errorCarta:false,
+            adivina:false,
         };
-        //this.mostrarCartas = this.mostrarCartas.bind(this);
-        //this.funcionPrueba = this.funcionPrueba.bind(this);
     }
 
     componentDidMount() {
-        // this.cargarArray();
-        this.funcionAlerta();
         this.state.cardArrayInicial.sort(() => 0.5 - Math.random())
         this.setState({ isLoading: true })
 
@@ -136,29 +148,21 @@ export default class Tablero extends Component {
 
         }
     }
-    funcionAlerta() {
-        return (< Alert variant="outlined" severity="success" >
-            This is a success alert — check it out!
-        </Alert >)
-    }
+   
     funcionClick = (selectedBoard, index) => {
-        console.log(`soy el pizarron ${selectedBoard}`)
+        
         if (this.state.isFlip) {
             this.setState({ isFlip: false })
         } else {
             this.setState({ isFlip: true })
         }
 
+
         // cardArrayChosen.push('hola')
         cardArrayAux.push(cardArrayInicial[selectedBoard]);
-        console.log(cardArrayAux);
         cardArrayInicial.splice(selectedBoard, 0, cardArray[selectedBoard].img);
-        console.log(cardArrayInicial);
         cardArrayChosen.push(cardArray[selectedBoard].name);
-        console.log(cardArrayChosen);
         if (cardArrayChosen.length === 2) {
-            console.log(cardArrayChosen);
-            console.log('llegue a 2 cartas elegidas');
             this.sonIguales(cardArrayChosen);
             cardArrayChosen.length = 0;
         }
@@ -168,45 +172,27 @@ export default class Tablero extends Component {
 
     sonIguales = (cartasElegidas) => {
         if (cartasElegidas[0] === cartasElegidas[1]) { //adivino la carta, las paso en negro. las agrego al array de cartas ganadas
-            console.log('adivinaste');
             cardArrayWon.push(cartasElegidas[0]);
             cardArrayWon.push(cartasElegidas[1]);
-            console.log('array de cartas elegidas:');
-            console.log(cardArrayWon);
-            console.log('array de cartas original');
-            console.log(cardArray.length);
-            alert('Encontraste una coincidencia')
-            this.funcionAlerta();
-            //return (<Alert severity="success">This is a success message!</Alert>)//
+            this.setState({adivina: true});
+            this.setState({puntaje: this.state.puntaje+50}, () => {
+                this.props.callback(this.state.puntaje)
+            });
+
 
             if ((cardArrayWon.length) == (cardArray.length)) {
-
-                console.log('ganaste el primer nivel');
-                alert('¡Ganaste el primer nivel! Continúa con el nivel 2')
+                this.setState({gano: true});
             }
         }
         else {
-            console.log('segui intentando, las cartas no son iguales');
-            alert('Continúa intentándolo')
-            //vuelvo a poner las imagenes de pizarron
-
+            this.setState({errorCarta: true});
+            this.setState({puntaje: this.state.puntaje-15}, () => {
+                this.props.callback(this.state.puntaje)
+            });
         }
 
-        //no importa q opcion ocurra, tengo q vaciar el array de cartas elegidas. 
-        //GANO una vez que el array de cartas ganadas queda del mismo tamaño que el array original
     }
-    /*
-     Quiero un array con los pizarrones, y q cuando les hago click, me muestre lo q hay en esa posicion pero en el otro array
-
-
-
-
-
-      <Card className="card-class" onClick={this.funcionClick.bind(this, i)}>
-                                    <img src={imagePizarron} alt={'pizarron'} />
-                                </Card>
-     
-    */
+    
 
     render() {
         const { isLoading, cardArrayInicial, isFlip, flipped } = this.state
@@ -219,6 +205,7 @@ export default class Tablero extends Component {
                     justify="center"
                     alignItems="center"
                 >
+                    
 
 
                     {
@@ -236,7 +223,11 @@ export default class Tablero extends Component {
                             </Grid>
                         ))
                     }
+                    {this.state.gano && <Alert variant="filled" severity="success" onClick={() => this.setState({gano:false})}>¡GANASTE EL PRIMER NIVEL!</Alert>}
+                    {this.state.errorCarta && <Alert variant="filled" severity="warning" onClick={() => this.setState({errorCarta:false})}>Continúa intentándolo</Alert>}
+                    {this.state.adivina && <Alert variant="filled" severity="success" onClick={() => this.setState({adivina:false})}>Encontraste una coincidencia</Alert>}
                 </Grid>
+                
             )
         } else {
             return (
