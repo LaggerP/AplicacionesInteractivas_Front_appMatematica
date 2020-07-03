@@ -114,6 +114,7 @@ export default class Tablero extends Component {
             cardArrayChosen: [],
             cardArrayWon: [],
         })
+        this.state.cardArrayInicial.sort(() => 0.5 - Math.random())
     }
 
     showAlert = () => {
