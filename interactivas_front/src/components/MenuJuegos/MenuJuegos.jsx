@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './MenuJuegos.scss';
 import MenuJuegosNavbar from './MenuJuegosNavbar/MenuJuegosNavbar';
-import fracciones from '../../assets/Images/GamesImages/Fracciones/fracciones.png';
 import multiplicacion from '../../assets/Images/multiplicacion.png'
 import billetes from '../../assets/Images/GamesImages/Billetes/billetes.png';
 import sumas from '../../assets/Images/GamesImages/Sumas/sumas.png';

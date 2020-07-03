@@ -18,7 +18,6 @@ const endpoints = {
     getAllRanking: `${urlApi}/api/ranking/list`,
     getRankingByUsername: `${urlApi}/api/ranking/find/`,
 
-
     //billetes games endpoints
     billestesGameLevels: `${urlApi}/api/billetesjuegos/list`,
     billetesGameLevelsByLevel:`${urlApi}/api/billetesjuegos/find/:level`
