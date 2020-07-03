@@ -36,3 +36,23 @@
         width: 150px
     }
 }
+
+
+.TablerContainer {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.TablerContainer--column {
+    background-color: red;
+    margin: 10px;
+    height: auto;
+    width: auto;
+}
+
+
+
+

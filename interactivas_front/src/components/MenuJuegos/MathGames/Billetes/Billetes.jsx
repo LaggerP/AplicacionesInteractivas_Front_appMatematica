@@ -5,11 +5,9 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initialData from "../../../../assets/jsonGames/Monedas/dataBilleteStructure";
 import Column from "./Column";
 import Button from "@material-ui/core/Button";
-import RankingTable from "../../Ranking/CustomComponent/RankingTable";
 import { saveLevelPoint } from '../../../../services/rankingServices'
 import { getAllBilletesLevels } from '../../../../services/billetesJuegosServices'
 import RankingBilletes from './RankingBilletes'
-
 
 const Container = styled("div")`
   display: flex;
@@ -34,7 +32,7 @@ const Billetes = () => {
         fetchInitialData();
     }, []);
 
-    // First get data from database. Run once. 
+    // First get data from database. Run once. S
     async function fetchInitialData() {
         let allBilletesGameData = await getAllBilletesLevels();
         setAllLevels(allBilletesGameData.data)
@@ -211,7 +209,6 @@ const Billetes = () => {
     } else { 
         return (
             <RankingBilletes userGamePoint={userGamePoint}/>
-
         )
     }
 };
