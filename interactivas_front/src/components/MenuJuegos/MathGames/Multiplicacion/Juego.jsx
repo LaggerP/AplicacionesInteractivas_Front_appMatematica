@@ -23,7 +23,7 @@ class Juego extends Component {
         super();
         this.state = {
             isPlaying: true,
-            actualLevel: 1,
+            actualLevel:1,
             gamePoints: 0,
             puntaje:0,
             imagePizarron: imagePizarron,
@@ -31,10 +31,12 @@ class Juego extends Component {
         }
     }
 
-    nextLevel = () => {
-        this.setState({ actualLevel: this.state.actualLevel + 1 });
-        this.updateScore();
+    getLevel = (actualLevelTab) => {
+        console.log('Level pasado de TABLERO: '+ actualLevelTab)
+        this.setState({actualLevel: actualLevelTab });
     }
+
+   
 
     updateScore = async ()  =>{
         console.log('Guarda puntaje a la tabla ranking')
@@ -60,24 +62,23 @@ class Juego extends Component {
         this.setState({puntaje: puntajeTablero})
     }
     render() {
-        const { isPlaying, actualLevel,puntaje,isFlip } = this.state
-        if (isPlaying && actualLevel === 1) {
+        const { isPlaying,puntaje,isFlip } = this.state
+        if (isPlaying) {
             return (
                 <div className="JuegoMultiplicacion">
                     <MenuJuegosNavbar />
                     <header className="Juego-header">
-                        <h1 className="Juego-titulo">¡ME DIVIERTO Y APRENDO! : NIVEL 1</h1>
+                        <h1 className="Juego-titulo">¡ME DIVIERTO Y APRENDO! : NIVEL {this.state.actualLevel}</h1>
 
                     </header>
                     <h2 className="Puntaje">PUNTOS: {this.state.puntaje}</h2>
-                    <Tablero actualLevel={this.state.actualLevel} callback={this.getPuntaje} />
+                    <Tablero callback={this.getPuntaje} callbackLevel={this.getLevel} />
                     
-                    <div className="ComenzarButton"> 
-                    <Button onClick={this.nextLevel} >CONTINUAR AL SIGUIENTE NIVEL</Button>
-                </div>
+                   
                 </div>
             )
         }
+        /*
         if (isPlaying && actualLevel === 2) {
             return (
                 <div>
@@ -111,7 +112,7 @@ class Juego extends Component {
                 </div>
             )
         }
-        
+        */
     }
 }
 
