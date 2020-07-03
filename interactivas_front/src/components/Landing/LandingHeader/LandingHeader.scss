@@ -1,3 +1,4 @@
+
 .header {
   color: white;
   overflow-x: hidden;
@@ -84,13 +85,35 @@
   .header {
     &-body {
       &--inputs {
+        width: 100vw;
+        height: 100vh;
+        &-title {
+          font-size: 27px;
+        }
         &-divInput {
           &-input {
-            width: 300px;
+            margin: 8px;
+            width: 280px;
+            height: 40px;
+            font-size: 18px;
           }
         }
+
         & .formSubmitButton {
-          width: 320px;
+          width: 300px;
+
+          height: 50px;
+          font-size: 18px;
+        }
+
+        .divViewSpan {
+          margin: 12px;
+          .formViewSpan {
+            font-size: 15px;
+            &:hover {
+              color: #ffffff;
+            }
+          }
         }
       }
     }
