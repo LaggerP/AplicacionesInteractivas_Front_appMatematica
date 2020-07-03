@@ -43,7 +43,14 @@ export const saveLevelPoint = async (dataPoints, gameType) => {
           break;
         case "multiplicacion":
             try {
+
+                const response = await axios.patch(endpoints.updateMultiplicacion, {puntaje_multiplicacion: dataPoints.gamePoint, username: dataPoints.username}, authorizationConfig)
+                console.log('RESPONSE SERVICE'+response)
+                return response;
+
             } catch (error) {
+                
+                console.log(error)
             }
           break;
       }
