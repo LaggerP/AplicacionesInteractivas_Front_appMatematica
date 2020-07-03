@@ -230,7 +230,7 @@ export default class Tablero extends Component {
                       
                     </Grid>
                     <div className="ComenzarButton"> 
-                        <Button  onClick={this.nextLevel} >CONTINUAR AL SIGUIENTE NIVEL</Button>
+                        <Button onClick={this.nextLevel} >CONTINUAR AL SIGUIENTE NIVEL</Button>
                     </div>
                 </div>
             )
