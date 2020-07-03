@@ -31,7 +31,6 @@ class Multiplicacion extends Component {
         if (!isPlaying && actualLevel === 0) {
 
             return (
-                console.log("cargo las instrucciones y el inicio"),
                 <div className="JuegoMultiplicacion">
                     <MenuJuegosNavbar />
                     <header className="Juego-header">
