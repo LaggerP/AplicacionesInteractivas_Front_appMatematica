@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import MenuJuegosNavbar from '../../MenuJuegosNavbar/MenuJuegosNavbar'
 import './Multiplicacion.scss'
-import pizzaron from '../../../../assets/Images/pizarron.png';
-import { Avatar } from '@material-ui/core';
 import { Button } from '@material-ui/core'
-import { ButtonBase } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
+//import { ButtonBase } from '@material-ui/core';
+//import { IconButton } from '@material-ui/core';
 import piz from '../../../../assets/Images/pizarron.png';
 import m2x2 from '../../../../assets/Images/2por2.jpg';
 import n4 from '../../../../assets/Images/cuatro.jpg';
@@ -34,7 +32,7 @@ class Multiplicacion extends Component {
                 <div className="JuegoMultiplicacion">
                     <MenuJuegosNavbar />
                     <header className="Juego-header">
-                        <h1 className="Juego-titulo">¡ME DIVIERTO Y MULTIPLICO!</h1>
+                        <h1 className="Juego-titulo">¡ME DIVIERTO Y APRENDO!</h1>
                     </header>
                     <div className="Multiplicacion-game">
                         <p>
@@ -56,9 +54,9 @@ class Multiplicacion extends Component {
                             <br /> 
                             El objetivo del juego es encontrar todas las parejas.
                 </p>
-                        <Button onClick={this.nextLevel} variant="contained" color="secondary" size="large" text-align="center" >
-                            COMENZAR A JUGAR
-                    </Button>
+                         <div className="ComenzarButton">
+                    <Button onClick={this.nextLevel}>Comenzar</Button>
+                </div>
                     </div>
                 </div>
 
