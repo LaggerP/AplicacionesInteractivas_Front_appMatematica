@@ -20,7 +20,11 @@ const endpoints = {
 
     //billetes games endpoints
     billestesGameLevels: `${urlApi}/api/billetesjuegos/list`,
-    billetesGameLevelsByLevel:`${urlApi}/api/billetesjuegos/find/:level`
+    billetesGameLevelsByLevel:`${urlApi}/api/billetesjuegos/find/:level`,
+
+    //multiplicacion games endpoints
+    multiGameLevels: `${urlApi}/api/multijuegos/list`,
+    multiGameLevelsByLevel:`${urlApi}/api/multijuegos/findLevel`,
 
 }
 

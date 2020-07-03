@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import MenuJuegosNavbar from '../../MenuJuegosNavbar/MenuJuegosNavbar'
 import './Multiplicacion.scss'
-import pizzaron from '../../../../assets/Images/pizarron.png';
-import { Avatar } from '@material-ui/core';
 import { Button } from '@material-ui/core'
 //import { ButtonBase } from '@material-ui/core';
 //import { IconButton } from '@material-ui/core';
